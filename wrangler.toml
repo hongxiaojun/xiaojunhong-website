@@ -1,18 +1,18 @@
-; Wrangler Pages configuration
-; Explicitly specify this is a Hugo site
+# Wrangler Pages configuration
+# Explicitly specify this is a Hugo site
 
 name = "xiaojunhong-website"
 compatibility_date = "2026-05-01"
 
-; Pages configuration (not Workers)
+# Pages configuration (not Workers)
 pages_build_output_dir = "public"
 
-; Prevent framework auto-detection conflicts
+# Prevent framework auto-detection conflicts
 [build]
 command = "hugo --minify"
 cwd = "."
 
-; Environment variables
+# Environment variables
 [build.environment]
 HUGO_VERSION = "0.161.1"
 NODE_ENV = "production"
