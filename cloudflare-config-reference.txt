@@ -1,0 +1,53 @@
+╔═══════════════════════════════════════════════════════════════╗
+║        Cloudflare Pages 配置快速参考卡片                      ║
+║           xiaojunhong-.space 部署                           ║
+╚═══════════════════════════════════════════════════════════════╝
+
+🔗 快速链接：
+─────────────────────────────────────────────────────────────
+• Cloudflare Dashboard: https://dash.cloudflare.com/
+• GitHub 仓库: https://github.com/hongxiaojun/xiaojunhong-website
+• 临时网址预览: https://xiaojunhong-website.pages.dev
+
+📋 配置信息（复制粘贴用）：
+─────────────────────────────────────────────────────────────
+Project name: xiaojunhong-website
+Production branch: main
+Framework preset: Hugo
+Build command: hugo --minify
+Build output directory: public
+Root directory: (leave empty)
+
+Environment variables:
+  HUGO_VERSION = 0.161.1
+
+✅ 成功标志：
+─────────────────────────────────────────────────────────────
+• 构建日志显示 "Success"
+• 可以访问临时网址
+• 网站页面正常显示
+• 控制台没有错误信息
+
+⚠️  常见问题：
+─────────────────────────────────────────────────────────────
+问题1: 构建失败 "Hugo not found"
+解决: 添加环境变量 HUGO_VERSION = 0.161.1
+
+问题2: 找不到仓库
+解决: 确认 GitHub 仓库设置为 Public
+
+问题3: 构建超时
+解决: 检查 build command 是否为 "hugo --minify"
+
+问题4: 页面 404
+解决: 确认 output directory 为 "public"
+
+📞 需要帮助？
+─────────────────────────────────────────────────────────────
+• 查看 CLOUDFLARE_SETUP.md 详细指南
+• 运行 ./verify-deployment.sh 检查本地配置
+• 询问 AI 助手
+
+═══════════════════════════════════════════════════════════════
+配置完成后，下一步是设置自定义域名 xiaojunhong.space
+═══════════════════════════════════════════════════════════════
