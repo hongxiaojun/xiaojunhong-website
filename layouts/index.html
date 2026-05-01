@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="hero">
+    <h1>Welcome to My Space</h1>
+    <p>A personal website for sharing articles and notes on technology, learning, and life.</p>
+</div>
+
+<div class="grid-section">
+    <div class="section-card">
+        <div class="section-number">01</div>
+        <h2 class="section-title">Articles</h2>
+        <p class="section-description">
+            Thoughts and tutorials on software development, cloud technologies, and continuous learning.
+            <a href="/articles/" style="display: inline-block; margin-top: 16px;">View all →</a>
+        </p>
+    </div>
+
+    <div class="section-card">
+        <div class="section-number">02</div>
+        <h2 class="section-title">Notes</h2>
+        <p class="section-description">
+            Quick notes, bookmarks, and fragments of ideas from daily learning and exploration.
+            <a href="/notes/" style="display: inline-block; margin-top: 16px;">View all →</a>
+        </p>
+    </div>
+
+    <div class="section-card">
+        <div class="section-number">03</div>
+        <h2 class="section-title">About</h2>
+        <p class="section-description">
+            A bit about me, my background, and what I'm currently working on.
+            <a href="/about/" style="display: inline-block; margin-top: 16px;">Learn more →</a>
+        </p>
+    </div>
+</div>
+
+{{ $articles := where .Site.RegularPages "Type" "articles" }}
+{{ if gt (len $articles) 0 }}
+<div style="margin-top: 64px;">
+    <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 32px;">Recent Articles</h2>
+    <ul class="article-list">
+        {{ range first 3 $articles }}
+        <li>
+            <a href="{{ .RelPermalink }}" class="article-title">{{ .Title }}</a>
+            <div class="article-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                {{ if .Params.readingTime }}
+                <span style="margin: 0 8px;">·</span>
+                <span>{{ .Params.readingTime }} min read</span>
+                {{ end }}
+            </div>
+        </li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
+{{ end }}

@@ -1,0 +1,37 @@
+# Hugo
+public/
+resources/
+.hugo_build.lock
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+
+# Node modules (if using npm/yarn)
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# Cloudflare
+.dev.vars
+.wrangler/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Gstack tool
+.gstack/

@@ -1,0 +1,63 @@
+baseURL = "https://xiaojunhong.space/"
+languageCode = "zh-CN"
+title = "xiaojunhong.space"
+theme = "custom"
+
+# Build settings
+disableKinds = ["taxonomy", "term"]
+enableRobotsTXT = true
+metaDataFormat = "yaml"
+
+# Language settings (for bilingual support later)
+defaultContentLanguage = "zh"
+[languages]
+  [languages.zh]
+    languageName = "中文"
+    weight = 1
+  [languages.en]
+    languageName = "English"
+    weight = 2
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    name = "Articles"
+    url = "/articles/"
+    weight = 1
+  [[menu.main]]
+    name = "Notes"
+    url = "/notes/"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+
+# Markup settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allow HTML in markdown
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+    tabWidth = 2
+
+# Output formats
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]
+  page = ["HTML"]
+
+# Privacy settings (for GDPR compliance)
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+
+# Server settings for Cloudflare Pages
+[minify]
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepWhitespace = false

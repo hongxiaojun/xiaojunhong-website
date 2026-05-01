@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="content">
+    <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 48px;">{{ .Title }}</h1>
+
+    {{ if .Content }}
+    <div style="margin-bottom: 48px; color: var(--color-text-light);">
+        {{ .Content }}
+    </div>
+    {{ end }}
+
+    <ul class="article-list">
+        {{ range .Pages }}
+        <li>
+            <a href="{{ .RelPermalink }}" class="article-title">{{ .Title }}</a>
+            <div class="article-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                {{ if .Params.readingTime }}
+                <span style="margin: 0 8px;">·</span>
+                <span>{{ .Params.readingTime }} min read</span>
+                {{ end }}
+                {{ if .Params.description }}
+                <p style="margin-top: 8px; color: var(--color-text-light);">{{ .Params.description }}</p>
+                {{ end }}
+            </div>
+        </li>
+        {{ end }}
+    </ul>
+
+    {{ if eq (len .Pages) 0 }}
+    <p style="text-align: center; color: var(--color-text-light); padding: 48px 0;">
+        No content yet. Check back soon!
+    </p>
+    {{ end }}
+</div>
+{{ end }}
