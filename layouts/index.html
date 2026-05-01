@@ -55,7 +55,7 @@
                                 {{ .Date.Format "January 2, 2006" }}
                             </time>
                         </div>
-                        <h3 class="article-card-title">{{ .Title }}</h3>
+                        <div class="article-card-title">{{ .Title }}</div>
                         {{ if .Params.description }}
                         <p class="article-card-excerpt">{{ .Params.description }}</p>
                         {{ end }}
