@@ -1,8 +1,8 @@
 # 部署进度报告 - xiaojunhong.space
 
 **开始时间**: 2026-05-01 17:23
-**最后更新**: 2026-05-01 18:35
-**状态**: 🟢 Cloudflare Pages 部署成功，正在调试网站加载问题
+**最后更新**: 2026-05-01 19:07
+**状态**: 🟡 Pages 项目已创建，等待部署内容
 
 ---
 
@@ -74,30 +74,43 @@ f3573f0 Fix config for Hugo v0.161 compatibility
 
 ## 📋 待完成步骤
 
-### Step 4: 🟡 网站加载问题调试
-- **状态**: 进行中
-- **时间**: 2026-05-01 18:35
-- **问题描述**: xiaojunhong-website.pages.dev 一直在加载，无法显示内容
-- **可能原因**:
-  - JavaScript 错误
-  - 资源加载失败
-  - 构建输出问题
-  - Cloudflare Pages 缓存问题
-- **调试步骤**:
-  1. 检查浏览器控制台错误
-  2. 验证构建输出文件
-  3. 检查网络请求
-  4. 清除 Cloudflare Pages 缓存
-  5. 测试基础 HTML 访问
+### Step 4: ✅ Nameserver 传播完成
+- **状态**: 完成
+- **时间**: 2026-05-01 19:07
+- **完成内容**:
+  - ✅ Namecheap nameservers 已更改为 Cloudflare
+  - ✅ WHOIS 确认: delilah.ns.cloudflare.com, jaziel.ns.cloudflare.com
+  - ✅ Cloudflare zone 状态: **active**
+  - ✅ DNS 全球传播完成
 
-### Step 5: ⏳ 域名和 DNS 配置
-- **依赖**: Step 4 完成 (网站正常加载)
-- **域名**: xiaojunhong.space
-- **准备文件**: ✅ domain-setup-automation.sh
-- **需要操作**:
-  - 在 Cloudflare Pages 添加自定义域名
-  - 在 Namecheap 配置 DNS 记录
-  - 等待 DNS 生效 (5-30 分钟)
+### Step 5: 🟡 配置 Cloudflare Pages 项目
+- **状态**: 部分完成
+- **时间**: 2026-05-01 19:07
+- **已完成**:
+  - ✅ Pages 项目创建: xiaojunhong-website (ID: 4b4a3bde-8c15-47c6-8677-10229048a500)
+  - ✅ 子域名: xiaojunhong-website.pages.dev
+  - ✅ 自定义域名添加: xiaojunhong.space
+  - ✅ SSL 证书已生成
+  - ✅ DNS 记录已配置: www.xiaojunhong.space → xiaojunhong-website.pages.dev
+- **待完成**:
+  - ❌ **项目还没有部署内容** - 导致 522 错误
+  - 🟡 根域名 CNAME 记录配置（pending）
+
+### Step 6: 🟡 修复部署错误
+- **状态**: 修复中
+- **时间**: 2026-05-01 19:20
+- **问题**:
+  - ❌ wrangler.toml 使用了错误的注释语法（; 而不是 #）
+  - 错误: "Invalid TOML document: only letter, numbers, dashes and underscores are allowed in keys"
+- **修复**:
+  - ✅ 已将所有 `;` 注释改为 `#` 注释
+  - ✅ 已提交到 GitHub (commit: 6fc0cbd)
+  - 🟡 Cloudflare Pages 正在自动重新部署
+- **检查命令**:
+  ```bash
+  # 在 Cloudflare Dashboard 查看部署日志
+  # 或等待几分钟后访问网站验证
+  ```
 
 ### Step 6: ⏳ 最终验证
 - **依赖**: Step 4 完成
@@ -230,10 +243,17 @@ title = "xiaojunhong.space"
 4. **Cloudflare Pages 框架冲突** ✅ (2026-05-01 18:30)
 
 ### 当前问题
-1. **网站加载问题** 🟡 (2026-05-01 18:35)
-   - 症状: xiaojunhong-website.pages.dev 一直在加载
-   - 影响: 无法验证网站内容和功能
-   - 状态: 正在调试中
+1. **Pages 项目无部署内容** 🔴 (2026-05-01 19:07)
+   - 症状: 访问 www.xiaojunhong.space 返回 522 错误
+   - 原因: Pages 项目已创建但没有部署任何内容
+   - 状态: 需要用户通过 Dashboard 连接 GitHub 并触发首次部署
+   - 影响: 网站无法访问，SSL 证书已生成但无内容可提供
+
+### 已解决的问题
+1. **Nameserver 传播** ✅ - Zone 状态已变为 active
+2. **Pages 项目创建** ✅ - 项目已成功创建
+3. **SSL 证书生成** ✅ - 证书已自动生成
+4. **DNS 记录配置** ✅ - www 子域名 CNAME 已配置
 
 ---
 
@@ -299,7 +319,12 @@ cat cloudflare-config-reference.txt
 
 ---
 
-**最后更新**: 2026-05-01 18:35
-**当前状态**: Cloudflare Pages 部署成功，正在调试网站加载问题
+**最后更新**: 2026-05-01 19:07
+**当前状态**: Pages 项目已创建，等待部署内容
 **GitHub 仓库**: https://github.com/hongxiaojun/xiaojunhong-website
-**临时网址**: xiaojunhong-website.pages.dev (正在调试)
+**Cloudflare Zone**: ✅ active
+**Pages 项目**: ✅ xiaojunhong-website (已创建)
+**自定义域名**: xiaojunhong.space (SSL 证书已生成)
+**临时网址**: xiaojunhong-website.pages.dev
+**当前问题**: 🔴 项目无部署内容，需要连接 GitHub 并触发部署
+**下一步**: 通过 Dashboard 连接 GitHub 仓库并触发首次部署
