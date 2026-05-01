@@ -1,0 +1,8 @@
+{
+  "name": "xiaojunhong-website",
+  "type": "hugo",
+  "build": {
+    "command": "hugo --minify",
+    "output": "public"
+  }
+}
