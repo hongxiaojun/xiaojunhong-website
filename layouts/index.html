@@ -1,56 +1,119 @@
 {{ define "main" }}
-<div class="hero">
-    <h1>Welcome to My Space</h1>
-    <p>A personal website for sharing articles and notes on technology, learning, and life.</p>
-</div>
+<div class="homepage">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-location">Beijing · China</div>
+            <h1 class="hero-title">
+                A space for learning,
+                <span class="hero-emphasis">building</span>,
+                and sharing.
+            </h1>
+            <p class="hero-description">
+                Personal website of {{ .Site.Title }}. Notes on technology, programming, and the journey of continuous learning in the digital age.
+            </p>
+        </div>
 
-<div class="grid-section">
-    <div class="section-card">
-        <div class="section-number">01</div>
-        <h2 class="section-title">Articles</h2>
-        <p class="section-description">
-            Thoughts and tutorials on software development, cloud technologies, and continuous learning.
-            <a href="/articles/" style="display: inline-block; margin-top: 16px;">View all →</a>
-        </p>
-    </div>
-
-    <div class="section-card">
-        <div class="section-number">02</div>
-        <h2 class="section-title">Notes</h2>
-        <p class="section-description">
-            Quick notes, bookmarks, and fragments of ideas from daily learning and exploration.
-            <a href="/notes/" style="display: inline-block; margin-top: 16px;">View all →</a>
-        </p>
-    </div>
-
-    <div class="section-card">
-        <div class="section-number">03</div>
-        <h2 class="section-title">About</h2>
-        <p class="section-description">
-            A bit about me, my background, and what I'm currently working on.
-            <a href="/about/" style="display: inline-block; margin-top: 16px;">Learn more →</a>
-        </p>
-    </div>
-</div>
-
-{{ $articles := where .Site.RegularPages "Type" "articles" }}
-{{ if gt (len $articles) 0 }}
-<div style="margin-top: 64px;">
-    <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 32px;">Recent Articles</h2>
-    <ul class="article-list">
-        {{ range first 3 $articles }}
-        <li>
-            <a href="{{ .RelPermalink }}" class="article-title">{{ .Title }}</a>
-            <div class="article-meta">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
-                {{ if .Params.readingTime }}
-                <span style="margin: 0 8px;">·</span>
-                <span>{{ .Params.readingTime }} min read</span>
-                {{ end }}
+        <!-- Metadata -->
+        <div class="hero-metadata">
+            <div class="metadata-item">
+                <span class="metadata-label">Focus</span>
+                <span class="metadata-value">Technology · Learning · Building</span>
             </div>
-        </li>
-        {{ end }}
-    </ul>
+            <div class="metadata-item">
+                <span class="metadata-label">Languages</span>
+                <span class="metadata-value">中文 · English</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Cadence</span>
+                <span class="metadata-value">~1 article / week</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Since</span>
+                <span class="metadata-value">2026</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    {{ $articles := where .Site.RegularPages "Type" "articles" }}
+    {{ if gt (len $articles) 0 }}
+    <section class="articles-section">
+        <div class="section-header">
+            <h2 class="section-title">Articles</h2>
+            <p class="section-subtitle">The journal — thoughts on technology and learning</p>
+            <a href="/articles/" class="section-link">View all →</a>
+        </div>
+
+        <div class="articles-grid">
+            {{ range first 6 $articles }}
+            <article class="article-card">
+                <a href="{{ .RelPermalink }}" class="article-card-link">
+                    <div class="article-card-content">
+                        <div class="article-date">
+                            <time datetime="{{ .Date.Format "2006-01-02" }}">
+                                {{ .Date.Format "January 2, 2006" }}
+                            </time>
+                        </div>
+                        <h3 class="article-card-title">{{ .Title }}</h3>
+                        {{ if .Params.description }}
+                        <p class="article-card-excerpt">{{ .Params.description }}</p>
+                        {{ end }}
+                        {{ if .Params.readingTime }}
+                        <div class="article-card-meta">
+                            <span>{{ .Params.readingTime }} min read</span>
+                        </div>
+                        {{ end }}
+                    </div>
+                </a>
+            </article>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- Quick Links Section -->
+    <section class="quicklinks-section">
+        <div class="quicklinks-grid">
+            <div class="quicklink-card">
+                <div class="quicklink-number">01</div>
+                <h3 class="quicklink-title">Articles</h3>
+                <p class="quicklink-description">Thoughts and tutorials on software development, cloud technologies, and continuous learning.</p>
+                <a href="/articles/" class="quicklink-link">Explore →</a>
+            </div>
+
+            <div class="quicklink-card">
+                <div class="quicklink-number">02</div>
+                <h3 class="quicklink-title">Notes</h3>
+                <p class="quicklink-description">Quick notes, bookmarks, and fragments of ideas from daily learning and exploration.</p>
+                <a href="/notes/" class="quicklink-link">Browse →</a>
+            </div>
+
+            <div class="quicklink-card">
+                <div class="quicklink-number">03</div>
+                <h3 class="quicklink-title">About</h3>
+                <p class="quicklink-description">A bit about me, my background, and what I'm currently working on.</p>
+                <a href="/about/" class="quicklink-link">Learn more →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">{{ len $articles }}</div>
+                <div class="stat-label">Articles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ len (where .Site.RegularPages "Type" "notes") }}</div>
+                <div class="stat-label">Notes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2026</div>
+                <div class="stat-label">Since</div>
+            </div>
+        </div>
+    </section>
 </div>
-{{ end }}
 {{ end }}
