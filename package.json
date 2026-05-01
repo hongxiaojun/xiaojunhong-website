@@ -1,0 +1,21 @@
+{
+  "name": "xiaojunhong-website",
+  "version": "1.0.0",
+  "description": "Personal website built with Hugo",
+  "scripts": {
+    "build": "hugo --minify",
+    "dev": "hugo server -D",
+    "deploy": "wrangler pages deploy public"
+  },
+  "keywords": [
+    "hugo",
+    "static-site",
+    "personal-website"
+  ],
+  "author": "hongxiaojun",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {}
+}

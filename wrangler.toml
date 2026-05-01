@@ -1,0 +1,20 @@
+# Wrangler configuration for Cloudflare Pages
+# Explicitly specify Hugo as the framework
+
+name = "xiaojunhong-website"
+compatibility_date = "2026-05-01"
+
+# Tell Wrangler this is a Hugo project
+[build]
+command = "hugo --minify"
+cwd = "."
+watch_paths = ["content", "layouts", "static", "config.toml"]
+
+# Output directory
+[site]
+bucket = "public"
+
+# Disable auto-detection of other frameworks
+[build.environment]
+HUGO_VERSION = "0.161.1"
+NODE_ENV = "production"
