@@ -2,7 +2,10 @@
     <div class="container">
         <nav>
             <div class="nav-brand">
-                <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+                <a href="{{ .Site.BaseURL }}" class="brand-link">
+                    <img src="/logo.png" alt="{{ .Site.Title }} Logo" class="site-logo">
+                    <span class="site-title">{{ .Site.Title }}</span>
+                </a>
             </div>
             <div class="nav-links">
                 {{ range .Site.Menus.main }}
