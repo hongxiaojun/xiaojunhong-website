@@ -120,16 +120,16 @@
 <script>
 (function() {
     const text = 'A space for ';
-    const learningText = 'learning';
+    const learningText = 'Learning';
     const middleText = ', ';
-    const buildingText = 'building';
-    const endingText = ', and sharing.';
+    const buildingText = 'Building';
+    const endingText = ', and Sharing.';
     const typingContainer = document.querySelector('.typing-container');
 
     if (!typingContainer) return;
 
     let charIndex = 0;
-    let phase = 0; // 0: typing "A space for ", 1: typing learning, 2: typing ", ", 3: typing building, 4: typing ", and sharing."
+    let phase = 0; // 0: typing "A space for ", 1: typing Learning, 2: typing ", ", 3: typing Building, 4: typing ", and Sharing."
 
     function typeChar() {
         if (phase === 0) {
@@ -183,7 +183,7 @@
         } else if (phase === 4) {
             if (charIndex < endingText.length) {
                 if (endingText.substring(0, charIndex + 1).toLowerCase() === 'sharing') {
-                    const sharingText = 'sharing';
+                    const sharingText = 'Sharing';
                     if (charIndex < sharingText.length) {
                         if (!typingContainer.querySelector('.hero-sharing')) {
                             const sharingSpan = document.createElement('span');
