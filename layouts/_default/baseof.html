@@ -12,20 +12,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --color-bg: #faf9f6;
-            --color-bg-alt: #f4f1ea;
-            --color-text: #1a1a1a;
-            --color-text-light: #666666;
-            --color-text-lighter: #999999;
-            --color-border: #e5e5e5;
-            --color-border-light: #ebe7dd;
-            --color-accent: #0066cc;
-            --color-accent-light: #e6f0ff;
+            /* Kami-inspired Paper Design System */
+            --parchment: #f5f4ed;
+            --ivory: #faf9f5;
+            --warm-sand: #e8e6dc;
+            --dark-surface: #30302e;
+            --deep-dark: #141413;
+
+            /* Kami brand colors - ink blue accent */
+            --brand: #1B365D;
+            --brand-light: #2D5A8A;
+
+            /* Kami neutrals - warm tones only */
+            --near-black: #141413;
+            --dark-warm: #3d3d3a;
+            --olive: #504e49;
+            --stone: #6b6a64;
+
+            /* Kami borders */
+            --border: #e8e6dc;
+            --border-soft: #e5e3d8;
+
+            /* Legacy compatibility */
+            --color-bg: var(--parchment);
+            --color-bg-alt: var(--ivory);
+            --color-text: var(--near-black);
+            --color-text-light: var(--olive);
+            --color-text-lighter: var(--stone);
+            --color-border: var(--border);
+            --color-border-light: var(--border-soft);
+            --color-accent: var(--brand);
+            --color-accent-light: var(--brand-light);
+
+            /* Spacing */
             --spacing-unit: 8px;
             --max-width: 1200px;
             --content-max-width: 720px;
             --toc-width: 240px;
+
+            /* Kami Typography */
+            --serif: Charter, Georgia, "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", "PMingLiU", Palatino, serif;
+            --sans: var(--serif);
+            --mono: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, "Courier New", monospace;
         }
 
         [data-theme="dark"] {
@@ -47,21 +75,29 @@
         }
 
         body {
-            font-family: var(--font-main);
+            font-family: var(--serif);
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.55;
             color: var(--color-text);
-            background-color: var(--color-bg);
-            background-image: radial-gradient(circle, #e8e6e1 1px, transparent 1px);
-            background-size: 8px 8px;
-            background-position: 0 0;
+            background-color: var(--parchment);
+            background-image: none;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             transition: background-color 0.3s ease, color 0.3s ease;
+            letter-spacing: 0.35px;
         }
 
+        /* Keep dot pattern for non-paper sections (homepage) */
+        body.homepage {
+            background-image: radial-gradient(circle, #e8e6e1 1px, transparent 1px);
+            background-size: 8px 8px;
+            background-position: 0 0;
+        }
+
+        /* Remove dot pattern in dark mode for paper feel */
         [data-theme="dark"] body {
-            background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+            background-color: var(--deep-dark);
+            background-image: none;
         }
 
         a {
@@ -143,7 +179,8 @@
 
         .nav-brand a {
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 500;
+            font-family: var(--serif);
             color: var(--color-text);
             display: flex;
             align-items: center;
@@ -166,7 +203,8 @@
 
         .site-title {
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 500;
+            font-family: var(--serif);
         }
 
         .nav-links {
@@ -177,6 +215,7 @@
         .nav-links a {
             font-size: 14px;
             font-weight: 500;
+            font-family: var(--serif);
             color: var(--color-text-light);
             position: relative;
         }
@@ -371,15 +410,17 @@
         }
 
         .article-card {
-            background-color: var(--color-bg-alt);
+            background-color: var(--ivory);
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.15s ease;
+            border: 1px solid var(--border);
         }
 
         .article-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+            border-color: var(--brand);
         }
 
         .article-card-link {
@@ -401,59 +442,74 @@
         }
 
         .article-card-title {
+            font-family: var(--serif);
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.4;
-            color: var(--color-text);
+            color: var(--near-black);
         }
 
-        /* Typography hierarchy - ensure comfortable reading */
+        /* Typography hierarchy - Kami-inspired */
         h1, .hero-title {
+            font-family: var(--serif);
             font-size: 48px;
-            font-weight: 700;
+            font-weight: 500;
             line-height: 1.2;
             margin-bottom: 24px;
+            letter-spacing: -0.5px;
         }
 
         h2, .section-title, .quicklink-title {
+            font-family: var(--serif);
             font-size: 32px;
-            font-weight: 700;
-            line-height: 1.3;
+            font-weight: 500;
+            line-height: 1.2;
             margin-bottom: 16px;
+            letter-spacing: 0.4px;
         }
 
         h3, .article-card-title {
+            font-family: var(--serif);
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.4;
             margin-bottom: 12px;
         }
 
         h4 {
+            font-family: var(--serif);
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.4;
             margin-bottom: 12px;
         }
 
         h5 {
+            font-family: var(--serif);
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.5;
             margin-bottom: 8px;
         }
 
         h6 {
+            font-family: var(--serif);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.5;
             margin-bottom: 8px;
         }
 
+        p {
+            font-family: var(--serif);
+            font-weight: 400;
+        }
+
         .article-card-excerpt {
+            font-family: var(--serif);
             font-size: 14px;
-            color: var(--color-text-light);
-            line-height: 1.6;
+            color: var(--olive);
+            line-height: 1.55;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -470,19 +526,20 @@
         .tag {
             display: inline-block;
             padding: 3px 10px;
-            background-color: var(--color-bg-alt);
-            border: 1px solid var(--color-border);
-            border-radius: 10px;
+            background-color: var(--ivory);
+            border: 1px solid var(--border);
+            border-radius: 4px;
             font-size: 11px;
             font-weight: 500;
-            color: var(--color-text-light);
-            transition: all 0.2s ease;
+            font-family: var(--serif);
+            color: var(--olive);
+            transition: all 0.15s ease;
         }
 
         .tag:hover {
-            background-color: var(--color-accent-light);
-            border-color: var(--color-accent);
-            color: var(--color-accent);
+            background-color: var(--warm-sand);
+            border-color: var(--brand);
+            color: var(--brand);
         }
 
         .article-card-meta {
