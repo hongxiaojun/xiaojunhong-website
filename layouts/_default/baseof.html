@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Kami-inspired Paper Design System */
@@ -53,7 +56,7 @@
             /* Kami Typography */
             --serif: Charter, Georgia, "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", "PMingLiU", Palatino, serif;
             --sans: var(--serif);
-            --mono: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, "Courier New", monospace;
+            --mono: "JetBrains Mono", "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, "Courier New", monospace;
         }
 
         [data-theme="dark"] {
@@ -74,20 +77,103 @@
             box-sizing: border-box;
         }
 
+        /* Page Transition Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Apply animations to main content */
+        main {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* Stagger animations for child elements */
+        .hero-section {
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .articles-section {
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .quicklinks-section {
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+
+        .stats-section {
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+
+        .article-card {
+            animation: scaleIn 0.4s ease-out both;
+        }
+
+        /* Stagger article cards */
+        .articles-grid .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .articles-grid .article-card:nth-child(2) { animation-delay: 0.2s; }
+        .articles-grid .article-card:nth-child(3) { animation-delay: 0.3s; }
+        .articles-grid .article-card:nth-child(4) { animation-delay: 0.4s; }
+        .articles-grid .article-card:nth-child(5) { animation-delay: 0.5s; }
+        .articles-grid .article-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .quicklink-card {
+            animation: slideInFromLeft 0.5s ease-out both;
+        }
+
+        .quicklink-card:nth-child(1) { animation-delay: 0.1s; }
+        .quicklink-card:nth-child(2) { animation-delay: 0.2s; }
+        .quicklink-card:nth-child(3) { animation-delay: 0.3s; }
+
         body {
             font-family: var(--serif);
             font-size: 16px;
             line-height: 1.55;
             color: var(--color-text);
             background-color: var(--parchment);
-            background-image: none;
+            background-image: radial-gradient(circle, #e8e6e1 1px, transparent 1px);
+            background-size: 8px 8px;
+            background-position: 0 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             transition: background-color 0.3s ease, color 0.3s ease;
             letter-spacing: 0.35px;
         }
 
-        /* Keep dot pattern for non-paper sections (homepage) */
+        /* Keep dot pattern for all pages */
         body.homepage {
             background-image: radial-gradient(circle, #e8e6e1 1px, transparent 1px);
             background-size: 8px 8px;
