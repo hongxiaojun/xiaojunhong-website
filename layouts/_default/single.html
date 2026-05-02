@@ -1,146 +1,456 @@
 {{ define "main" }}
-<article class="content">
-    <header class="article-header">
-        <h1 class="article-title">{{ .Title }}</h1>
-        <div class="article-meta">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
-            {{ if .Params.readingTime }}
-            <span class="meta-separator">·</span>
-            <span>{{ .Params.readingTime }} min read</span>
-            {{ end }}
+<div class="article-container">
+    <aside class="toc-sidebar">
+        <nav class="toc" id="toc">
+            <div class="toc-title">目录</div>
+            <ul class="toc-list" id="toc-list"></ul>
+        </nav>
+    </aside>
+
+    <article class="content">
+        <header class="article-header">
+            <h1 class="article-title">{{ .Title }}</h1>
+            <div class="article-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                {{ if .Params.readingTime }}
+                <span class="meta-separator">·</span>
+                <span>{{ .Params.readingTime }} min read</span>
+                {{ end }}
+            </div>
+        </header>
+
+        <div class="article-body">
+            {{ .Content }}
         </div>
-    </header>
 
-    <div class="article-body">
-        {{ .Content }}
-    </div>
-
-    <footer class="article-footer">
-        <a href="{{ .Section | relURL }}" class="back-link">← Back to {{ .Section }}</a>
-    </footer>
-</article>
+        <footer class="article-footer">
+            <a href="{{ .Section | relURL }}" class="back-link">← Back to {{ .Section }}</a>
+        </footer>
+    </article>
+</div>
 
 <style>
-    .article-header {
-        margin-bottom: 48px;
+.article-container {
+    display: grid;
+    grid-template-columns: var(--toc-width) 1fr;
+    gap: 40px;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* TOC Sidebar */
+.toc-sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.toc {
+    font-size: 14px;
+}
+
+.toc-title {
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--color-text);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-list li {
+    margin-bottom: 8px;
+}
+
+.toc-list a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+}
+
+.toc-list a:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+}
+
+.toc-list a.active {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    font-weight: 500;
+}
+
+/* Nested TOC items */
+.toc-list ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 16px;
+}
+
+.toc-list ul li {
+    margin-bottom: 4px;
+}
+
+.toc-list ul a {
+    font-size: 13px;
+    padding-left: 8px;
+}
+
+/* Article Content */
+.article-header {
+    margin-bottom: 48px;
+}
+
+.article-title {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--color-text);
+}
+
+.article-meta {
+    font-size: 14px;
+    color: var(--color-text-light);
+}
+
+.meta-separator {
+    margin: 0 8px;
+}
+
+.article-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+/* Article Headings with scroll-margin */
+.article-body h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 48px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    scroll-margin-top: 100px;
+}
+
+.article-body h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    scroll-margin-top: 100px;
+}
+
+.article-body h4 {
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    scroll-margin-top: 100px;
+}
+
+.article-body h5,
+.article-body h6 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    scroll-margin-top: 100px;
+}
+
+.article-body p {
+    margin-bottom: 16px;
+}
+
+.article-body a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.article-body code {
+    background-color: var(--color-bg-alt);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    border: 1px solid var(--color-border);
+}
+
+.article-body pre {
+    background-color: var(--color-bg-alt);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+    border: 1px solid var(--color-border);
+}
+
+.article-body pre code {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+.article-body blockquote {
+    border-left: 4px solid var(--color-accent);
+    padding: 12px 16px;
+    margin: 24px 0;
+    color: var(--color-text-light);
+    background-color: var(--color-bg-alt);
+    border-radius: 0 8px 8px 0;
+}
+
+.article-body ul,
+.article-body ol {
+    margin-left: 24px;
+    margin-bottom: 16px;
+}
+
+.article-body li {
+    margin-bottom: 8px;
+}
+
+.article-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 24px 0;
+}
+
+.article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+}
+
+.article-body table thead {
+    background-color: var(--color-bg-alt);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.article-body table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.article-body table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.article-body table tr:last-child td {
+    border-bottom: none;
+}
+
+.article-body hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 32px 0;
+}
+
+.article-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+}
+
+.back-link {
+    font-size: 14px;
+    color: var(--color-text-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.back-link:hover {
+    color: var(--color-accent);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .article-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .toc-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .article-container {
+        padding: 0 20px;
     }
 
     .article-title {
-        font-size: 40px;
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 16px;
-        color: var(--color-text);
-    }
-
-    .article-meta {
-        font-size: 14px;
-        color: var(--color-text-light);
-    }
-
-    .meta-separator {
-        margin: 0 8px;
+        font-size: 32px;
     }
 
     .article-body {
-        font-size: 17px;
-        line-height: 1.8;
-        color: var(--color-text);
-        max-width: 680px;
+        font-size: 16px;
     }
 
     .article-body h2 {
-        font-size: 28px;
-        font-weight: 700;
-        margin-top: 48px;
-        margin-bottom: 20px;
-        line-height: 1.3;
+        font-size: 24px;
+        margin-top: 36px;
     }
 
     .article-body h3 {
-        font-size: 22px;
-        font-weight: 600;
-        margin-top: 36px;
-        margin-bottom: 16px;
-        line-height: 1.4;
+        font-size: 20px;
+        margin-top: 28px;
     }
 
     .article-body h4 {
-        font-size: 19px;
-        font-weight: 600;
-        margin-top: 28px;
-        margin-bottom: 12px;
-        line-height: 1.4;
+        font-size: 18px;
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-container {
+        padding: 0 16px;
     }
 
-    .article-body p {
-        margin-bottom: 16px;
+    .article-title {
+        font-size: 28px;
     }
 
-    .article-body a {
-        color: var(--color-accent);
-        text-decoration: underline;
+    .article-body {
+        font-size: 15px;
     }
 
-    .article-body code {
-        background-color: #f5f5f5;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: 'Monaco', 'Courier New', monospace;
-        font-size: 0.9em;
+    .article-body h2 {
+        font-size: 22px;
     }
 
-    .article-body pre {
-        background-color: #f5f5f5;
-        padding: 16px;
-        border-radius: 8px;
-        overflow-x: auto;
-        margin-bottom: 16px;
+    .article-body h3 {
+        font-size: 18px;
     }
 
-    .article-body pre code {
-        background-color: transparent;
-        padding: 0;
-    }
-
-    .article-body blockquote {
-        border-left: 4px solid var(--color-accent);
-        padding-left: 16px;
-        margin-left: 0;
-        color: var(--color-text-light);
-        font-style: italic;
-    }
-
-    .article-body ul,
-    .article-body ol {
-        margin-left: 24px;
-        margin-bottom: 16px;
-    }
-
-    .article-body li {
-        margin-bottom: 8px;
-    }
-
-    .article-body img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin: 24px 0;
-    }
-
-    .article-footer {
-        margin-top: 64px;
-        padding-top: 32px;
-        border-top: 1px solid var(--color-border);
-    }
-
-    .back-link {
+    .article-body table {
         font-size: 14px;
-        color: var(--color-text-light);
     }
 
-    .back-link:hover {
-        color: var(--color-accent);
+    .article-body table th,
+    .article-body table td {
+        padding: 8px;
     }
+}
+
+/* Print Styles */
+@media print {
+    .toc-sidebar {
+        display: none;
+    }
+
+    .article-container {
+        grid-template-columns: 1fr;
+    }
+
+    .article-body a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        word-break: break-all;
+    }
+}
 </style>
+
+<script>
+(function() {
+    // Generate TOC
+    const articleBody = document.querySelector('.article-body');
+    const tocList = document.getElementById('toc-list');
+
+    if (articleBody && tocList) {
+        const headings = articleBody.querySelectorAll('h2, h3');
+        const tocItems = [];
+        let currentH2List = null;
+
+        headings.forEach((heading, index) => {
+            // Add ID if not present
+            if (!heading.id) {
+                heading.id = 'heading-' + index;
+            }
+
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.textContent = heading.textContent;
+            link.href = '#' + heading.id;
+            listItem.appendChild(link);
+
+            if (heading.tagName === 'H2') {
+                // Create new H2 list
+                currentH2List = document.createElement('ul');
+                tocList.appendChild(listItem);
+                tocItems.push({ link, heading, sublist: currentH2List });
+                tocList.appendChild(currentH2List);
+            } else if (heading.tagName === 'H3' && currentH2List) {
+                // Add to current H2 list
+                currentH2List.appendChild(listItem);
+                tocItems.push({ link, heading });
+            }
+        });
+
+        // Smooth scroll and active state
+        const observerOptions = {
+            root: null,
+            rootMargin: '-100px 0px -66%',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all links
+                    tocItems.forEach(item => item.link.classList.remove('active'));
+                    // Add active class to current link
+                    const activeItem = tocItems.find(item => item.heading === entry.target);
+                    if (activeItem) {
+                        activeItem.link.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        headings.forEach(heading => observer.observe(heading));
+
+        // Smooth scroll for TOC links
+        tocList.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Update URL without jumping
+                    history.pushState(null, null, e.target.getAttribute('href'));
+                }
+            }
+        });
+    }
+})();
+</script>
 {{ end }}
