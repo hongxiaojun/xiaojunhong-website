@@ -1,42 +1,57 @@
 {{ define "main" }}
+{{ $articles := where .Site.RegularPages "Type" "articles" }}
+{{ $notes := where .Site.RegularPages "Type" "notes" }}
 <div class="homepage">
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-content">
-            <div class="hero-location">GUANGZHOU·CHINA</div>
-            <h1 class="hero-title">
-                <span class="typing-container"></span>
-                <span class="typing-cursor">|</span>
-            </h1>
-            <div class="hero-description">
-                <p class="hero-subtitle">Code with Vibe, Think in Flow.</p>
-                <p class="hero-text">当 AI 接管逻辑，我们负责审美与直觉。这是一场从 Vibe Coding 迈向 Vibe Thinking 的实验——记录技术探索的火花，分享跨界思考的深度，在智能浪潮中尽情畅游。</p>
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-location">GUANGZHOU·CHINA</div>
+                <h1 class="hero-title">
+                    <span class="typing-container"></span>
+                    <span class="typing-cursor">|</span>
+                </h1>
+                <div class="hero-description">
+                    <p class="hero-subtitle">Code with Vibe, Think in Flow.</p>
+                    <p class="hero-text">当 AI 接管逻辑，我们负责审美与直觉。这是一场从 Vibe Coding 迈向 Vibe Thinking 的实验——记录技术探索的火花，分享跨界思考的深度，在智能浪潮中尽情畅游。</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Metadata -->
-        <div class="hero-metadata">
-            <div class="metadata-item">
-                <span class="metadata-label">Focus</span>
-                <span class="metadata-value">Technology · Learning · Building</span>
-            </div>
-            <div class="metadata-item">
-                <span class="metadata-label">Languages</span>
-                <span class="metadata-value">中文 · English</span>
-            </div>
-            <div class="metadata-item">
-                <span class="metadata-label">Cadence</span>
-                <span class="metadata-value">~1 article / week</span>
-            </div>
-            <div class="metadata-item">
-                <span class="metadata-label">Since</span>
-                <span class="metadata-value">2026</span>
+            <!-- Metadata Badges -->
+            <div class="hero-metadata">
+                <div class="metadata-badge">
+                    <div class="metadata-emoji">🎯</div>
+                    <div class="metadata-content">
+                        <span class="metadata-label">Focus</span>
+                        <span class="metadata-value">Technology · Learning · Building</span>
+                    </div>
+                </div>
+                <div class="metadata-badge">
+                    <div class="metadata-emoji">📖</div>
+                    <div class="metadata-content">
+                        <span class="metadata-label">Articles</span>
+                        <span class="metadata-value">{{ len $articles }} posts</span>
+                    </div>
+                </div>
+                <div class="metadata-badge">
+                    <div class="metadata-emoji">📒</div>
+                    <div class="metadata-content">
+                        <span class="metadata-label">Notes</span>
+                        <span class="metadata-value">{{ len $notes }} notes</span>
+                    </div>
+                </div>
+                <div class="metadata-badge">
+                    <div class="metadata-emoji">🚀</div>
+                    <div class="metadata-content">
+                        <span class="metadata-label">Active</span>
+                        <span class="metadata-value">Since 2026</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Articles Section -->
-    {{ $articles := where .Site.RegularPages "Type" "articles" }}
     {{ if gt (len $articles) 0 }}
     <section class="articles-section">
         <div class="section-header">
