@@ -1,0 +1,798 @@
+{{ define "main" }}
+<div class="note-container">
+    <aside class="toc-sidebar">
+        <nav class="toc" id="toc">
+            <div class="toc-title">目录</div>
+            <ul class="toc-list" id="toc-list"></ul>
+        </nav>
+    </aside>
+
+    <article class="content">
+        <header class="note-header">
+            <div class="note-type-badge">
+                {{ if .Params.tags }}
+                    {{ range .Params.tags }}
+                        {{ if eq . "concept" }}
+                            <span class="type-icon">💡</span>
+                            <span class="type-text">概念解剖</span>
+                        {{ else if eq . "roundtable" }}
+                            <span class="type-icon">💬</span>
+                            <span class="type-text">圆桌讨论</span>
+                        {{ else }}
+                            <span class="type-icon">📝</span>
+                            <span class="type-text">笔记</span>
+                        {{ end }}
+                    {{ end }}
+                {{ else }}
+                    <span class="type-icon">📝</span>
+                    <span class="type-text">笔记</span>
+                {{ end }}
+            </div>
+
+            <h1 class="note-title">{{ .Title }}</h1>
+
+            <div class="note-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}" class="note-date">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    {{ .Date.Format "2006年1月2日" }}
+                </time>
+            </div>
+
+            {{ if .Params.tags }}
+            <div class="note-tags">
+                {{ range .Params.tags }}
+                <span class="tag">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
+        </header>
+
+        <div class="note-body">
+            {{ .Content }}
+        </div>
+
+        <footer class="note-footer">
+            <a href="/notes/" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                返回笔记列表
+            </a>
+        </footer>
+    </article>
+</div>
+
+<style>
+/* Note Container - Enhanced Kami Design */
+.note-container {
+    display: grid;
+    grid-template-columns: var(--toc-width) 1fr;
+    gap: 48px;
+    position: relative;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 88px 64px 120px;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TOC Sidebar - Glass morphism effect */
+.toc-sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.toc {
+    font-family: var(--serif);
+    font-size: 14px;
+    background: var(--ivory);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.toc-title {
+    font-weight: 600;
+    font-family: var(--serif);
+    margin-bottom: 16px;
+    color: var(--near-black);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+}
+
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-list li {
+    margin-bottom: 6px;
+}
+
+.toc-list a {
+    font-family: var(--serif);
+    color: var(--olive);
+    text-decoration: none;
+    display: block;
+    padding: 6px 12px;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.toc-list a:hover {
+    color: var(--brand);
+    background: var(--warm-sand);
+    transform: translateX(4px);
+}
+
+.toc-list a.active {
+    color: var(--brand);
+    background: var(--warm-sand);
+    font-weight: 600;
+    border-left: 3px solid var(--brand);
+}
+
+/* Nested TOC */
+.toc-list ul {
+    list-style: none;
+    margin: 6px 0 6px 16px;
+    padding: 0;
+}
+
+.toc-list ul li {
+    margin-bottom: 4px;
+}
+
+.toc-list ul a {
+    font-size: 12px;
+    padding: 4px 8px 4px 12px;
+}
+
+/* Note Header - Enhanced design */
+.note-header {
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 3px solid var(--border-soft);
+    position: relative;
+}
+
+.note-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand) 0%, transparent 100%);
+    opacity: 0.6;
+}
+
+.note-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, var(--ivory) 0%, var(--warm-sand) 100%);
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.type-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.type-text {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--near-black);
+    letter-spacing: 0.5px;
+}
+
+.note-title {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--near-black);
+    letter-spacing: -0.8px;
+    background: linear-gradient(135deg, var(--near-black) 0%, var(--dark-warm) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.note-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--stone);
+    font-family: var(--serif);
+}
+
+.note-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.note-date:hover {
+    background: var(--warm-sand);
+    border-color: var(--brand);
+}
+
+.note-date svg {
+    color: var(--brand);
+}
+
+.note-tags {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, var(--ivory) 0%, var(--warm-sand) 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--serif);
+    color: var(--olive);
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.tag:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(77, 166, 255, 0.3);
+}
+
+/* Note Body - Enhanced typography */
+.note-body {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.75;
+    font-weight: 400;
+    color: var(--near-black);
+}
+
+/* Enhanced Headings */
+.note-body h2 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 80px;
+    margin-bottom: 28px;
+    line-height: 1.2;
+    scroll-margin-top: 100px;
+    letter-spacing: -0.5px;
+    color: var(--near-black);
+    position: relative;
+    padding-left: 20px;
+}
+
+.note-body h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    background: linear-gradient(180deg, var(--brand) 0%, var(--brand-light) 100%);
+    border-radius: 2px;
+}
+
+.note-body h3 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 56px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    scroll-margin-top: 100px;
+    color: var(--near-black);
+    position: relative;
+}
+
+.note-body h3::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--brand);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.note-body h4 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    scroll-margin-top: 100px;
+    color: var(--dark-warm);
+}
+
+.note-body p {
+    margin-bottom: 20px;
+    font-family: var(--serif);
+}
+
+.note-body strong {
+    color: var(--brand);
+    font-weight: 600;
+}
+
+.note-body em {
+    color: var(--dark-warm);
+    font-style: italic;
+}
+
+.note-body a {
+    color: var(--brand);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    background: linear-gradient(to bottom, transparent 0%, transparent 1px, var(--brand) 1px, var(--brand) 2px, transparent 2px);
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+}
+
+.note-body a:hover {
+    background-size: 100% 100%;
+}
+
+.note-body code {
+    background: linear-gradient(135deg, #EEF2F7 0%, #E8EDF5 100%);
+    color: var(--brand);
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+    border: 1px solid #D8E2F0;
+    font-weight: 600;
+}
+
+.note-body pre {
+    background: var(--ivory);
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 32px 0;
+    border: 2px solid var(--border);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.note-body pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: var(--near-black);
+    font-weight: 400;
+}
+
+.note-body blockquote {
+    border-left: 4px solid var(--brand);
+    padding: 20px 24px;
+    margin: 32px 0;
+    color: var(--olive);
+    background: linear-gradient(135deg, var(--ivory) 0%, var(--warm-sand) 100%);
+    border-radius: 0 12px 12px 0;
+    font-family: var(--serif);
+    font-style: normal;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+.note-body blockquote::before {
+    content: '"';
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    font-size: 48px;
+    color: var(--brand);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.note-body blockquote p {
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.note-body ul,
+.note-body ol {
+    margin-left: 28px;
+    margin-bottom: 20px;
+    font-family: var(--serif);
+}
+
+.note-body li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.note-body li::marker {
+    color: var(--brand);
+    font-weight: 600;
+}
+
+.note-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 32px 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 2px solid var(--border);
+}
+
+.note-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 15px;
+    font-family: var(--serif);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.note-body table thead {
+    background: linear-gradient(135deg, var(--ivory) 0%, var(--warm-sand) 100%);
+    border-bottom: 2px solid var(--border);
+}
+
+.note-body table th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    font-family: var(--serif);
+    color: var(--near-black);
+}
+
+.note-body table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--dark-warm);
+}
+
+.note-body table tr:last-child td {
+    border-bottom: none;
+}
+
+.note-body table tr:hover {
+    background: var(--ivory);
+}
+
+.note-body hr {
+    border: none;
+    border-top: 2px solid var(--border-soft);
+    margin: 64px 0;
+    position: relative;
+}
+
+.note-body hr::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: var(--brand);
+}
+
+/* Note Footer */
+.note-footer {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 2px solid var(--border-soft);
+}
+
+.back-link {
+    font-size: 15px;
+    font-family: var(--serif);
+    color: var(--olive);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    color: var(--brand);
+    background: var(--warm-sand);
+    border-color: var(--brand);
+    transform: translateX(-4px);
+}
+
+.back-link svg {
+    transition: transform 0.2s ease;
+}
+
+.back-link:hover svg {
+    transform: translateX(-4px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .note-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 64px 48px 80px;
+    }
+
+    .toc-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .note-container {
+        padding: 48px 32px 64px;
+    }
+
+    .note-title {
+        font-size: 36px;
+    }
+
+    .note-body {
+        font-size: 16px;
+    }
+
+    .note-body h2 {
+        font-size: 26px;
+        padding-left: 16px;
+        margin-top: 56px;
+    }
+
+    .note-body h3 {
+        font-size: 22px;
+        margin-top: 40px;
+    }
+
+    .note-body h4 {
+        font-size: 18px;
+        margin-top: 32px;
+    }
+
+    .note-type-badge {
+        padding: 8px 14px;
+    }
+
+    .type-icon {
+        font-size: 18px;
+    }
+
+    .type-text {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .note-container {
+        padding: 32px 24px 48px;
+    }
+
+    .note-title {
+        font-size: 30px;
+    }
+
+    .note-body {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .note-body h2 {
+        font-size: 24px;
+    }
+
+    .note-body h3 {
+        font-size: 20px;
+    }
+
+    .note-body table {
+        font-size: 14px;
+    }
+
+    .note-body table th,
+    .note-body table td {
+        padding: 12px;
+    }
+
+    .note-meta {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: var(--parchment) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .toc-sidebar {
+        display: none;
+    }
+
+    .note-container {
+        grid-template-columns: 1fr;
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .note-header,
+    .note-body h2,
+    .note-body h3,
+    .note-body h4,
+    blockquote,
+    pre,
+    table,
+    .note-footer {
+        page-break-inside: avoid;
+    }
+
+    .note-body h2 {
+        font-size: 26pt;
+        page-break-after: avoid;
+    }
+
+    .note-body h3 {
+        font-size: 18pt;
+        page-break-after: avoid;
+    }
+
+    .note-body p {
+        orphans: 3;
+        widows: 3;
+    }
+
+    .note-body a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        word-break: break-all;
+    }
+}
+</style>
+
+<script>
+(function() {
+    // Generate TOC
+    const noteBody = document.querySelector('.note-body');
+    const tocList = document.getElementById('toc-list');
+
+    if (noteBody && tocList) {
+        const headings = noteBody.querySelectorAll('h2, h3');
+        const tocItems = [];
+        let currentH2List = null;
+
+        headings.forEach((heading, index) => {
+            if (!heading.id) {
+                heading.id = 'heading-' + index;
+            }
+
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.textContent = heading.textContent;
+            link.href = '#' + heading.id;
+            listItem.appendChild(link);
+
+            if (heading.tagName === 'H2') {
+                currentH2List = document.createElement('ul');
+                tocList.appendChild(listItem);
+                tocItems.push({ link, heading, sublist: currentH2List });
+                tocList.appendChild(currentH2List);
+            } else if (heading.tagName === 'H3' && currentH2List) {
+                currentH2List.appendChild(listItem);
+                tocItems.push({ link, heading });
+            }
+        });
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-100px 0px -66%',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocItems.forEach(item => item.link.classList.remove('active'));
+                    const activeItem = tocItems.find(item => item.heading === entry.target);
+                    if (activeItem) {
+                        activeItem.link.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        headings.forEach(heading => observer.observe(heading));
+
+        tocList.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    history.pushState(null, null, e.target.getAttribute('href'));
+                }
+            }
+        });
+    }
+})();
+</script>
+{{ end }}
