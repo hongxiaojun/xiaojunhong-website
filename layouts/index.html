@@ -59,6 +59,13 @@
                         {{ if .Params.description }}
                         <p class="article-card-excerpt">{{ .Params.description }}</p>
                         {{ end }}
+                        {{ if .Params.tags }}
+                        <div class="article-card-tags">
+                            {{ range first 3 .Params.tags }}
+                            <span class="tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
                         {{ if .Params.readingTime }}
                         <div class="article-card-meta">
                             <span>{{ .Params.readingTime }} min read</span>

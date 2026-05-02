@@ -460,6 +460,31 @@
             overflow: hidden;
         }
 
+        .article-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-light);
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background-color: var(--color-accent-light);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
         .article-card-meta {
             font-size: 13px;
             color: var(--color-text-lighter);
@@ -729,12 +754,64 @@
             }
         }
 
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #4A90A4, #722F37, #D4A574);
+            transition: width 0.1s ease;
+            z-index: 9999;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--color-accent-light);
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-text);
+        }
+
         /* Print Styles */
         @media print {
             .theme-toggle,
             header,
             footer,
-            .back-link {
+            .back-link,
+            .reading-progress,
+            .back-to-top {
                 display: none !important;
             }
 
@@ -818,6 +895,7 @@
     </style>
 </head>
 <body>
+    <div class="reading-progress" id="reading-progress"></div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -840,6 +918,12 @@
         {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
 
     <script>
     (function() {
@@ -870,6 +954,47 @@
                 }
             });
         }
+    })();
+
+    // Reading Progress Bar
+    (function() {
+        const progressBar = document.getElementById('reading-progress');
+        if (!progressBar) return;
+
+        function updateProgress() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            progressBar.style.width = Math.min(progress, 100) + '%';
+        }
+
+        window.addEventListener('scroll', updateProgress);
+        updateProgress();
+    })();
+
+    // Back to Top Button
+    (function() {
+        const backToTop = document.getElementById('back-to-top');
+        if (!backToTop) return;
+
+        function toggleBackToTop() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', toggleBackToTop);
+        toggleBackToTop();
     })();
     </script>
 </body>

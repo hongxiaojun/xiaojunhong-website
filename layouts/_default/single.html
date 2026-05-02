@@ -17,11 +17,28 @@
                 <span>{{ .Params.readingTime }} min read</span>
                 {{ end }}
             </div>
+
+            {{ if .Params.tags }}
+            <div class="article-tags">
+                {{ range .Params.tags }}
+                <span class="tag">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
         </header>
 
         <div class="article-body">
             {{ .Content }}
         </div>
+
+        {{ if .Params.tags }}
+        <section class="related-articles">
+            <h3 class="related-title">Related Articles</h3>
+            <div class="related-grid" id="related-articles">
+                <!-- Related articles will be injected by JavaScript -->
+            </div>
+        </section>
+        {{ end }}
 
         <footer class="article-footer">
             <a href="{{ .Section | relURL }}" class="back-link">← Back to {{ .Section }}</a>
@@ -129,6 +146,31 @@
 
 .meta-separator {
     margin: 0 8px;
+}
+
+.article-tags {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-light);
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 .article-body {
@@ -284,6 +326,77 @@
 
 .back-link:hover {
     color: var(--color-accent);
+}
+
+/* Related Articles */
+.related-articles {
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--color-border);
+}
+
+.related-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--color-text);
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.related-card {
+    background-color: var(--color-bg-alt);
+    border-radius: 8px;
+    padding: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--color-border);
+}
+
+.related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-accent);
+}
+
+.related-card-link {
+    color: var(--color-text);
+    text-decoration: none;
+    display: block;
+}
+
+.related-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.related-card-excerpt {
+    font-size: 14px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.related-card-meta {
+    font-size: 12px;
+    color: var(--color-text-lighter);
+}
+
+.related-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
 }
 
 /* Responsive Design */
@@ -450,6 +563,74 @@
                 }
             }
         });
+    }
+})();
+
+// Related Articles
+(function() {
+    const relatedContainer = document.getElementById('related-articles');
+    if (!relatedContainer) return;
+
+    // Get current article tags from the article tags element
+    const currentArticleTags = Array.from(document.querySelectorAll('.tag'))
+        .map(tag => tag.textContent.trim());
+
+    if (currentArticleTags.length === 0) return;
+
+    // Get all article links from the page
+    const articleLinks = document.querySelectorAll('a[href^="/articles/"]');
+    const relatedArticles = [];
+
+    articleLinks.forEach(link => {
+        // Skip if it's the current article
+        if (link.href === window.location.href) return;
+
+        // Skip if it's not a direct article link
+        if (!link.href.includes('/articles/') || link.href.includes('/articles/#')) return;
+
+        const title = link.querySelector('.article-card-title, .related-card-title');
+        const excerpt = link.querySelector('.article-card-excerpt, .related-card-excerpt');
+        const tags = link.querySelectorAll('.tag');
+
+        if (!title) return;
+
+        const articleTags = Array.from(tags).map(tag => tag.textContent.trim());
+
+        // Calculate tag overlap
+        const matchingTags = currentArticleTags.filter(tag => articleTags.includes(tag));
+        const overlapScore = matchingTags.length;
+
+        if (overlapScore > 0) {
+            relatedArticles.push({
+                url: link.href,
+                title: title.textContent,
+                excerpt: excerpt ? excerpt.textContent : '',
+                tags: articleTags,
+                score: overlapScore
+            });
+        }
+    });
+
+    // Sort by overlap score and take top 3
+    relatedArticles.sort((a, b) => b.score - a.score);
+    const topRelated = relatedArticles.slice(0, 3);
+
+    // Render related articles
+    if (topRelated.length > 0) {
+        relatedContainer.innerHTML = topRelated.map(article => `
+            <div class="related-card">
+                <a href="${article.url}" class="related-card-link">
+                    <h4 class="related-card-title">${article.title}</h4>
+                    ${article.excerpt ? `<p class="related-card-excerpt">${article.excerpt}</p>` : ''}
+                    <div class="related-card-tags">
+                        ${article.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </a>
+            </div>
+        `).join('');
+    } else {
+        // If no related articles found, hide the section
+        relatedContainer.closest('.related-articles').style.display = 'none';
     }
 })();
 </script>
