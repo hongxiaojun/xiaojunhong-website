@@ -5,10 +5,6 @@ draft: false
 description: "罗翔说熟能生巧是颠扑不破的真理。F1换胎只需1.82秒，罗振宇每天60秒坚持十年。那些看似毫不费力的卓越，都是通过反复练习、工程化打磨练就的。"
 readingTime: 6
 tags: ["刻意练习", "成长", "罗翔", "技能学习"]
----
-
-# 那些"毫不费力"的卓越，都是怎么练出来的？
-
 最近看[鲁豫对话罗翔| 陈鲁豫·慢谈](https://www.bilibili.com/video/BV1zNoVB1EWb/?spm_id_from=333.337.search-card.all.click&vd_source=abe919466bbd5e5158ff210a4871f16d)
 
 鲁豫问他："这种风格是慢慢找到的吗？"
