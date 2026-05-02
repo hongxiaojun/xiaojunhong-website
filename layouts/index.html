@@ -118,15 +118,17 @@
 
 <script>
 (function() {
-    const text = 'A space for learning, ';
-    const emphasisText = 'building';
+    const text = 'A space for ';
+    const learningText = 'learning';
+    const middleText = ', ';
+    const buildingText = 'building';
     const endingText = ', and sharing.';
     const typingContainer = document.querySelector('.typing-container');
 
     if (!typingContainer) return;
 
     let charIndex = 0;
-    let phase = 0; // 0: typing main text, 1: typing emphasis, 2: typing ending
+    let phase = 0; // 0: typing "A space for ", 1: typing learning, 2: typing ", ", 3: typing building, 4: typing ", and sharing."
 
     function typeChar() {
         if (phase === 0) {
@@ -137,15 +139,15 @@
             } else {
                 phase = 1;
                 charIndex = 0;
-                const emphasisSpan = document.createElement('span');
-                emphasisSpan.className = 'hero-emphasis';
-                typingContainer.appendChild(emphasisSpan);
+                const learningSpan = document.createElement('span');
+                learningSpan.className = 'hero-learning';
+                typingContainer.appendChild(learningSpan);
                 setTimeout(typeChar, 100);
             }
         } else if (phase === 1) {
-            const emphasisSpan = typingContainer.querySelector('.hero-emphasis');
-            if (charIndex < emphasisText.length) {
-                emphasisSpan.textContent += emphasisText.charAt(charIndex);
+            const learningSpan = typingContainer.querySelector('.hero-learning');
+            if (charIndex < learningText.length) {
+                learningSpan.textContent += learningText.charAt(charIndex);
                 charIndex++;
                 setTimeout(typeChar, 100);
             } else {
@@ -154,10 +156,56 @@
                 setTimeout(typeChar, 100);
             }
         } else if (phase === 2) {
-            if (charIndex < endingText.length) {
-                typingContainer.textContent += endingText.charAt(charIndex);
+            if (charIndex < middleText.length) {
+                typingContainer.textContent += middleText.charAt(charIndex);
                 charIndex++;
                 setTimeout(typeChar, 100);
+            } else {
+                phase = 3;
+                charIndex = 0;
+                const buildingSpan = document.createElement('span');
+                buildingSpan.className = 'hero-building';
+                typingContainer.appendChild(buildingSpan);
+                setTimeout(typeChar, 100);
+            }
+        } else if (phase === 3) {
+            const buildingSpan = typingContainer.querySelector('.hero-building');
+            if (charIndex < buildingText.length) {
+                buildingSpan.textContent += buildingText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 100);
+            } else {
+                phase = 4;
+                charIndex = 0;
+                setTimeout(typeChar, 100);
+            }
+        } else if (phase === 4) {
+            if (charIndex < endingText.length) {
+                if (endingText.substring(0, charIndex + 1).toLowerCase() === 'sharing') {
+                    const sharingText = 'sharing';
+                    if (charIndex < sharingText.length) {
+                        if (!typingContainer.querySelector('.hero-sharing')) {
+                            const sharingSpan = document.createElement('span');
+                            sharingSpan.className = 'hero-sharing';
+                            typingContainer.appendChild(sharingSpan);
+                        }
+                        const sharingSpan = typingContainer.querySelector('.hero-sharing');
+                        if (sharingSpan.textContent.length < sharingText.length) {
+                            sharingSpan.textContent += sharingText.charAt(sharingSpan.textContent.length);
+                            setTimeout(typeChar, 100);
+                            return;
+                        }
+                    }
+                    charIndex++;
+                    if (charIndex < endingText.length) {
+                        typingContainer.textContent += endingText.charAt(charIndex);
+                    }
+                    setTimeout(typeChar, 100);
+                } else {
+                    typingContainer.textContent += endingText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeChar, 100);
+                }
             }
         }
     }
