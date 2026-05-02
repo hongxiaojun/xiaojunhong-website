@@ -28,7 +28,7 @@ I believe in learning in public. This website serves as:
 ## Get in Touch
 
 Feel free to reach out:
-- Email: hello@xiaojunhong.space
-- GitHub: [xiaojunhong](https://github.com/xiaojunhong)
+- Email: junqiaochen@gmail.com
+- GitHub: [hongxiaojun](https://github.com/hongxiaojun)
 
 Thanks for visiting!
