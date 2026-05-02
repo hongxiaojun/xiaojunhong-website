@@ -1,0 +1,355 @@
+{{ define "main" }}
+<div class="github-container">
+    <header class="github-header">
+        <h1 class="github-title">GitHub Projects</h1>
+        <p class="github-subtitle">Featured open source projects and repositories</p>
+        <div class="github-profile">
+            <a href="https://github.com/hongxiaojun" target="_blank" rel="noopener" class="github-link">
+                <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-1.03.196-2.395.475-3.93.676-.399-.196-.786-.407-1.156-.626-.384-.196-.793-.399-1.156-.626zm6.06 4.117c-.96.103-1.94.232-2.857.285v-4.16c.97-.065 2.073-.277 2.857-.285zm-1.17 7.508c-.735.395-1.56.643-2.447.752-.665.105-1.343.167-2.035.167-.632 0-1.253.058-1.842.17-.596.114-1.167.252-1.696.453-.529.201-1.024.466-1.475.773-.519.352-.839.78-.966 1.283-.127.503-.167 1.064-.167 1.593 0 .595.096 1.126.285 1.593.19.464.389.987.44 1.593.05.606.106 1.144.194 1.593.447.549.254 1.021.596 1.475.773.518.201 1.024.466 1.475.773.519.352.839.78.966 1.283.127.503.167 1.064.167 1.593 0 .595-.096 1.126-.285 1.593-.19.464-.389-.987-.44-1.593-.05-.606-.106-1.144-.194-1.593-.447-.549-.254-1.021-.596-1.475-.773-.518-.201-1.024-.466-1.475-.773-.519-.352-.839-.78-.966-1.283-.127-.503-.167-1.064-.167-1.593 0-.595.096-1.126.285-1.593.19-.464.389-.987.44-1.593.05-.606.106-1.144.194-1.593.447-.549.254-1.021.596-1.475.773-.518.201-1.024.466-1.475.773-.519.352-.839.78-.966 1.283.127.503.167 1.064.167 1.593 0 .595-.096 1.126-.285 1.593-.19.464.389-.987.44-1.593.05.606.106 1.144.194 1.593.447.549.254 1.021.596 1.475.773.518.201 1.024.466 1.475.773.519.352.839.78.966 1.283.127.503.167 1.064.167 1.593 0 .595-.096 1.126-.285 1.593-.19.464-.389-.987-.44-1.593-.05-.606-.106-1.144-.194-1.593-.447-.549-.254-1.021-.596-1.475-.773-.518-.201-1.024-.466-1.475-.773-.519-.352-.839-.78-.966-1.283-.127-.503-.167-1.064-.167-1.593zm0-15.968c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm9 3.378c-1.395 0-2.528-1.133-2.528-2.528 0-1.395 1.133-2.528 2.528-2.528 1.395 0 2.528 1.133 2.528 2.528 0 1.395-1.133 2.528-2.528 2.528z"/>
+                </svg>
+                <span>@hongxiaojun</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="github-projects" id="github-projects">
+        <!-- Projects will be loaded by JavaScript -->
+        <div class="loading">Loading projects...</div>
+    </div>
+</div>
+
+<style>
+/* GitHub Projects Container */
+.github-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 88px 24px 120px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Header */
+.github-header {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.github-title {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--near-black);
+    letter-spacing: -0.5px;
+}
+
+.github-subtitle {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--olive);
+    margin-bottom: 32px;
+}
+
+.github-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.github-link:hover {
+    background-color: var(--warm-sand);
+    border-color: var(--brand);
+    color: var(--brand);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.github-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--near-black);
+}
+
+/* Projects Grid */
+.github-projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 32px;
+    animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.project-card {
+    background-color: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    animation: scaleIn 0.4s ease-out both;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-color: var(--brand);
+}
+
+.project-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.project-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--near-black);
+}
+
+.project-title a {
+    color: var(--brand);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.project-title a:hover {
+    text-decoration: underline;
+}
+
+.project-meta {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--stone);
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.project-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.project-meta svg {
+    width: 14px;
+    height: 14px;
+}
+
+.project-description {
+    padding: 24px;
+    flex-grow: 1;
+}
+
+.project-description p {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--olive);
+    line-height: 1.55;
+    margin: 0;
+}
+
+.project-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.project-languages {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.language-tag {
+    padding: 3px 10px;
+    background-color: var(--warm-sand);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: var(--serif);
+    color: var(--dark-warm);
+}
+
+.project-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--stone);
+    font-family: var(--serif);
+}
+
+.project-stats span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.project-stats svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    padding: 64px;
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--olive);
+    grid-column: 1 / -1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .github-container {
+        padding: 64px 20px 80px;
+    }
+
+    .github-title {
+        font-size: 32px;
+    }
+
+    .github-subtitle {
+        font-size: 16px;
+    }
+
+    .github-projects {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .github-container {
+        padding: 48px 16px 64px;
+    }
+
+    .github-title {
+        font-size: 28px;
+    }
+
+    .project-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
+
+<script>
+(function() {
+    const githubContainer = document.getElementById('github-projects');
+
+    // GitHub pinned repositories
+    const pinnedRepos = [
+        {
+            name: 'xiaojunhong-website',
+            description: 'Personal website built with Hugo, featuring Kami-inspired paper UI design and rich content.',
+            language: 'HTML',
+            stars: 3,
+            forks: 0,
+            url: 'https://github.com/hongxiaojun/xiaojunhong-website'
+        },
+        {
+            name: 'Another-Pinned-Repo',
+            description: 'This is a placeholder for your second pinned repository. Update with actual project details.',
+            language: 'JavaScript',
+            stars: 10,
+            forks: 3,
+            url: 'https://github.com/hongxiaojun/your-repo'
+        },
+        {
+            name: 'Third-Pinned-Project',
+            description: 'Add your third pinned repository here. Describe what makes this project interesting.',
+            language: 'Python',
+            stars: 25,
+            forks: 8,
+            url: 'https://github.com/hongxiaojun/third-repo'
+        }
+    ];
+
+    // Function to create project card HTML
+    function createProjectCard(repo) {
+        return `
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">
+                        <a href="${repo.url}" target="_blank" rel="noopener">${repo.name}</a>
+                    </h3>
+                    <div class="project-meta">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            ${repo.language || 'N/A'}
+                        </span>
+                    </div>
+                </div>
+                <div class="project-description">
+                    <p>${repo.description}</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-languages">
+                        <span class="language-tag">${repo.language || 'Various'}</span>
+                    </div>
+                    <div class="project-stats">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 22 12 18.18 5.82 22 2 17 9.27 9.27 2 12 6.91 8.26 12 2z"/>
+                            </svg>
+                            ${repo.stars}
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="6" y1="3" x2="6" y2="15"></line>
+                                <circle cx="18" cy="9" r="3"/>
+                                <path d="M6 9l12 0"></path>
+                            </svg>
+                            ${repo.forks}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Render projects
+    if (githubContainer && pinnedRepos.length > 0) {
+        setTimeout(() => {
+            githubContainer.innerHTML = pinnedRepos.map(repo => createProjectCard(repo)).join('');
+        }, 500); // Slight delay for smooth loading
+    }
+})();
+</script>
+{{ end }}

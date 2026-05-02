@@ -28,9 +28,13 @@ defaultContentLanguage = "zh"
     url = "/notes/"
     weight = 2
   [[menu.main]]
+    name = "GitHub"
+    url = "/github/"
+    weight = 3
+  [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 3
+    weight = 4
 
 # Markup settings
 [markup]
