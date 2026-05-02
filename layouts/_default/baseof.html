@@ -168,6 +168,35 @@
             line-height: 1.2;
             margin-bottom: 24px;
             color: var(--color-text);
+            min-height: 58px;
+        }
+
+        .typing-text {
+            display: inline;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0;
+            animation: typing 3.5s steps(50, end);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: var(--color-accent);
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .hero-emphasis {
