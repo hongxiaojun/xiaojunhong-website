@@ -171,27 +171,22 @@
             min-height: 58px;
         }
 
-        .typing-text {
+        .typing-container {
             display: inline;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 0;
-            animation: typing 3.5s steps(50, end);
+        }
+
+        .hero-emphasis {
+            color: #722F37;
         }
 
         .typing-cursor {
             display: inline-block;
             width: 2px;
             height: 1em;
-            background-color: var(--color-accent);
+            background-color: #722F37;
             margin-left: 2px;
             animation: blink 1s step-end infinite;
             vertical-align: text-bottom;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
         }
 
         @keyframes blink {

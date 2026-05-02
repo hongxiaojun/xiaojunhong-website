@@ -3,9 +3,9 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
-            <div class="hero-location">Beijing · China</div>
+            <div class="hero-location">GUANGZHOU·CHINA</div>
             <h1 class="hero-title">
-                <span class="typing-text">A space for learning, building, and sharing.</span>
+                <span class="typing-container"></span>
                 <span class="typing-cursor">|</span>
             </h1>
             <p class="hero-description">
@@ -115,4 +115,55 @@
         </div>
     </section>
 </div>
+
+<script>
+(function() {
+    const text = 'A space for learning, ';
+    const emphasisText = 'building';
+    const endingText = ', and sharing.';
+    const typingContainer = document.querySelector('.typing-container');
+
+    if (!typingContainer) return;
+
+    let charIndex = 0;
+    let phase = 0; // 0: typing main text, 1: typing emphasis, 2: typing ending
+
+    function typeChar() {
+        if (phase === 0) {
+            if (charIndex < text.length) {
+                typingContainer.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 100);
+            } else {
+                phase = 1;
+                charIndex = 0;
+                const emphasisSpan = document.createElement('span');
+                emphasisSpan.className = 'hero-emphasis';
+                typingContainer.appendChild(emphasisSpan);
+                setTimeout(typeChar, 100);
+            }
+        } else if (phase === 1) {
+            const emphasisSpan = typingContainer.querySelector('.hero-emphasis');
+            if (charIndex < emphasisText.length) {
+                emphasisSpan.textContent += emphasisText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 100);
+            } else {
+                phase = 2;
+                charIndex = 0;
+                setTimeout(typeChar, 100);
+            }
+        } else if (phase === 2) {
+            if (charIndex < endingText.length) {
+                typingContainer.textContent += endingText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 100);
+            }
+        }
+    }
+
+    // Start typing animation
+    setTimeout(typeChar, 500);
+})();
+</script>
 {{ end }}
