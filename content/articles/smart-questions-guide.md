@@ -5,6 +5,7 @@ draft: false
 description: "在黑客和技术社区的世界里，提问不仅是一种获取信息的方式，更是一门艺术。本指南基于《How To Ask Questions The Smart Way》为你提供完整的高质量提问方法论。"
 readingTime: 4
 tags: ["提问", "技术社区", "沟通", "开源"]
+featured: true
 ---
 
 

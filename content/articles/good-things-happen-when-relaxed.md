@@ -5,6 +5,7 @@ draft: false
 description: "过度用力反而会成为阻碍。基于控制论心理学，理解为什么Actor比Reactor更有效，以及如何通过放松来激活潜意识的自动导航系统。"
 readingTime: 8
 tags: ["Actor vs Reactor", "放松", "心理学", "控制论", "自我管理"]
+featured: true
 ---
 
 ## 引言
