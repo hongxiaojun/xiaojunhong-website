@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章管理 - xiaojunhong.space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .article-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .article-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-item.featured {
+            background: linear-gradient(135deg, #fff5e6 0%, #fff 100%);
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 12px;
+            margin-right: 15px;
+        }
+
+        .article-info {
+            flex: 1;
+        }
+
+        .article-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #999;
+            display: flex;
+            gap: 15px;
+        }
+
+        .toggle-btn {
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .toggle-btn.featured {
+            background: #ffa500;
+            border-color: #ffa500;
+            color: white;
+        }
+
+        .toggle-btn.featured:hover {
+            background: #ff8c00;
+            border-color: #ff8c00;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #666;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 文章管理</h1>
+            <p>管理首页置顶文章，点击按钮即可切换置顶状态</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>全部文章</h3>
+                    <div class="number" id="totalCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>置顶文章</h3>
+                    <div class="number" id="featuredCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>最新文章</h3>
+                    <div class="number" id="latestCount">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部文章</button>
+                <button class="filter-btn" data-filter="featured">置顶文章</button>
+                <button class="filter-btn" data-filter="non-featured">未置顶</button>
+            </div>
+        </div>
+
+        <div class="article-list" id="articleList">
+            <div class="loading">加载中...</div>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        <span>✓</span>
+        <span id="messageText">操作成功</span>
+    </div>
+
+    <script>
+        const CONFIG = {
+            articlesPath: './content/articles/',
+            maxFeatured: 6
+        };
+
+        let articles = [];
+        let currentFilter = 'all';
+
+        // Parse front matter from markdown
+        function parseFrontMatter(content) {
+            const lines = content.split('\n');
+            let frontMatter = {};
+            let contentStart = 0;
+
+            if (lines[0] === '---') {
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i] === '---') {
+                        contentStart = i + 1;
+                        break;
+                    }
+                    const match = lines[i].match(/^(\w+):\s*(.+)$/);
+                    if (match) {
+                        frontMatter[match[1]] = match[2];
+                    }
+                }
+            }
+
+            return { frontMatter, contentStart };
+        }
+
+        // Update front matter in markdown
+        function updateFrontMatter(content, updates) {
+            const lines = content.split('\n');
+            let updated = false;
+
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i] === '---') break;
+
+                const match = lines[i].match(/^(\w+):\s*(.+)$/);
+                if (match) {
+                    const key = match[1];
+                    if (updates.hasOwnProperty(key)) {
+                        lines[i] = `${key}: ${updates[key]}`;
+                        delete updates[key];
+                        updated = true;
+                    }
+                }
+            }
+
+            // Add new fields if needed
+            if (Object.keys(updates).length > 0) {
+                const insertIndex = lines.indexOf('---', 1);
+                for (const [key, value] of Object.entries(updates)) {
+                    lines.splice(insertIndex, 0, `${key}: ${value}`);
+                }
+            }
+
+            return lines.join('\n');
+        }
+
+        // Load articles from filesystem
+        async function loadArticles() {
+            try {
+                // For demo, we'll parse from the content directory
+                const response = await fetch('./articles.json');
+                const data = await response.json();
+
+                articles = data.articles.map(article => ({
+                    ...article,
+                    featured: article.featured || false
+                }));
+
+                updateStats();
+                renderArticles();
+            } catch (error) {
+                console.error('Failed to load articles:', error);
+                // Demo data for testing
+                articles = [
+                    {
+                        id: 'my-website-journey-three-days',
+                        title: '从零到个人网站：三天搭建我的知识家园',
+                        date: '2026-05-03',
+                        featured: true,
+                        description: '写给所有想拥有个人网站，但迟迟没有开始的你'
+                    },
+                    {
+                        id: 'three-day-website-tutorial',
+                        title: '三天搭建个人网站：完整教程',
+                        date: '2026-05-03',
+                        featured: true,
+                        description: '从零到上线的完整指南'
+                    },
+                    {
+                        id: 'a-effortless-excellence-practicing',
+                        title: '那些毫不费力的卓越，都是怎么练出来的',
+                        date: '2026-05-02',
+                        featured: false,
+                        description: '关于刻意练习的深度思考'
+                    },
+                    {
+                        id: 'smart-questions-guide',
+                        title: '如何聪明地提问',
+                        date: '2026-05-02',
+                        featured: false,
+                        description: '提问的智慧'
+                    }
+                ];
+                updateStats();
+                renderArticles();
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const featured = articles.filter(a => a.featured);
+            const latest = articles.slice(0, 2);
+
+            document.getElementById('totalCount').textContent = articles.length;
+            document.getElementById('featuredCount').textContent = featured.length;
+            document.getElementById('latestCount').textContent = latest.length;
+        }
+
+        // Render article list
+        function renderArticles() {
+            const container = document.getElementById('articleList');
+            let filtered = articles;
+
+            if (currentFilter === 'featured') {
+                filtered = articles.filter(a => a.featured);
+            } else if (currentFilter === 'non-featured') {
+                filtered = articles.filter(a => !a.featured);
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <p>没有找到文章</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(article => `
+                <div class="article-item ${article.featured ? 'featured' : ''}">
+                    ${article.featured ? '<span class="featured-badge">⭐ 置顶</span>' : ''}
+                    <div class="article-info">
+                        <div class="article-title">${article.title}</div>
+                        <div class="article-meta">
+                            <span>📅 ${article.date}</span>
+                            ${article.description ? `<span>📝 ${article.description.substring(0, 50)}...</span>` : ''}
+                        </div>
+                    </div>
+                    <button class="toggle-btn ${article.featured ? 'featured' : ''}"
+                            onclick="toggleFeatured('${article.id}')">
+                        ${article.featured ? '取消置顶' : '设为置顶'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Toggle featured status
+        async function toggleFeatured(articleId) {
+            const article = articles.find(a => a.id === articleId);
+            if (!article) return;
+
+            const newStatus = !article.featured;
+
+            // Check max featured limit
+            if (newStatus && articles.filter(a => a.featured).length >= CONFIG.maxFeatured) {
+                alert(`最多只能置顶 ${CONFIG.maxFeatured} 篇文章`);
+                return;
+            }
+
+            article.featured = newStatus;
+
+            // Show success message
+            showMessage(newStatus ? '已设为置顶' : '已取消置顶');
+
+            // Update UI
+            updateStats();
+            renderArticles();
+
+            // In a real implementation, this would update the file
+            console.log(`Updated ${articleId}: featured = ${newStatus}`);
+        }
+
+        // Show success message
+        function showMessage(text) {
+            const message = document.getElementById('successMessage');
+            document.getElementById('messageText').textContent = text;
+            message.style.display = 'flex';
+
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000);
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderArticles();
+            });
+        });
+
+        // Load articles on page load
+        loadArticles();
+    </script>
+</body>
+</html>
