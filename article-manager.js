@@ -166,6 +166,36 @@ function createServer() {
             return;
         }
 
+        // 处理 Git 推送请求
+        if (req.url === '/api/push' && req.method === 'POST') {
+            const { exec } = require('child_process');
+            const util = require('util');
+            const execPromise = util.promisify(exec);
+
+            (async () => {
+                try {
+                    // Git add, commit, and push
+                    const { stdout: addOutput } = await execPromise('git add content/articles/');
+                    const { stdout: commitOutput } = await execPromise('git commit -m "Update featured articles from admin panel"');
+                    const { stdout: pushOutput } = await execPromise('git push origin main');
+
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: true,
+                        message: '成功推送到 GitHub！Cloudflare Pages 正在部署...',
+                        output: { add: addOutput, commit: commitOutput, push: pushOutput }
+                    }));
+                } catch (error) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        error: error.message
+                    }));
+                }
+            })();
+            return;
+        }
+
         // 处理 API 请求
         if (req.url === '/api/articles') {
             const articles = scanArticles();
@@ -300,6 +330,20 @@ function createAdminPage(filePath) {
             border-color: #667eea;
             color: white;
         }
+        .push-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            border-color: #4caf50;
+            color: white !important;
+            margin-left: auto;
+        }
+        .push-btn:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            border-color: #3d8b40;
+        }
+        .push-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
         .article-list {
             background: white;
             border-radius: 12px;
@@ -419,6 +463,7 @@ function createAdminPage(filePath) {
                 <button class="filter-btn active" data-filter="all">全部文章</button>
                 <button class="filter-btn" data-filter="featured">置顶文章</button>
                 <button class="filter-btn" data-filter="non-featured">未置顶</button>
+                <button class="filter-btn push-btn" onclick="pushChanges()">🚀 推送更改到 GitHub</button>
             </div>
         </div>
 
@@ -554,6 +599,43 @@ function createAdminPage(filePath) {
 
         // 页面加载时获取文章
         loadArticles();
+
+        // 推送更改到 GitHub
+        async function pushChanges() {
+            const btn = document.querySelector('.push-btn');
+            const originalText = btn.innerHTML;
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '⏳ 正在推送...';
+
+                const response = await fetch('/api/push', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showMessage('✅ ' + result.message);
+                    btn.innerHTML = '✅ 已推送';
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }, 3000);
+                } else {
+                    alert('推送失败：' + result.error);
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Push failed:', error);
+                alert('推送失败：' + error.message);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>`;
