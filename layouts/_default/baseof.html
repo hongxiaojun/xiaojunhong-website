@@ -164,6 +164,10 @@
             animation: fadeInUp 0.6s ease-out 0.4s both;
         }
 
+        .ticker-section {
+            animation: fadeInUp 0.6s ease-out 0.5s both;
+        }
+
         .article-card {
             animation: scaleIn 0.4s ease-out both;
         }
@@ -802,6 +806,151 @@
             color: var(--color-text-light);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        /* Content Ticker Section */
+        .ticker-section {
+            padding: 32px 0;
+            background: var(--color-bg);
+            background-image: radial-gradient(circle, #e8e6e1 1px, transparent 1px);
+            background-size: 8px 8px;
+            background-position: 0 0;
+            border-radius: 8px;
+            margin: 32px 0;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .ticker-section {
+            background-image: none;
+        }
+
+        .ticker-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .ticker-title {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .ticker-subtitle {
+            font-size: 13px;
+            color: var(--color-text-light);
+        }
+
+        .ticker-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: scroll 90s linear infinite;
+            width: max-content;
+        }
+
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .ticker-item {
+            flex: 0 0 auto;
+            padding: 0 20px;
+        }
+
+        .ticker-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--color-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--color-text);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            font-family: var(--serif);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .ticker-link:hover {
+            background: #e8f4fc;
+            border-color: #d0e8f8;
+            color: var(--color-text);
+            transform: translateY(-1px);
+        }
+
+        .ticker-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .ticker-item[data-type="article"] .ticker-badge {
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+            color: white;
+        }
+
+        .ticker-item[data-type="note"] .ticker-badge {
+            background: linear-gradient(135deg, #722F37 0%, #8B3F47 100%);
+            color: white;
+        }
+
+        .ticker-item[data-type="podcast"] .ticker-badge {
+            background: linear-gradient(135deg, #4A90A4 0%, #5BA0B4 100%);
+            color: white;
+        }
+
+        [data-theme="dark"] .ticker-item[data-type="article"] .ticker-badge {
+            background: linear-gradient(135deg, #4da6ff 0%, #6bb3ff 100%);
+        }
+
+        [data-theme="dark"] .ticker-item[data-type="note"] .ticker-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8585 100%);
+        }
+
+        [data-theme="dark"] .ticker-item[data-type="podcast"] .ticker-badge {
+            background: linear-gradient(135deg, #4dd4ff 0%, #6de4ff 100%);
+        }
+
+        .ticker-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-width: 400px;
+        }
+
+        .ticker-emoji {
+            font-size: 14px;
+            margin-left: 6px;
+            opacity: 0.8;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .ticker-link:hover .ticker-emoji {
+            opacity: 1;
+            transform: scale(1.2) rotate(10deg);
         }
 
         /* Footer */
