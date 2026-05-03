@@ -1,0 +1,59 @@
+name: Website Health Check
+
+on:
+  schedule:
+    # 每周日凌晨2点运行（UTC时间，对应北京时间上午10点）
+    - cron: '0 2 * * 0'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Run Health Check
+        run: |
+          chmod +x website-health.sh
+          ./website-health.sh
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: health-report-${{ github.run_number }}
+          path: .website-health/report-*.txt
+          retention-days: 90
+
+      - name: Comment on Issue (if problems found)
+        if: github.event_name == 'schedule'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // 读取最新的报告
+            const fs = require('fs');
+            const reportFiles = require('child_process').exec('find .website-health -name "report-*.txt" -type f | sort -r | head -1').stdout.trim().split('\n');
+
+            if (reportFiles.length > 0) {
+              const report = fs.readFileSync(reportFiles[0], 'utf8');
+
+              // 检查是否有警告
+              const hasWarnings = report.includes('⚠️');
+
+              if (hasWarnings) {
+                github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: `🤖 Website Health Report - ${new Date().toLocaleDateString('zh-CN')}`,
+                  body: `## 自动化健康检查报告\n\n${report}\n\n---\n*此报告由 GitHub Actions 自动生成*`
+                });
+              }
+            }
