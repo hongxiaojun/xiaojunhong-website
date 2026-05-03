@@ -2,6 +2,7 @@
 title: "三天搭建个人网站：完整教程"
 date: 2026-05-03
 draft: false
+featured: true
 description: "从零到上线的完整指南：使用Hugo+Cloudflare Pages快速构建你的数字家园。基于真实三天开发经历，包含所有关键步骤和常见问题解决方案。"
 readingTime: 15
 tags: ["教程", "Hugo", "Cloudflare Pages", "Web开发", "新手指南", "Kami设计"]

@@ -2,6 +2,7 @@
 title: "从零到个人网站：三天搭建我的知识家园"
 date: 2026-05-03
 draft: false
+featured: true
 description: "写给所有想拥有个人网站，但迟迟没有开始的你。基于真实的三天搭建经历，打破心理障碍，提供实用建议。"
 readingTime: 8
 tags: ["个人网站", "Hugo", "Web开发", "新手指南", "经验分享"]

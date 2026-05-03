@@ -59,6 +59,13 @@ defaultContentLanguage = "zh"
   [privacy.googleAnalytics]
     disable = true
 
+# Homepage featured articles settings
+[params]
+  # Number of latest articles to show on homepage (in addition to featured articles)
+  latestArticlesCount = 2
+  # Maximum total articles to show on homepage
+  maxHomepageArticles = 6
+
 # Server settings for Cloudflare Pages
 [minify]
   [minify.tdewolff]

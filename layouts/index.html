@@ -60,9 +60,23 @@
         </div>
 
         <div class="articles-grid">
-            {{ range first 6 $articles }}
-            <article class="article-card">
+            {{ $featuredArticles := where $articles "Params.featured" true }}
+            {{ $latestCount := .Site.Params.latestArticlesCount | default 2 }}
+            {{ $maxArticles := .Site.Params.maxHomepageArticles | default 6 }}
+
+            {{ $nonFeatured := where $articles "Params.featured" "!=" true }}
+            {{ $latestArticles := first $latestCount $nonFeatured }}
+
+            {{ $homepageArticles := $featuredArticles }}
+            {{ $homepageArticles = $homepageArticles | append $latestArticles }}
+            {{ $homepageArticles = first $maxArticles $homepageArticles }}
+
+            {{ range $homepageArticles }}
+            <article class="article-card{{ if .Params.featured }} article-card-featured{{ end }}">
                 <a href="{{ .RelPermalink }}" class="article-card-link">
+                    {{ if .Params.featured }}
+                    <div class="featured-badge">⭐ Featured</div>
+                    {{ end }}
                     <div class="article-card-content">
                         <div class="article-date">
                             <time datetime="{{ .Date.Format "2006-01-02" }}">
