@@ -1,0 +1,444 @@
+{{ define "main" }}
+<div class="notes-page">
+    <header class="notes-header">
+        <h1 class="notes-title">{{ .Title }}</h1>
+        <p class="notes-subtitle">思考的碎片，知识的火花</p>
+        {{ if .Content }}
+        <div class="notes-description">{{ .Content }}</div>
+        {{ end }}
+    </header>
+
+    {{ if gt (len .Pages) 0 }}
+    <div class="notes-grid">
+        {{ range .Pages }}
+        <article class="note-card">
+            <a href="{{ .RelPermalink }}" class="note-card-link">
+                <!-- Pin Icon -->
+                <div class="note-pin">📌</div>
+
+                <!-- Note Content -->
+                <div class="note-card-content">
+                    <!-- Note Type Badge -->
+                    {{ if .Params.tags }}
+                    <div class="note-type">
+                        {{ range .Params.tags }}
+                        {{ if eq . "concept" }}
+                            <span class="type-badge type-concept">💡 概念</span>
+                        {{ else if eq . "roundtable" }}
+                            <span class="type-badge type-roundtable">💬 圆桌</span>
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                    {{ end }}
+
+                    <!-- Note Title -->
+                    <h2 class="note-title">{{ .Title }}</h2>
+
+                    <!-- Note Date -->
+                    <div class="note-date">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <time datetime="{{ .Date.Format "2006-01-02" }}">
+                            {{ .Date.Format "2006-01-02" }}
+                        </time>
+                    </div>
+
+                    <!-- Note Description/Excerpt -->
+                    {{ if .Params.description }}
+                    <p class="note-description">{{ .Params.description }}</p>
+                    {{ else }}
+                    <p class="note-excerpt">{{ .Summary | default (truncate 100 "暂无描述") }}</p>
+                    {{ end }}
+
+                    <!-- Note Tags -->
+                    {{ if .Params.tags }}
+                    <div class="note-tags">
+                        {{ range first 3 .Params.tags }}
+                        <span class="note-tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </a>
+        </article>
+        {{ end }}
+    </div>
+    {{ else }}
+    <div class="notes-empty">
+        <div class="empty-icon">📝</div>
+        <p>暂无笔记内容</p>
+    </div>
+    {{ end }}
+</div>
+
+<style>
+/* Notes Page Container */
+.notes-page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 88px 64px 120px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notes Header */
+.notes-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.notes-title {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--near-black);
+    letter-spacing: -1px;
+}
+
+.notes-subtitle {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--olive);
+    margin-bottom: 32px;
+    font-weight: 400;
+}
+
+.notes-description {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--stone);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Notes Grid - Similar to Articles */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Note Card - Sticky Note Effect */
+.note-card {
+    position: relative;
+    background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+    border-radius: 2px;
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+
+    /* Slight rotation for natural sticky note look */
+    transform: rotate(var(--rotation, 0deg));
+}
+
+/* Random rotation for organic feel */
+.note-card:nth-child(3n+1) { --rotation: -1deg; }
+.note-card:nth-child(3n+2) { --rotation: 1deg; }
+.note-card:nth-child(3n+3) { --rotation: -0.5deg; }
+
+.note-card:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.02);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        0 16px 48px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.note-card-link {
+    display: block;
+    text-decoration: none;
+    padding: 32px 28px 28px 28px;
+    min-height: 280px;
+    position: relative;
+}
+
+/* Pin Icon - Top Left Corner */
+.note-pin {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.note-card:hover .note-pin {
+    transform: translateX(-50%) translateY(-4px) rotate(15deg);
+}
+
+/* Note Card Content */
+.note-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    padding-top: 12px;
+}
+
+/* Note Type Badge */
+.note-type {
+    margin-bottom: 8px;
+}
+
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--serif);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.type-concept {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    color: #1976d2;
+}
+
+.type-roundtable {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    color: #7b1fa2;
+}
+
+/* Note Title */
+.note-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--near-black);
+    margin: 0;
+    letter-spacing: -0.3px;
+
+    /* Multi-line truncation */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Note Date */
+.note-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--stone);
+    font-family: var(--serif);
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.note-date svg {
+    color: #f57c00;
+}
+
+/* Note Description */
+.note-description,
+.note-excerpt {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--olive);
+    margin: 0;
+
+    /* Truncate to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Note Tags */
+.note-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.note-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--serif);
+    color: var(--olive);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.note-card:hover .note-tag {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+}
+
+/* Empty State */
+.notes-empty {
+    text-align: center;
+    padding: 120px 40px;
+    color: var(--stone);
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+    opacity: 0.5;
+}
+
+.notes-empty p {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--stone);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .notes-page {
+        padding: 64px 48px 80px;
+    }
+
+    .notes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .notes-page {
+        padding: 48px 32px 64px;
+    }
+
+    .notes-title {
+        font-size: 40px;
+    }
+
+    .notes-subtitle {
+        font-size: 16px;
+    }
+
+    .notes-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .note-card {
+        --rotation: 0deg !important;
+    }
+
+    .note-card-link {
+        padding: 28px 24px 24px 24px;
+        min-height: 240px;
+    }
+
+    .note-title {
+        font-size: 18px;
+        -webkit-line-clamp: 2;
+    }
+
+    .note-description,
+    .note-excerpt {
+        font-size: 13px;
+        -webkit-line-clamp: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .notes-page {
+        padding: 32px 24px 48px;
+    }
+
+    .notes-title {
+        font-size: 32px;
+    }
+
+    .notes-header {
+        margin-bottom: 48px;
+    }
+
+    .note-card-link {
+        padding: 24px 20px 20px 20px;
+        min-height: 220px;
+    }
+
+    .note-pin {
+        font-size: 24px;
+        top: -6px;
+    }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .note-card {
+    background: linear-gradient(135deg, #2d2d00 0%, #3d3d00 100%);
+}
+
+[data-theme="dark"] .note-title {
+    color: var(--near-black);
+}
+
+[data-theme="dark"] .note-description,
+[data-theme="dark"] .note-excerpt {
+    color: #a0a090;
+}
+
+[data-theme="dark"] .note-date {
+    background: rgba(0, 0, 0, 0.3);
+    color: #909080;
+}
+
+[data-theme="dark"] .note-tag {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #a0a090;
+}
+
+/* Print Styles */
+@media print {
+    .notes-page {
+        padding: 0;
+    }
+
+    .note-card {
+        break-inside: avoid;
+        background: #fff9c4 !important;
+        box-shadow: none !important;
+        border: 1px solid #ddd;
+    }
+
+    .note-pin {
+        display: none;
+    }
+}
+</style>
+{{ end }}
