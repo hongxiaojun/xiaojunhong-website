@@ -140,24 +140,19 @@
 .note-card {
     position: relative;
     background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.12),
         0 4px 12px rgba(0, 0, 0, 0.08);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: visible;
 
-    /* Slight rotation for natural sticky note look */
-    transform: rotate(var(--rotation, 0deg));
+    /* No rotation - neat and tidy layout */
+    transform: rotate(0deg);
 }
 
-/* Random rotation for organic feel */
-.note-card:nth-child(3n+1) { --rotation: -1deg; }
-.note-card:nth-child(3n+2) { --rotation: 1deg; }
-.note-card:nth-child(3n+3) { --rotation: -0.5deg; }
-
 .note-card:hover {
-    transform: rotate(0deg) translateY(-8px) scale(1.02);
+    transform: translateY(-6px) scale(1.01);
     box-shadow:
         0 8px 24px rgba(0, 0, 0, 0.15),
         0 16px 48px rgba(0, 0, 0, 0.1);
@@ -175,17 +170,16 @@
 /* Pin Icon - Top Left Corner */
 .note-pin {
     position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 28px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    top: -10px;
+    left: 20px;
+    font-size: 32px;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
     z-index: 10;
     transition: transform 0.3s ease;
 }
 
 .note-card:hover .note-pin {
-    transform: translateX(-50%) translateY(-4px) rotate(15deg);
+    transform: translateY(-6px) rotate(10deg);
 }
 
 /* Note Card Content */
@@ -354,7 +348,7 @@
     }
 
     .note-card {
-        --rotation: 0deg !important;
+        /* Already no rotation on mobile */
     }
 
     .note-card-link {
