@@ -1,47 +1,33 @@
 <!-- Website Visitor Statistics -->
 <div class="visitor-stats">
     <div class="stats-header">
-        <h3>📊 Website Statistics</h3>
-        <p class="stats-subtitle">Live visitor tracking</p>
+        <h3>📊 Statistics</h3>
     </div>
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-icon">👥</div>
+        <div class="stat-item">
+            <span class="stat-icon">👥</span>
             <div class="stat-content">
                 <div class="stat-number" data-total-visitors>Loading...</div>
-                <div class="stat-label">Total Visitors</div>
+                <div class="stat-label">Visitors</div>
             </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">📖</div>
+        <div class="stat-item">
+            <span class="stat-icon">📖</span>
             <div class="stat-content">
                 <div class="stat-number" data-total-views>Loading...</div>
-                <div class="stat-label">Page Views</div>
+                <div class="stat-label">Views</div>
             </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">🎙️</div>
+        <div class="stat-item">
+            <span class="stat-icon">🎙️</span>
             <div class="stat-content">
                 <div class="stat-number" data-total-plays>Loading...</div>
-                <div class="stat-label">Podcast Plays</div>
+                <div class="stat-label">Plays</div>
             </div>
         </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">📅</div>
-            <div class="stat-content">
-                <div class="stat-number" data-active-days>Loading...</div>
-                <div class="stat-label">Days Online</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="stats-footer">
-        <span class="stats-note">🕐 Updated in real-time</span>
-        <span class="stats-badge">Live</span>
     </div>
 </div>
 
@@ -49,155 +35,89 @@
 .visitor-stats {
     background: var(--color-bg-alt);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 32px;
-    margin: 48px 0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
 }
 
 .stats-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .stats-header h3 {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin: 0;
     color: var(--color-text);
 }
 
-.stats-subtitle {
-    font-size: 14px;
-    color: var(--color-text-light);
-}
-
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
 }
 
-.stat-card {
+.stat-item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px;
-    background: var(--color-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    transition: all 0.2s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-color: var(--color-accent);
+    gap: 8px;
 }
 
 .stat-icon {
-    font-size: 32px;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-bg-alt);
-    border-radius: 8px;
-    flex-shrink: 0;
+    font-size: 20px;
+    line-height: 1;
 }
 
 .stat-content {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .stat-number {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--color-accent);
-    margin-bottom: 4px;
+    line-height: 1;
 }
 
 .stat-label {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--color-text-light);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.stats-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-}
-
-.stats-note {
-    font-size: 13px;
-    color: var(--color-text-light);
-}
-
-.stats-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: white;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 16px;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
-.stats-badge::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: white;
-    border-radius: 50%;
-    animation: blink 1s ease-in-out infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
 @media (max-width: 768px) {
     .visitor-stats {
-        padding: 24px;
+        padding: 16px;
+        margin: 24px 0;
+    }
+
+    .stats-header h3 {
+        font-size: 14px;
     }
 
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
 
-    .stat-card {
-        padding: 16px;
+    .stat-item {
+        gap: 6px;
     }
 
     .stat-icon {
-        font-size: 24px;
-        width: 40px;
-        height: 40px;
+        font-size: 18px;
     }
 
     .stat-number {
-        font-size: 20px;
+        font-size: 16px;
     }
 
-    .stats-footer {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
+    .stat-label {
+        font-size: 10px;
     }
 }
 </style>
