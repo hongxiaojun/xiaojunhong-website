@@ -158,13 +158,13 @@
     const learningText = 'Learning';
     const middleText = ', ';
     const buildingText = 'Building';
-    const endingText = ', and Sharing.';
+    const endingText = ', Sharing.';
     const typingContainer = document.querySelector('.typing-container');
 
     if (!typingContainer) return;
 
     let charIndex = 0;
-    let phase = 0; // 0: typing "A space for ", 1: typing Learning, 2: typing ", ", 3: typing Building, 4: typing ", and Sharing."
+    let phase = 0; // 0: typing "A space for ", 1: typing Learning, 2: typing ", ", 3: typing Building, 4: typing ", Sharing."
 
     function typeChar() {
         if (phase === 0) {
