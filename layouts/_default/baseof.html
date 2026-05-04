@@ -97,6 +97,29 @@
             --color-accent-light: #1a3a5c;
         }
 
+        /* Enhanced glow effects in dark mode */
+        [data-theme="dark"] .hero-learning {
+            text-shadow: 0 0 30px rgba(74, 144, 164, 0.8),
+                         0 0 60px rgba(0, 212, 255, 0.6),
+                         0 0 90px rgba(123, 104, 238, 0.4);
+        }
+
+        [data-theme="dark"] .hero-learning::before {
+            filter: blur(12px);
+            opacity: 0.9;
+        }
+
+        [data-theme="dark"] .hero-building {
+            text-shadow: 0 0 30px rgba(114, 47, 55, 0.8),
+                         0 0 60px rgba(255, 107, 107, 0.6),
+                         0 0 90px rgba(255, 142, 83, 0.4);
+        }
+
+        [data-theme="dark"] .hero-building::before {
+            filter: blur(12px);
+            opacity: 0.9;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -397,18 +420,77 @@
         }
 
         .hero-learning {
-            color: #4A90A4;
             font-weight: 700;
+            background: linear-gradient(135deg, #4A90A4 0%, #00D4FF 50%, #7B68EE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(74, 144, 164, 0.5),
+                         0 0 40px rgba(0, 212, 255, 0.3),
+                         0 0 60px rgba(123, 104, 238, 0.2);
+            animation: glow-pulse 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        .hero-learning::before {
+            content: 'Vibe Coding';
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #4A90A4 0%, #00D4FF 50%, #7B68EE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(8px);
+            opacity: 0.7;
         }
 
         .hero-building {
-            color: #722F37;
             font-weight: 700;
+            background: linear-gradient(135deg, #722F37 0%, #FF6B6B 50%, #FF8E53 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(114, 47, 55, 0.5),
+                         0 0 40px rgba(255, 107, 107, 0.3),
+                         0 0 60px rgba(255, 142, 83, 0.2);
+            animation: glow-pulse 3s ease-in-out infinite 1.5s;
+            position: relative;
+        }
+
+        .hero-building::before {
+            content: 'Vibe Thinking';
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #722F37 0%, #FF6B6B 50%, #FF8E53 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(8px);
+            opacity: 0.7;
         }
 
         .hero-sharing {
             color: #D4A574;
             font-weight: 700;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: brightness(1);
+                text-shadow: 0 0 20px currentColor,
+                             0 0 40px currentColor,
+                             0 0 60px currentColor;
+            }
+            50% {
+                filter: brightness(1.2);
+                text-shadow: 0 0 30px currentColor,
+                             0 0 60px currentColor,
+                             0 0 90px currentColor;
+            }
         }
 
         .hero-emphasis {
