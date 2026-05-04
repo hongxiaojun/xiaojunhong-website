@@ -116,6 +116,19 @@
                          0 0 90px rgba(152, 251, 152, 0.4);
         }
 
+        /* Audio spectrum in dark mode */
+        [data-theme="dark"] .spectrum-bar {
+            opacity: 0.9;
+        }
+
+        [data-theme="dark"] .spectrum-bar:nth-child(odd) {
+            background: linear-gradient(to top, #FF6B6B, #FF8E53);
+        }
+
+        [data-theme="dark"] .spectrum-bar:nth-child(3n) {
+            background: linear-gradient(to top, #FFD700, #FFEC8B);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1519,6 +1532,36 @@
             background-color: var(--color-bg);
         }
 
+        /* Audio Spectrum Visualization */
+        .audio-spectrum {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            height: 60px;
+            margin: 16px 0;
+            padding: 0 20px;
+        }
+
+        .spectrum-bar {
+            flex: 1;
+            max-width: 8px;
+            min-width: 2px;
+            height: 10%;
+            background: linear-gradient(to top, var(--color-accent), var(--color-accent-light));
+            border-radius: 2px;
+            transition: height 0.15s ease-out;
+            opacity: 0.8;
+        }
+
+        .spectrum-bar:nth-child(odd) {
+            background: linear-gradient(to top, #722F37, #FF6B6B);
+        }
+
+        .spectrum-bar:nth-child(3n) {
+            background: linear-gradient(to top, #D4A574, #FFD700);
+        }
+
         .player-tips {
             display: flex;
             align-items: center;
@@ -1699,6 +1742,17 @@
 
             .podcast-navigation {
                 grid-template-columns: 1fr;
+            }
+
+            .audio-spectrum {
+                height: 50px;
+                gap: 3px;
+                padding: 0 15px;
+            }
+
+            .spectrum-bar {
+                max-width: 6px;
+                min-width: 2px;
             }
 
             .nav-button.next {

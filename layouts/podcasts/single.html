@@ -84,10 +84,34 @@
                 </div>
             </div>
 
-            <audio controls class="audio-player" preload="metadata">
+            <audio controls class="audio-player" preload="metadata" id="audio-player">
                 <source src="{{ . }}" type="audio/{{ $.Params.audio_format }}">
                 您的浏览器不支持音频播放，请升级浏览器。
             </audio>
+
+            <!-- Audio Spectrum Visualization -->
+            <div class="audio-spectrum" id="audio-spectrum">
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+            </div>
 
             <div class="player-tips">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -167,11 +191,63 @@
 
 <script>
 (function() {
+    // Audio Spectrum Animation
+    const audioPlayer = document.getElementById('audio-player');
+    const audioSpectrum = document.getElementById('audio-spectrum');
+    const spectrumBars = document.querySelectorAll('.spectrum-bar');
+
+    if (audioPlayer && audioSpectrum && spectrumBars.length > 0) {
+        let animationInterval;
+        let isAnimating = false;
+
+        // Start spectrum animation
+        function startSpectrumAnimation() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            animationInterval = setInterval(() => {
+                spectrumBars.forEach((bar, index) => {
+                    // Random height between 10% and 100%
+                    const height = Math.random() * 90 + 10;
+                    bar.style.height = `${height}%`;
+
+                    // Create staggered animation delay
+                    const delay = index * 50;
+                    bar.style.transitionDelay = `${delay}ms`;
+                });
+            }, 150);
+        }
+
+        // Stop spectrum animation
+        function stopSpectrumAnimation() {
+            if (!isAnimating) return;
+            isAnimating = false;
+
+            clearInterval(animationInterval);
+
+            // Gradually return to baseline
+            spectrumBars.forEach(bar => {
+                bar.style.height = '10%';
+                bar.style.transition = 'height 0.5s ease-out';
+            });
+        }
+
+        // Listen for play/pause events
+        audioPlayer.addEventListener('play', startSpectrumAnimation);
+        audioPlayer.addEventListener('pause', stopSpectrumAnimation);
+        audioPlayer.addEventListener('ended', stopSpectrumAnimation);
+
+        // Initialize with low bars
+        spectrumBars.forEach(bar => {
+            bar.style.height = '10%';
+        });
+    }
+
     // Track podcast plays
-    const audioPlayer = document.querySelector('audio');
+    const audioPlayerQuery = document.querySelector('audio');
     const podcastPath = window.location.pathname;
 
-    if (audioPlayer) {
+    if (audioPlayerQuery) {
         // Load existing play count
         const storageKey = `podcast_plays_${podcastPath}`;
         let currentPlays = parseInt(localStorage.getItem(storageKey) || '0');
@@ -183,7 +259,7 @@
             playCounter.textContent = formatNumber(demoPlays);
         }
 
-        audioPlayer.addEventListener('play', function() {
+        audioPlayerQuery.addEventListener('play', function() {
             // Check if this session already counted
             const sessionKey = `podcast_session_${podcastPath}`;
             if (!sessionStorage.getItem(sessionKey)) {
