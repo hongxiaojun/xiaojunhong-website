@@ -142,76 +142,8 @@
         </div>
 
         <div class="ticker-container">
-            <div class="ticker-track">
-                <!-- Articles -->
-                {{ $articleEmojis := slice "📚" "💡" "🚀" "✨" }}
-                {{ range $index, $item := (first 10 $articles) }}
-                <div class="ticker-item" data-type="article">
-                    <a href="{{ .RelPermalink }}" class="ticker-link">
-                        <span class="ticker-badge">文章</span>
-                        <span class="ticker-text">{{ .Title }}</span>
-                        <span class="ticker-emoji">{{ index $articleEmojis (mod $index (len $articleEmojis)) }}</span>
-                    </a>
-                </div>
-                {{ end }}
-
-                <!-- Notes -->
-                {{ $noteEmojis := slice "📌" "🖊️" "💡" "✨" }}
-                {{ range $index, $item := (first 10 $notes) }}
-                <div class="ticker-item" data-type="note">
-                    <a href="{{ .RelPermalink }}" class="ticker-link">
-                        <span class="ticker-badge">笔记</span>
-                        <span class="ticker-text">{{ .Title }}</span>
-                        <span class="ticker-emoji">{{ index $noteEmojis (mod $index (len $noteEmojis)) }}</span>
-                    </a>
-                </div>
-                {{ end }}
-
-                <!-- Podcasts -->
-                {{ $podcastEmojis := slice "🎙️" "🎧" "🎵" "🎶" }}
-                {{ range $index, $item := (first 10 $podcasts) }}
-                <div class="ticker-item" data-type="podcast">
-                    <a href="{{ .RelPermalink }}" class="ticker-link">
-                        <span class="ticker-badge">播客</span>
-                        <span class="ticker-text">{{ .Title }}</span>
-                        <span class="ticker-emoji">{{ index $podcastEmojis (mod $index (len $podcastEmojis)) }}</span>
-                    </a>
-                </div>
-                {{ end }}
-
-                <!-- Duplicate for seamless loop -->
-                <!-- Articles -->
-                {{ range $index, $item := (first 10 $articles) }}
-                <div class="ticker-item" data-type="article">
-                    <a href="{{ .RelPermalink }}" class="ticker-link">
-                        <span class="ticker-badge">文章</span>
-                        <span class="ticker-text">{{ .Title }}</span>
-                        <span class="ticker-emoji">{{ index $articleEmojis (mod $index (len $articleEmojis)) }}</span>
-                    </a>
-                </div>
-                {{ end }}
-
-                <!-- Notes -->
-                {{ range $index, $item := (first 10 $notes) }}
-                <div class="ticker-item" data-type="note">
-                    <a href="{{ .RelPermalink }}" class="ticker-link">
-                        <span class="ticker-badge">笔记</span>
-                        <span class="ticker-text">{{ .Title }}</span>
-                        <span class="ticker-emoji">{{ index $noteEmojis (mod $index (len $noteEmojis)) }}</span>
-                    </a>
-                </div>
-                {{ end }}
-
-                <!-- Podcasts -->
-                {{ range $index, $item := (first 10 $podcasts) }}
-                <div class="ticker-item" data-type="podcast">
-                    <a href="{{ .RelPermalink }}" class="ticker-link">
-                        <span class="ticker-badge">播客</span>
-                        <span class="ticker-text">{{ .Title }}</span>
-                        <span class="ticker-emoji">{{ index $podcastEmojis (mod $index (len $podcastEmojis)) }}</span>
-                    </a>
-                </div>
-                {{ end }}
+            <div class="ticker-track" id="ticker-track">
+                <!-- Content will be shuffled by JavaScript -->
             </div>
         </div>
     </section>
@@ -316,6 +248,87 @@
 
     // Start typing animation
     setTimeout(typeChar, 500);
+})();
+</script>
+
+<script>
+(function() {
+    // Shuffle ticker content for random display
+    const tickerTrack = document.getElementById('ticker-track');
+    if (!tickerTrack) return;
+
+    // Content data
+    const articles = [
+        {{ range $index, $item := (first 10 $articles) }}
+        {
+            type: 'article',
+            title: '{{ .Title }}',
+            url: '{{ .RelPermalink }}',
+            badge: '文章',
+            emoji: {{ $index }}
+        },
+        {{ end }}
+    ];
+
+    const notes = [
+        {{ range $index, $item := (first 10 $notes) }}
+        {
+            type: 'note',
+            title: '{{ .Title }}',
+            url: '{{ .RelPermalink }}',
+            badge: '笔记',
+            emoji: {{ $index }}
+        },
+        {{ end }}
+    ];
+
+    const podcasts = [
+        {{ range $index, $item := (first 10 $podcasts) }}
+        {
+            type: 'podcast',
+            title: '{{ .Title }}',
+            url: '{{ .RelPermalink }}',
+            badge: '播客',
+            emoji: {{ $index }}
+        },
+        {{ end }}
+    ];
+
+    const articleEmojis = ['📚', '💡', '🚀', '✨'];
+    const noteEmojis = ['📌', '🖊️', '💡', '✨'];
+    const podcastEmojis = ['🎙️', '🎧', '🎵', '🎶'];
+
+    // Combine all content
+    const allContent = [
+        ...articles.map(item => ({ ...item, emoji: articleEmojis[item.emoji % articleEmojis.length] })),
+        ...notes.map(item => ({ ...item, emoji: noteEmojis[item.emoji % noteEmojis.length] })),
+        ...podcasts.map(item => ({ ...item, emoji: podcastEmojis[item.emoji % podcastEmojis.length] }))
+    ];
+
+    // Shuffle function
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    // Create shuffled content twice for seamless loop
+    const shuffledContent = shuffleArray(allContent);
+    const tickerContent = [...shuffledContent, ...shuffledContent];
+
+    // Generate HTML
+    tickerTrack.innerHTML = tickerContent.map(item => `
+        <div class="ticker-item" data-type="${item.type}">
+            <a href="${item.url}" class="ticker-link">
+                <span class="ticker-badge">${item.badge}</span>
+                <span class="ticker-text">${item.title}</span>
+                <span class="ticker-emoji">${item.emoji}</span>
+            </a>
+        </div>
+    `).join('');
 })();
 </script>
 {{ end }}
