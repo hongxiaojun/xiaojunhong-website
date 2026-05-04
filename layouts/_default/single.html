@@ -16,6 +16,8 @@
                 <span class="meta-separator">·</span>
                 <span>{{ .Params.readingTime }} min read</span>
                 {{ end }}
+                <span class="meta-separator">·</span>
+                {{ partial "stats.html" . }}
             </div>
 
             {{ if .Params.tags }}
@@ -44,6 +46,8 @@
             <a href="{{ .Section | relURL }}" class="back-link">← Back to {{ .Section }}</a>
         </footer>
     </article>
+
+    {{ partial "visitor-stats.html" . }}
 </div>
 
 <style>

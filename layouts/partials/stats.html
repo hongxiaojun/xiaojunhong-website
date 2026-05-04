@@ -1,0 +1,34 @@
+<!-- View Counter Component -->
+<div class="view-counter">
+    <span class="view-icon">👁️</span>
+    <span class="view-count" data-pageview-count>Loading...</span>
+    <span class="view-label">views</span>
+</div>
+
+<style>
+.view-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+.view-icon {
+    font-size: 14px;
+}
+
+.view-count {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.view-label {
+    font-size: 12px;
+    text-transform: lowercase;
+}
+</style>

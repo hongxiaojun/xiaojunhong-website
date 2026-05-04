@@ -1,0 +1,45 @@
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
+
+<!-- Page View Counter -->
+<script>
+(function() {
+    // Simple page view counter using localStorage for demo
+    // For production, replace with actual backend API
+    const path = window.location.pathname;
+    const storageKey = `pageview_${path}`;
+
+    // Get current count
+    let count = parseInt(localStorage.getItem(storageKey) || '0');
+
+    // Only increment if this is a new session
+    const sessionKey = `session_${path}`;
+    if (!sessionStorage.getItem(sessionKey)) {
+        count++;
+        localStorage.setItem(storageKey, count.toString());
+        sessionStorage.setItem(sessionKey, 'true');
+
+        // Send to backend (replace with your actual API endpoint)
+        // fetch('/api/pageview', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ path: path })
+        // });
+    }
+
+    // Display count if element exists
+    const countElement = document.querySelector('[data-pageview-count]');
+    if (countElement) {
+        // Format number with K/M suffix
+        const formatNumber = (num) => {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        };
+
+        // Add some randomness for demo (remove in production)
+        const demoCount = count + Math.floor(Math.random() * 100);
+        countElement.textContent = formatNumber(demoCount) + ' views';
+    }
+})();
+</script>

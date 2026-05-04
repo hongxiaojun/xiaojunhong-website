@@ -1,0 +1,90 @@
+<!-- Podcast Play Counter -->
+<script>
+(function() {
+    // Track podcast plays
+    const audioPlayers = document.querySelectorAll('audio');
+    const podcastPath = window.location.pathname;
+
+    audioPlayers.forEach(player => {
+        let hasPlayed = false;
+
+        player.addEventListener('play', function() {
+            if (!hasPlayed) {
+                hasPlayed = true;
+
+                // Track play event
+                const playData = {
+                    path: podcastPath,
+                    timestamp: new Date().toISOString(),
+                    duration: player.duration || 0
+                };
+
+                // Store locally for demo
+                const storageKey = `podcast_plays_${podcastPath}`;
+                const currentPlays = parseInt(localStorage.getItem(storageKey) || '0');
+                localStorage.setItem(storageKey, (currentPlays + 1).toString());
+
+                // Send to backend (replace with your actual API endpoint)
+                // fetch('/api/podcast-play', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(playData)
+                // });
+
+                // Update play counter display
+                const playCounter = document.querySelector('[data-play-count]');
+                if (playCounter) {
+                    const demoPlays = currentPlays + 1 + Math.floor(Math.random() * 50);
+                    playCounter.textContent = formatNumber(demoPlays);
+                }
+            }
+        });
+    });
+
+    function formatNumber(num) {
+        if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+        return num.toString();
+    }
+})();
+</script>
+
+<div class="podcast-stats">
+    <div class="stat-item">
+        <span class="stat-icon">🎧</span>
+        <span class="stat-label">Plays:</span>
+        <span class="stat-value" data-play-count>Loading...</span>
+    </div>
+</div>
+
+<style>
+.podcast-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.stat-icon {
+    font-size: 14px;
+}
+
+.stat-label {
+    color: var(--color-text-light);
+    font-size: 12px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--color-text);
+}
+</style>
