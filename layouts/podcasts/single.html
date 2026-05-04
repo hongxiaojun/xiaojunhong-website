@@ -84,11 +84,6 @@
                 </div>
             </div>
 
-            <audio controls class="audio-player" preload="metadata" id="audio-player">
-                <source src="{{ . }}" type="audio/{{ $.Params.audio_format }}">
-                您的浏览器不支持音频播放，请升级浏览器。
-            </audio>
-
             <!-- Audio Spectrum Visualization -->
             <div class="audio-spectrum" id="audio-spectrum">
                 <div class="spectrum-bar"></div>
@@ -111,7 +106,13 @@
                 <div class="spectrum-bar"></div>
                 <div class="spectrum-bar"></div>
                 <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
             </div>
+
+            <audio controls class="audio-player" preload="metadata" id="audio-player">
+                <source src="{{ . }}" type="audio/{{ $.Params.audio_format }}">
+                您的浏览器不支持音频播放，请升级浏览器。
+            </audio>
 
             <div class="player-tips">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
