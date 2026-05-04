@@ -104,31 +104,16 @@
                          0 0 90px rgba(123, 104, 238, 0.4);
         }
 
-        [data-theme="dark"] .hero-learning::before {
-            filter: blur(12px);
-            opacity: 0.9;
-        }
-
         [data-theme="dark"] .hero-building {
             text-shadow: 0 0 30px rgba(114, 47, 55, 0.8),
                          0 0 60px rgba(255, 107, 107, 0.6),
                          0 0 90px rgba(255, 142, 83, 0.4);
         }
 
-        [data-theme="dark"] .hero-building::before {
-            filter: blur(12px);
-            opacity: 0.9;
-        }
-
         [data-theme="dark"] .hero-sharing {
             text-shadow: 0 0 30px rgba(212, 165, 116, 0.8),
                          0 0 60px rgba(255, 215, 0, 0.6),
                          0 0 90px rgba(152, 251, 152, 0.4);
-        }
-
-        [data-theme="dark"] .hero-sharing::before {
-            filter: blur(12px);
-            opacity: 0.9;
         }
 
         * {
@@ -440,21 +425,7 @@
                          0 0 40px rgba(0, 212, 255, 0.3),
                          0 0 60px rgba(123, 104, 238, 0.2);
             animation: glow-pulse 3s ease-in-out infinite;
-            position: relative;
-        }
-
-        .hero-learning::before {
-            content: 'Vibe Coding';
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            background: linear-gradient(135deg, #4A90A4 0%, #00D4FF 50%, #7B68EE 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: blur(8px);
-            opacity: 0.7;
+            display: inline-block;
         }
 
         .hero-building {
@@ -466,22 +437,8 @@
             text-shadow: 0 0 20px rgba(114, 47, 55, 0.5),
                          0 0 40px rgba(255, 107, 107, 0.3),
                          0 0 60px rgba(255, 142, 83, 0.2);
-            animation: glow-pulse 3s ease-in-out infinite 1.5s;
-            position: relative;
-        }
-
-        .hero-building::before {
-            content: 'Vibe Thinking';
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            background: linear-gradient(135deg, #722F37 0%, #FF6B6B 50%, #FF8E53 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: blur(8px);
-            opacity: 0.7;
+            animation: glow-pulse 3s ease-in-out infinite 1s;
+            display: inline-block;
         }
 
         .hero-sharing {
@@ -493,22 +450,8 @@
             text-shadow: 0 0 20px rgba(212, 165, 116, 0.5),
                          0 0 40px rgba(255, 215, 0, 0.3),
                          0 0 60px rgba(152, 251, 152, 0.2);
-            animation: glow-pulse 3s ease-in-out infinite 3s;
-            position: relative;
-        }
-
-        .hero-sharing::before {
-            content: 'Sharing';
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            background: linear-gradient(135deg, #D4A574 0%, #FFD700 50%, #98FB98 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: blur(8px);
-            opacity: 0.7;
+            animation: glow-pulse 3s ease-in-out infinite 2s;
+            display: inline-block;
         }
 
         @keyframes glow-pulse {
