@@ -1534,6 +1534,8 @@
             font-family: var(--serif);
             position: relative;
             overflow: hidden;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .modern-podcast-player::before {
@@ -1558,8 +1560,8 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(232, 230, 220, 0.6);
             border-radius: 14px;
-            padding: 18px 22px;
-            margin-bottom: 22px;
+            padding: clamp(12px, 3vw, 18px) clamp(14px, 4vw, 22px);
+            margin-bottom: clamp(16px, 4vw, 22px);
             color: var(--color-text);
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -1569,15 +1571,17 @@
             overflow: hidden;
             white-space: nowrap;
             margin-bottom: 10px;
+            width: 100%;
         }
 
         .scrolling-title {
             display: inline-block;
-            font-size: 17px;
+            font-size: clamp(14px, 2.5vw, 17px);
             font-weight: 600;
             color: var(--color-text);
             animation: scroll-text 20s linear infinite;
             padding-right: 60px;
+            white-space: nowrap;
         }
 
         .scrolling-title:hover {
@@ -1587,6 +1591,41 @@
         @keyframes scroll-text {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
+        }
+
+        /* Tablet devices (768px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .modern-podcast-player {
+                padding: 18px;
+            }
+
+            .player-controls-section {
+                gap: 12px;
+            }
+
+            .speed-btn {
+                width: 48px;
+                height: 38px;
+            }
+
+            .skip-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .play-btn {
+                width: 58px;
+                height: 58px;
+            }
+
+            .volume-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .volume-slider-wrapper {
+                width: 68px;
+            }
         }
 
         .title-metadata {
@@ -1612,15 +1651,15 @@
         .player-progress-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: clamp(8px, 2vw, 12px);
             margin-bottom: 22px;
         }
 
         .time-label {
-            font-size: 12px;
+            font-size: clamp(10px, 2.5vw, 12px);
             color: var(--color-text-light);
             font-family: var(--mono);
-            min-width: 48px;
+            min-width: clamp(36px, 8vw, 48px);
             text-align: center;
             opacity: 0.85;
         }
@@ -1630,6 +1669,7 @@
             height: 24px;
             display: flex;
             align-items: center;
+            min-width: 0;
         }
 
         .progress-track {
@@ -1665,8 +1705,8 @@
             right: -7px;
             top: 50%;
             transform: translateY(-50%);
-            width: 14px;
-            height: 14px;
+            width: clamp(12px, 3vw, 14px);
+            height: clamp(12px, 3vw, 14px);
             background: rgba(212, 165, 116, 0.9);
             backdrop-filter: blur(4px);
             border: 2px solid rgba(255, 255, 255, 0.8);
@@ -1696,7 +1736,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: clamp(8px, 2vw, 16px);
+            flex-wrap: nowrap;
+            min-height: 80px;
         }
 
         .player-btn {
@@ -1712,6 +1754,7 @@
             transition: all 0.3s ease;
             font-family: var(--serif);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            flex-shrink: 0;
         }
 
         .player-btn:hover {
@@ -1728,8 +1771,8 @@
         }
 
         .player-btn svg {
-            width: 22px;
-            height: 22px;
+            width: clamp(18px, 2.5vw, 24px);
+            height: clamp(18px, 2.5vw, 24px);
             opacity: 0.85;
         }
 
@@ -1739,10 +1782,10 @@
 
         /* Speed Button */
         .speed-btn {
-            width: 52px;
-            height: 40px;
+            width: clamp(40px, 10vw, 52px);
+            height: clamp(32px, 8vw, 40px);
             border-radius: 10px;
-            font-size: 13px;
+            font-size: clamp(10px, 2.5vw, 13px);
             font-weight: 600;
         }
 
@@ -1752,8 +1795,8 @@
 
         /* Skip Buttons */
         .skip-btn {
-            width: 48px;
-            height: 48px;
+            width: clamp(38px, 10vw, 48px);
+            height: clamp(38px, 10vw, 48px);
             border-radius: 50%;
             position: relative;
         }
@@ -1761,15 +1804,15 @@
         .skip-btn span {
             position: absolute;
             bottom: 5px;
-            font-size: 9px;
+            font-size: clamp(7px, 2vw, 9px);
             font-weight: 600;
             opacity: 0.75;
         }
 
         /* Play/Pause Button */
         .play-btn {
-            width: 62px;
-            height: 62px;
+            width: clamp(50px, 12vw, 62px);
+            height: clamp(50px, 12vw, 62px);
             border-radius: 50%;
             background: linear-gradient(135deg,
                 rgba(212, 165, 116, 0.9) 0%,
@@ -1780,6 +1823,7 @@
             box-shadow:
                 0 4px 16px rgba(212, 165, 116, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
         }
 
         .play-btn:hover {
@@ -1794,8 +1838,8 @@
         }
 
         .play-btn svg {
-            width: 26px;
-            height: 26px;
+            width: clamp(20px, 4vw, 26px);
+            height: clamp(20px, 4vw, 26px);
             opacity: 1;
         }
 
@@ -1812,17 +1856,18 @@
         .volume-control {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: clamp(6px, 1.5vw, 10px);
+            flex-shrink: 0;
         }
 
         .volume-btn {
-            width: 40px;
-            height: 40px;
+            width: clamp(32px, 8vw, 40px);
+            height: clamp(32px, 8vw, 40px);
             border-radius: 10px;
         }
 
         .volume-slider-wrapper {
-            width: 76px;
+            width: clamp(50px, 15vw, 76px);
             height: 24px;
             display: flex;
             align-items: center;
@@ -2071,6 +2116,191 @@
             .nav-button.next {
                 text-align: left;
                 flex-direction: row;
+            }
+
+            /* Modern Podcast Player Mobile Styles */
+            .modern-podcast-player {
+                padding: 16px;
+                border-radius: 16px;
+                margin: 0 -8px;
+            }
+
+            .player-title-bar {
+                padding: 14px 16px;
+                margin-bottom: 16px;
+                border-radius: 12px;
+            }
+
+            .scrolling-title {
+                font-size: 15px;
+                padding-right: 50px;
+                animation: scroll-text 16s linear infinite;
+            }
+
+            .title-metadata {
+                font-size: 11px;
+            }
+
+            .player-progress-section {
+                margin-bottom: 18px;
+                gap: 8px;
+            }
+
+            .time-label {
+                font-size: 11px;
+                min-width: 40px;
+            }
+
+            .progress-container {
+                height: 20px;
+            }
+
+            .progress-track {
+                height: 5px;
+            }
+
+            .progress-track:hover {
+                height: 6px;
+            }
+
+            .progress-thumb {
+                width: 12px;
+                height: 12px;
+                right: -6px;
+            }
+
+            .player-controls-section {
+                gap: 10px;
+            }
+
+            .speed-btn {
+                width: 44px;
+                height: 34px;
+                font-size: 11px;
+            }
+
+            .skip-btn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .skip-btn span {
+                font-size: 8px;
+                bottom: 4px;
+            }
+
+            .skip-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .play-btn {
+                width: 54px;
+                height: 54px;
+            }
+
+            .play-btn svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .volume-control {
+                gap: 8px;
+            }
+
+            .volume-btn {
+                width: 34px;
+                height: 34px;
+            }
+
+            .volume-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .volume-slider-wrapper {
+                width: 60px;
+            }
+
+            .volume-slider {
+                height: 3px;
+            }
+
+            .player-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Extra small devices (phones in portrait) */
+        @media (max-width: 480px) {
+            .modern-podcast-player {
+                padding: 14px;
+                margin: 0 -4px;
+            }
+
+            .player-title-bar {
+                padding: 12px 14px;
+                margin-bottom: 14px;
+            }
+
+            .scrolling-title {
+                font-size: 14px;
+                animation: scroll-text 14s linear infinite;
+            }
+
+            .title-metadata {
+                font-size: 10px;
+            }
+
+            .player-progress-section {
+                margin-bottom: 16px;
+                gap: 6px;
+            }
+
+            .player-controls-section {
+                gap: 8px;
+                min-height: 70px;
+            }
+
+            .speed-btn {
+                width: 40px;
+                height: 32px;
+                font-size: 10px;
+            }
+
+            .skip-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .skip-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .play-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .play-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .volume-btn {
+                width: 32px;
+                height: 32px;
+            }
+
+            .volume-slider-wrapper {
+                width: 50px;
+            }
+
+            .time-label {
+                font-size: 10px;
+                min-width: 34px;
             }
         }
 
