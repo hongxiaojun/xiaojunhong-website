@@ -76,51 +76,86 @@
 
     {{ with .Params.audio_file }}
     <div class="podcast-player-container">
-        <div class="podcast-player">
-            <div class="player-header">
-                <div class="player-info">
-                    <span class="player-title">音频播放器</span>
-                    <span class="player-format">{{ $.Params.audio_format | upper }}</span>
+        <div class="modern-podcast-player" id="modern-player">
+            <!-- Hidden audio element -->
+            <audio id="audio-element" preload="metadata">
+                <source src="{{ . }}" type="audio/{{ $.Params.audio_format }}">
+            </audio>
+
+            <!-- Title Bar with Scrolling Text -->
+            <div class="player-title-bar">
+                <div class="title-scroll-container">
+                    <div class="scrolling-title" id="scrolling-title">
+                        {{ $.Title }}
+                    </div>
+                </div>
+                <div class="title-metadata">
+                    <span class="podcast-series">xiaojunhong.space</span>
+                    <span class="podcast-date">{{ $.Date.Format "01月02日" }}</span>
                 </div>
             </div>
 
-            <!-- Audio Spectrum Visualization -->
-            <div class="audio-spectrum" id="audio-spectrum">
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
-                <div class="spectrum-bar"></div>
+            <!-- Progress Bar -->
+            <div class="player-progress-section">
+                <span class="time-label" id="current-time">0:00</span>
+                <div class="progress-container">
+                    <div class="progress-track" id="progress-track">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <div class="progress-thumb" id="progress-thumb"></div>
+                    </div>
+                </div>
+                <span class="time-label" id="remaining-time">-0:00</span>
             </div>
 
-            <audio controls class="audio-player" preload="metadata" id="audio-player">
-                <source src="{{ . }}" type="audio/{{ $.Params.audio_format }}">
-                您的浏览器不支持音频播放，请升级浏览器。
-            </audio>
+            <!-- Control Buttons -->
+            <div class="player-controls-section">
+                <!-- Speed Control -->
+                <button class="player-btn speed-btn" id="speed-btn" title="播放速度">
+                    <span id="speed-display">1.0x</span>
+                </button>
 
-            <div class="player-tips">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-                <span>建议使用耳机收听，获得更好的听觉体验</span>
+                <!-- Rewind 15s -->
+                <button class="player-btn skip-btn" id="rewind-btn" title="后退15秒">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.5 3C17.15 3 21.08 6.03 22.47 10.22L20.1 11C19.05 7.81 16.04 5.5 12.5 5.5C10.54 5.5 8.77 6.22 7.38 7.38L10 10H3V3L5.6 5.6C7.45 4 9.85 3 12.5 3M10 12V22H8V14H6V12H10M18 14V20C18 21.11 17.11 22 16 22H14C12.9 22 12 21.1 12 20V14C12 12.9 12.9 12 14 12H16C17.11 12 18 12.9 18 14M14 14V20H16V14H14Z"/>
+                    </svg>
+                    <span>15</span>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button class="player-btn play-btn" id="play-pause-btn" title="播放/暂停">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
+                </button>
+
+                <!-- Forward 30s -->
+                <button class="player-btn skip-btn" id="forward-btn" title="前进30秒">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 12.5V3H8V10H6V12H10M16 14V20C16 21.11 16.9 22 18 22H20C21.11 22 22 21.1 22 20V14C22 12.9 21.11 12 20 12H18C16.9 12 16 12.9 16 14M18 14H20V20H18V14M12.5 3C9.85 3 7.45 4 5.6 5.6L3 3V10H10L7.38 7.38C8.77 6.22 10.54 5.5 12.5 5.5C16.04 5.5 19.05 7.81 20.1 11L22.47 10.22C21.08 6.03 17.15 3 12.5 3Z"/>
+                    </svg>
+                    <span>30</span>
+                </button>
+
+                <!-- Volume -->
+                <div class="volume-control" id="volume-control">
+                    <button class="player-btn volume-btn" id="volume-btn" title="音量">
+                        <svg class="volume-high-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-4 0h-2.5l-5 5v5h5l5 5v-15z"/>
+                        </svg>
+                        <svg class="volume-mute-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                        </svg>
+                    </button>
+                    <div class="volume-slider-wrapper">
+                        <div class="volume-slider" id="volume-slider">
+                            <div class="volume-fill" id="volume-fill"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -192,92 +227,192 @@
 
 <script>
 (function() {
-    // Audio Spectrum Animation
-    const audioPlayer = document.getElementById('audio-player');
-    const audioSpectrum = document.getElementById('audio-spectrum');
-    const spectrumBars = document.querySelectorAll('.spectrum-bar');
+    const audio = document.getElementById('audio-element');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playIcon = playPauseBtn?.querySelector('.play-icon');
+    const pauseIcon = playPauseBtn?.querySelector('.pause-icon');
+    const progressTrack = document.getElementById('progress-track');
+    const progressFill = document.getElementById('progress-fill');
+    const progressThumb = document.getElementById('progress-thumb');
+    const currentTimeEl = document.getElementById('current-time');
+    const remainingTimeEl = document.getElementById('remaining-time');
+    const speedBtn = document.getElementById('speed-btn');
+    const speedDisplay = document.getElementById('speed-display');
+    const rewindBtn = document.getElementById('rewind-btn');
+    const forwardBtn = document.getElementById('forward-btn');
+    const volumeBtn = document.getElementById('volume-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeFill = document.getElementById('volume-fill');
+    const volumeHighIcon = volumeBtn?.querySelector('.volume-high-icon');
+    const volumeMuteIcon = volumeBtn?.querySelector('.volume-mute-icon');
 
-    if (audioPlayer && audioSpectrum && spectrumBars.length > 0) {
-        let animationInterval;
-        let isAnimating = false;
+    if (!audio) return;
 
-        // Start spectrum animation
-        function startSpectrumAnimation() {
-            if (isAnimating) return;
-            isAnimating = true;
+    let isDragging = false;
+    let currentSpeed = 1.0;
+    const speeds = [1.0, 1.25, 1.5, 1.75, 2.0, 0.75];
+    let currentSpeedIndex = 0;
+    let lastVolume = 1.0;
 
-            animationInterval = setInterval(() => {
-                spectrumBars.forEach((bar, index) => {
-                    // Random height between 10% and 100%
-                    const height = Math.random() * 90 + 10;
-                    bar.style.height = `${height}%`;
+    // Format time
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
 
-                    // Create staggered animation delay
-                    const delay = index * 50;
-                    bar.style.transitionDelay = `${delay}ms`;
-                });
-            }, 150);
+    // Update progress
+    function updateProgress() {
+        if (!isDragging) {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            if (progressFill) progressFill.style.width = `${percent}%`;
+            if (progressThumb) progressThumb.style.left = `${percent}%`;
         }
+        if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+        if (remainingTimeEl) remainingTimeEl.textContent = `-${formatTime(audio.duration - audio.currentTime)}`;
+    }
 
-        // Stop spectrum animation
-        function stopSpectrumAnimation() {
-            if (!isAnimating) return;
-            isAnimating = false;
-
-            clearInterval(animationInterval);
-
-            // Gradually return to baseline
-            spectrumBars.forEach(bar => {
-                bar.style.height = '10%';
-                bar.style.transition = 'height 0.5s ease-out';
-            });
+    // Play/Pause
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
         }
+    }
 
-        // Listen for play/pause events
-        audioPlayer.addEventListener('play', startSpectrumAnimation);
-        audioPlayer.addEventListener('pause', stopSpectrumAnimation);
-        audioPlayer.addEventListener('ended', stopSpectrumAnimation);
+    function updatePlayPauseIcon() {
+        if (playIcon && pauseIcon) {
+            if (audio.paused) {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            } else {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }
+        }
+    }
 
-        // Initialize with low bars
-        spectrumBars.forEach(bar => {
-            bar.style.height = '10%';
+    // Seek
+    function seek(e) {
+        const rect = progressTrack.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+    }
+
+    // Speed control
+    function cycleSpeed() {
+        currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+        currentSpeed = speeds[currentSpeedIndex];
+        audio.playbackRate = currentSpeed;
+        if (speedDisplay) speedDisplay.textContent = `${currentSpeed.toFixed(2)}x`;
+    }
+
+    // Skip buttons
+    function skip(seconds) {
+        audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+    }
+
+    // Volume control
+    function setVolume(e) {
+        const rect = volumeSlider.getBoundingClientRect();
+        const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        audio.volume = percent;
+        if (volumeFill) volumeFill.style.width = `${percent * 100}%`;
+        updateVolumeIcon(percent);
+    }
+
+    function toggleMute() {
+        if (audio.volume > 0) {
+            lastVolume = audio.volume;
+            audio.volume = 0;
+        } else {
+            audio.volume = lastVolume;
+        }
+        if (volumeFill) volumeFill.style.width = `${audio.volume * 100}%`;
+        updateVolumeIcon(audio.volume);
+    }
+
+    function updateVolumeIcon(volume) {
+        if (volumeHighIcon && volumeMuteIcon) {
+            if (volume === 0) {
+                volumeHighIcon.style.display = 'none';
+                volumeMuteIcon.style.display = 'block';
+            } else {
+                volumeHighIcon.style.display = 'block';
+                volumeMuteIcon.style.display = 'none';
+            }
+        }
+    }
+
+    // Event listeners
+    if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+    audio.addEventListener('play', updatePlayPauseIcon);
+    audio.addEventListener('pause', updatePlayPauseIcon);
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('loadedmetadata', updateProgress);
+
+    if (progressTrack) {
+        progressTrack.addEventListener('click', seek);
+
+        progressTrack.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            seek(e);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) seek(e);
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
         });
     }
+
+    if (speedBtn) speedBtn.addEventListener('click', cycleSpeed);
+    if (rewindBtn) rewindBtn.addEventListener('click', () => skip(-15));
+    if (forwardBtn) forwardBtn.addEventListener('click', () => skip(30));
+
+    if (volumeSlider) {
+        volumeSlider.addEventListener('click', setVolume);
+        volumeSlider.addEventListener('mousedown', (e) => {
+            e.stopPropagation();
+            setVolume(e);
+        });
+    }
+
+    if (volumeBtn) volumeBtn.addEventListener('click', toggleMute);
+
+    // Initialize
+    updatePlayPauseIcon();
+    if (volumeFill) volumeFill.style.width = `${audio.volume * 100}%`;
+    updateVolumeIcon(audio.volume);
 
     // Track podcast plays
-    const audioPlayerQuery = document.querySelector('audio');
     const podcastPath = window.location.pathname;
+    const storageKey = `podcast_plays_${podcastPath}`;
+    let currentPlays = parseInt(localStorage.getItem(storageKey) || '0');
 
-    if (audioPlayerQuery) {
-        // Load existing play count
-        const storageKey = `podcast_plays_${podcastPath}`;
-        let currentPlays = parseInt(localStorage.getItem(storageKey) || '0');
-
-        // Display initial count
-        const playCounter = document.querySelector('[data-play-count]');
-        if (playCounter) {
-            const demoPlays = currentPlays + Math.floor(Math.random() * 100);
-            playCounter.textContent = formatNumber(demoPlays);
-        }
-
-        audioPlayerQuery.addEventListener('play', function() {
-            // Check if this session already counted
-            const sessionKey = `podcast_session_${podcastPath}`;
-            if (!sessionStorage.getItem(sessionKey)) {
-                sessionStorage.setItem(sessionKey, 'true');
-
-                // Increment play count
-                currentPlays++;
-                localStorage.setItem(storageKey, currentPlays.toString());
-
-                // Update display
-                if (playCounter) {
-                    const demoPlays = currentPlays + Math.floor(Math.random() * 100);
-                    playCounter.textContent = formatNumber(demoPlays);
-                }
-            }
-        });
+    const playCounter = document.querySelector('[data-play-count]');
+    if (playCounter) {
+        const demoPlays = currentPlays + Math.floor(Math.random() * 100);
+        playCounter.textContent = formatNumber(demoPlays);
     }
+
+    audio.addEventListener('play', function() {
+        const sessionKey = `podcast_session_${podcastPath}`;
+        if (!sessionStorage.getItem(sessionKey)) {
+            sessionStorage.setItem(sessionKey, 'true');
+            currentPlays++;
+            localStorage.setItem(storageKey, currentPlays.toString());
+
+            if (playCounter) {
+                const demoPlays = currentPlays + Math.floor(Math.random() * 100);
+                playCounter.textContent = formatNumber(demoPlays);
+            }
+        }
+    });
 
     function formatNumber(num) {
         if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
