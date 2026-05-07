@@ -3,6 +3,7 @@ title: "AI时代的师徒制：看师傅干活，练就一身好手感"
 date: 2026-05-07
 draft: false
 description: "AI善于写程序，是实干老师傅。我在旁边看师傅干活，看久看多了，自然会懂。在终端大量阅读代码、看指令和命令，这个过程阅读耐心和英文能力会不自觉提升。最重要的是带着自己的目标和需求，清楚最终想要的。"
+coverImage: "/images/article-covers/ai-era-apprenticeship-system.png"
 readingTime: 8
 tags: ["AI", "手感", "生产者", "创造力", "探索"]
 featured: true

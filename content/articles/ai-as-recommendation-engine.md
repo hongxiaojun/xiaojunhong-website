@@ -3,6 +3,7 @@ title: "把 AI 当推荐引擎？就像让医生直接开药，却不告诉他�
 date: 2026-05-02
 draft: false
 description: "AI使用有上限和下限。下限是问'推荐什么'，上限是让AI做信息收集然后自己做决策。AI不对你的决策负责，但你要负责。"
+coverImage: "/images/article-covers/ai-as-recommendation-engine.png"
 readingTime: 5
 tags: ["AI", "决策", "提示词工程", "思维工具", "AI使用指南"]
 ---

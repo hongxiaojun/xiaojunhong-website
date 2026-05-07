@@ -3,6 +3,7 @@ title: "效率的代价：AI时代的一次智力剥夺"
 date: 2026-05-05
 draft: false
 description: "当工具开始完美适应你时，它也在废掉你"
+coverImage: "/images/article-covers/ai-era-intelligence-deprivation.png"
 readingTime: 9
 tags: ["AI", "生产力", "认知", "技术哲学", "Vibe Coding"]
 ---

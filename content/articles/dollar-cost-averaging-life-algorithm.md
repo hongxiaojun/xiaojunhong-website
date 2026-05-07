@@ -3,6 +3,7 @@ title: "定投改变命运：不只是投资，更是一种人生算法"
 date: 2026-05-02
 draft: false
 description: "最成功的投资策略竟然是傻瓜都会的定投。不只是投资策略，更是一种人生算法——用长期视角看问题，用结构化方式做决策，用持续投入换取复利。"
+coverImage: "/images/article-covers/dollar-cost-averaging-life-algorithm.png"
 readingTime: 6
 tags: ["定投", "投资", "人生算法", "长期主义", "复利"]
 ---

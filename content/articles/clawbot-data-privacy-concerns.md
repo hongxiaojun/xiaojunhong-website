@@ -3,6 +3,7 @@ title: "龙虾热潮背后：大厂如何在你的聊天对话框里伸手"
 date: 2026-05-02
 draft: false
 description: "13.5万台OpenClaw暴露公网，341个恶意插件流入市场。AI时代的数据隐私危机：当大厂免费提供智能体工具时，你的对话数据正在成为新的'矿藏'。"
+coverImage: "/images/article-covers/clawbot-data-privacy-concerns.png"
 readingTime: 6
 tags: ["AI", "数据隐私", "ClawBot", "网络安全", "数字主权"]
 ---

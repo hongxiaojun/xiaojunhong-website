@@ -3,6 +3,7 @@ title: "奖励孩子，你可能一直都做错了"
 date: 2026-05-02
 draft: false
 description: "你以为你在激励孩子，其实可能正在给他们喂精神鸦片。外在奖励会削弱内在动机，让孩子从'我想做'变成'为了奖品才做'。不用奖励，那用什么？后果教育。"
+coverImage: "/images/article-covers/rewarding-children-you-may-be-wrong.png"
 readingTime: 10
 tags: ["教育", "育儿", "动机", "后果教育", "成长"]
 featured: true

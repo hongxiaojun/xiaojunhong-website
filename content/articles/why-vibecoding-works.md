@@ -3,6 +3,7 @@ title: "为什么你vibecoding的代码总是恰好能用？而有人可以高�
 date: 2026-04-25
 draft: false
 description: "从苍蝇模式到智能体工厂：探讨Vibe coding背后的隐形知识，以及如何将个人经验转化为可执行的流程标准。"
+coverImage: "/images/article-covers/why-vibecoding-works.png"
 readingTime: 1
 tags: ["Vibe Coding", "VMark", "隐形知识", "AI辅助开发"]
 ---

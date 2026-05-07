@@ -3,6 +3,7 @@ title: "当每个手艺人都有了一座超级工厂"
 date: 2026-05-07
 draft: false
 description: "从 Karpathy 的洞察看 AI 时代手艺人的觉醒：不是手工业的终结，而是每个有想法、有追求的手艺人，现在都有了一座高度定制化的超级工厂。"
+coverImage: "/images/article-covers/when-every-craftsman-has-a-super-factory.png"
 readingTime: 12
 tags: [AI,编程,手艺人,Karpathy,Agentic,创意]
 ---

@@ -3,6 +3,7 @@ title: "从流量孤岛到逻辑领地：为什么聪明人都在重返 GitHub�
 date: 2026-05-05
 draft: false
 description: "当自然语言成为代码，GitHub 就是你的思维基础设施"
+coverImage: "/images/article-covers/github-thinking-repository.png"
 readingTime: 12
 tags: ["GitHub", "AI", "数字资产", "Vibe Coding", "思维工具"]
 ---

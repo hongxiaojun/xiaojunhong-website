@@ -3,6 +3,7 @@ title: "好事情只会在你放松的时候发生"
 date: 2026-05-02
 draft: false
 description: "过度用力反而会成为阻碍。基于控制论心理学，理解为什么Actor比Reactor更有效，以及如何通过放松来激活潜意识的自动导航系统。"
+coverImage: "/images/article-covers/good-things-happen-when-relaxed.png"
 readingTime: 8
 tags: ["Actor vs Reactor", "放松", "心理学", "控制论", "自我管理"]
 featured: true
