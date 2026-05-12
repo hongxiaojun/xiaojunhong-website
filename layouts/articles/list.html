@@ -16,10 +16,14 @@
                 <!-- 封面图 -->
                 {{ if .Params.coverImage }}
                 <div class="article-cover">
-                    <img src="{{ .Params.coverImage }}"
-                         alt="{{ .Title }}"
-                         loading="lazy"
-                         class="cover-image">
+                    <picture class="cover-picture">
+                        {{ $webpPath := replace .Params.coverImage ".png" ".webp" }}
+                        <source srcset="{{ $webpPath }}" type="image/webp">
+                        <img src="{{ .Params.coverImage }}"
+                             alt="{{ .Title }}"
+                             loading="lazy"
+                             class="cover-image">
+                    </picture>
                     <div class="cover-overlay"></div>
                 </div>
                 {{ end }}
