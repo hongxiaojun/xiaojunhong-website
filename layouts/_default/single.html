@@ -495,38 +495,68 @@
     /* Change to single column layout */
     .article-container {
         grid-template-columns: 1fr;
-        padding: 48px 32px 64px;
+        padding: 48px 24px 64px;
         max-width: 100%;
         width: 100%;
     }
 
+    /* Article title - ensure no truncation */
     .article-title {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: keep-word;
+        hyphens: auto;
+    }
+
+    /* Article header spacing */
+    .article-header {
+        margin-bottom: 48px;
+        padding-bottom: 32px;
     }
 
     .article-body {
         font-size: 18px;
         line-height: 1.8;
         letter-spacing: 0.05em;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body p {
         margin-bottom: 20px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body h2 {
         font-size: 24px;
         margin-top: 48px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body h3 {
         font-size: 20px;
         margin-top: 36px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body h4 {
         font-size: 18px;
         margin-top: 28px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Ensure code blocks don't overflow */
+    .article-body pre {
+        overflow-x: auto;
+        max-width: 100%;
+        word-wrap: normal;
+        overflow-wrap: normal;
     }
 }
 
@@ -544,43 +574,96 @@
     /* Change to single column layout */
     .article-container {
         grid-template-columns: 1fr;
-        padding: 32px 24px 48px;
+        padding: 32px 20px 48px;
         max-width: 100%;
         width: 100%;
     }
 
+    /* Article title - ensure no truncation */
     .article-title {
-        font-size: 28px;
+        font-size: 26px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: keep-word;
+        hyphens: auto;
+    }
+
+    /* Article header spacing */
+    .article-header {
+        margin-bottom: 40px;
+        padding-bottom: 24px;
     }
 
     .article-body {
         font-size: 17px;
         line-height: 1.85;
         letter-spacing: 0.08em;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body p {
         margin-bottom: 22px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body h2 {
         font-size: 22px;
+        margin-top: 40px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body h3 {
         font-size: 18px;
+        margin-top: 32px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .article-body h4 {
+        font-size: 17px;
+        margin-top: 28px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Ensure code blocks don't overflow */
+    .article-body pre {
+        overflow-x: auto;
+        max-width: 100%;
+        word-wrap: normal;
+        overflow-wrap: normal;
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    .article-body code {
+        font-size: 12px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-body table {
         font-size: 14px;
         max-width: 100%;
         table-layout: auto;
+        display: block;
+        overflow-x: auto;
     }
 
     .article-body table th,
     .article-body table td {
         padding: 8px;
         white-space: nowrap;
+    }
+
+    /* Ensure inline elements don't overflow */
+    .article-body a {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 }
 
