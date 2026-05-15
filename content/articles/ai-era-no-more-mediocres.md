@@ -3,7 +3,7 @@ title: "AI时代，拒绝平庸的方法论"
 date: 2026-05-15
 draft: false
 description: "齐宣王喜欢听合奏，南郭先生可以混日子。齐湣王喜欢听独奏，南郭先生连夜逃跑。AI时代，齐湣王时刻已经到来——不是测试你会不会做，而是测试你能不能判断AI做得对不对。"
-coverImage: "/images/article-covers/ai-era-no-more-mediocres.png"
+coverImage: "/images/article-covers/ai-era-no-more-mediocres.webp"
 readingTime: 18
 tags: ["AI", "方法论", "认知", "成长", "竞争力"]
 featured: true
