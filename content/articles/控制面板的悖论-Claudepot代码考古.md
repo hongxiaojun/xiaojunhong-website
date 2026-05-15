@@ -3,7 +3,7 @@ title: "控制面板的悖论 — Claudepot 代码考古"
 date: 2026-05-15
 draft: false
 description: "Claudepot 为已经优秀的 Claude Code 构建了一个控制面板，解决的不是产品功能的缺失，而是元层面的管理需求。这是对 Anthropic 产品策略留白的深度洞察。"
-coverImage: "/images/article-covers/控制面板的悖论-Claudepot代码考古.webp"
+coverImage: "/images/article-covers/控制面板的悖论-Claudepot代码考古.png"
 readingTime: 15
 tags: ["AI", "开源项目", "架构设计", "Rust", "Tauri"]
 featured: true
