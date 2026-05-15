@@ -3,7 +3,12 @@ title: "Welcome to My Personal Website"
 date: 2026-05-01
 draft: false
 description: "Hello! This is my first article on this new website powered by Hugo and Cloudflare Pages."
+tags: ["welcome", "introduction", "web-development"]
+categories: ["网站介绍"]
+featured: true  # Show on homepage
+slug: "welcome-to-my-website"
 readingTime: 3
+lastmod: 2026-05-15
 ---
 
 Hello! Welcome to my personal website at xiaojunhong.space.

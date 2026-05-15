@@ -1,5 +1,10 @@
 # xiaojunhong.space
 
+[![Build Status](https://img.shields.io/github/actions/workflow/status/xiaojunhong/xiaojunhong-website/health-check.yml)](https://github.com/xiaojunhong/xiaojunhong-website/actions)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Hugo](https://img.shields.io/badge/Hugo-0.100%2B-orange.svg)](https://gohugo.io)
+[![Cloudflare](https://img.shields.io/badge/Cloudflare-Pages-orange.svg)](https://developers.cloudflare.com/pages/)
+
 A personal website built with Hugo and hosted on Cloudflare Pages.
 
 ## Project Structure
@@ -120,16 +125,33 @@ After initial setup:
 
 ### Front Matter Template
 
-Articles use this format:
+Articles use this complete format:
 ```yaml
 ---
 title: "Article Title"
 date: 2026-05-01
 draft: false
-description: "Brief description for listing pages"
-readingTime: 5  # Optional: reading time in minutes
+description: "Brief description for SEO and listing pages"
+tags: ["tag1", "tag2"]
+categories: ["category"]
+featured: true  # Show on homepage
+slug: "url-friendly-slug"
+readingTime: 5  # Optional: Hugo can auto-calculate
+lastmod: 2026-05-15
 ---
 ```
+
+**字段说明**:
+- `title`: 文章标题（必需）
+- `date`: 发布日期（必需）
+- `draft`: 是否为草稿（true/false）
+- `description`: SEO 描述和列表页摘要
+- `tags`: 文章标签数组
+- `categories`: 文章分类
+- `featured`: 是否在首页显示
+- `slug`: URL 友好的路径
+- `readingTime`: 阅读时间（分钟）
+- `lastmod`: 最后修改日期
 
 ### Writing Content
 
