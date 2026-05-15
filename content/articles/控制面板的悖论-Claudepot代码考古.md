@@ -9,8 +9,6 @@ tags: ["AI", "开源项目", "架构设计", "Rust", "Tauri"]
 featured: true
 ---
 
-# 控制面板的悖论 — Claudepot 代码考古
-
 ## 项目基本信息
 
 | 属性 | 值 |
