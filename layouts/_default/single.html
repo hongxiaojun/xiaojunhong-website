@@ -8,6 +8,15 @@
     </aside>
 
     <article class="content">
+        {{ if .Params.coverImage }}
+        <div class="article-cover-header">
+            <img src="{{ .Params.coverImage }}"
+                 alt="{{ .Title }}"
+                 class="article-cover-image"
+                 loading="eager">
+        </div>
+        {{ end }}
+
         <header class="article-header">
             <h1 class="article-title">{{ .Title }}</h1>
             <div class="article-meta">
@@ -136,6 +145,21 @@
 .toc-list ul a {
     font-size: 13px;
     padding-left: 8px;
+}
+
+/* Article Cover Header */
+.article-cover-header {
+    margin-bottom: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.article-cover-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
 }
 
 /* Article Header - Paper style */
