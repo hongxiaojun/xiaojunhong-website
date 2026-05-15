@@ -1087,6 +1087,9 @@
         .content {
             max-width: var(--content-max-width);
             margin: 0 auto;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .article-list {
@@ -1120,17 +1123,31 @@
                 font-size: 18px;
                 line-height: 1.7;
                 letter-spacing: 0.4px;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-word;
             }
 
             /* Fix content width on mobile */
             .content {
                 max-width: 100% !important;
                 width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                overflow: hidden;
             }
 
             .container {
                 padding: 0 20px;
                 max-width: 100%;
+                overflow: hidden;
+            }
+
+            /* Ensure all text elements wrap properly */
+            * {
+                max-width: 100%;
+                box-sizing: border-box;
             }
 
             .theme-toggle {
@@ -1210,16 +1227,30 @@
                 font-size: 17px;
                 line-height: 1.75;
                 letter-spacing: 0.5px;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-word;
             }
 
             /* Fix content width on mobile */
             .content {
                 max-width: 100% !important;
                 width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                overflow: hidden;
             }
 
             .container {
                 padding: 0 16px;
+                overflow: hidden;
+            }
+
+            /* Ensure all text elements wrap properly */
+            * {
+                max-width: 100%;
+                box-sizing: border-box;
             }
 
             .hero-title {
