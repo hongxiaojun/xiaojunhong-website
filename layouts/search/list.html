@@ -16,6 +16,7 @@
                 aria-label="搜索内容"
             >
             <div class="search-icon">🔍</div>
+            <button id="test-search-btn" style="margin-left: 8px; padding: 8px 16px; background: var(--brand); color: white; border: none; border-radius: 6px; cursor: pointer;">测试搜索</button>
         </div>
 
         <div class="search-filters">
@@ -338,7 +339,16 @@
             return;
         }
 
+        console.log('🔍 Searching for:', query);
+        console.log('📊 Search index size:', searchIndex.length);
+
         const results = performSearch(query, currentFilter);
+
+        console.log('✨ Found results:', results.length);
+        if (results.length > 0) {
+            console.log('📋 First result:', results[0].title);
+        }
+
         displayResults(results, query);
     }
 
@@ -352,7 +362,13 @@
                 return false;
             }
 
-            const searchText = `${page.title} ${page.description} ${page.content} ${page.tags.join(' ')}`.toLowerCase();
+            // Safely handle undefined fields
+            const title = (page.title || '').toLowerCase();
+            const description = (page.description || '').toLowerCase();
+            const content = (page.content || '').toLowerCase();
+            const tags = (page.tags || []).join(' ').toLowerCase();
+
+            const searchText = `${title} ${description} ${content} ${tags}`;
 
             // All terms must match
             return terms.every(term => searchText.includes(term));
@@ -367,17 +383,22 @@
     // Calculate relevance score
     function calculateRelevance(page, terms) {
         let score = 0;
-        const title = page.title.toLowerCase();
-        const description = (page.description || '').toLowerCase();
-        const content = page.content.toLowerCase();
-        const tags = page.tags.join(' ').toLowerCase();
 
-        terms.forEach(term => {
-            if (title.includes(term)) score += 10;
-            if (description.includes(term)) score += 5;
-            if (tags.includes(term)) score += 3;
-            if (content.includes(term)) score += 1;
-        });
+        try {
+            const title = (page.title || '').toLowerCase();
+            const description = (page.description || '').toLowerCase();
+            const content = (page.content || '').toLowerCase();
+            const tags = (page.tags || []).join(' ').toLowerCase();
+
+            terms.forEach(term => {
+                if (title.includes(term)) score += 10;
+                if (description.includes(term)) score += 5;
+                if (tags.includes(term)) score += 3;
+                if (content.includes(term)) score += 1;
+            });
+        } catch (error) {
+            console.error('Error calculating relevance for page:', page.title, error);
+        }
 
         return score;
     }
@@ -509,6 +530,16 @@
             search(query);
         }, 300);
     });
+
+    // Test search button
+    const testBtn = document.getElementById('test-search-btn');
+    if (testBtn) {
+        testBtn.addEventListener('click', () => {
+            console.log('🧪 Testing search with "财富"...');
+            searchInput.value = '财富';
+            search('财富');
+        });
+    }
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
