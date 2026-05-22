@@ -389,27 +389,26 @@
     if (volumeFill) volumeFill.style.width = `${audio.volume * 100}%`;
     updateVolumeIcon(audio.volume);
 
-    // Track podcast plays
+    // Track podcast plays with real analytics
     const podcastPath = window.location.pathname;
-    const storageKey = `podcast_plays_${podcastPath}`;
-    let currentPlays = parseInt(localStorage.getItem(storageKey) || '0');
-
     const playCounter = document.querySelector('[data-play-count]');
-    if (playCounter) {
-        const demoPlays = currentPlays + Math.floor(Math.random() * 100);
-        playCounter.textContent = formatNumber(demoPlays);
+    let playCounted = false;
+
+    // Get initial play count from analytics API
+    if (window.Analytics && playCounter) {
+        window.Analytics.getPodcastStats(podcastPath).then(count => {
+            if (count !== null) {
+                playCounter.textContent = formatNumber(count);
+            }
+        });
     }
 
-    audio.addEventListener('play', function() {
-        const sessionKey = `podcast_session_${podcastPath}`;
-        if (!sessionStorage.getItem(sessionKey)) {
-            sessionStorage.setItem(sessionKey, 'true');
-            currentPlays++;
-            localStorage.setItem(storageKey, currentPlays.toString());
-
-            if (playCounter) {
-                const demoPlays = currentPlays + Math.floor(Math.random() * 100);
-                playCounter.textContent = formatNumber(demoPlays);
+    audio.addEventListener('play', async function() {
+        if (!playCounted && window.Analytics) {
+            playCounted = true;
+            const newCount = await window.Analytics.trackPodcastPlay(podcastPath);
+            if (newCount !== null && playCounter) {
+                playCounter.textContent = formatNumber(newCount);
             }
         }
     });
@@ -417,6 +416,11 @@
     function formatNumber(num) {
         if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
         return num.toString();
+    }
+
+    // Fallback formatNumber if Analytics is not available
+    if (!window.Analytics) {
+        window.Analytics = { formatNumber: formatNumber };
     }
 })();
 </script>

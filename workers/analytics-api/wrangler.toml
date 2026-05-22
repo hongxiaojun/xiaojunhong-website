@@ -1,0 +1,14 @@
+name = "xiaojunhong-analytics"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# D1 Database bindings
+[[d1_databases]]
+binding = "DB"
+database_name = "xiaojunhong-analytics"
+database_id = "YOUR_DATABASE_ID" # Replace with actual D1 database ID after creation
+
+# Environment variables
+[vars]
+CORS_ORIGIN = "https://xiaojunhong.space"
+ENVIRONMENT = "production"

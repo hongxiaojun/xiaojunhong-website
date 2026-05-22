@@ -124,58 +124,23 @@
 
 <script>
 (function() {
-    // Simulated statistics (replace with real API calls)
-    function generateStats() {
-        // Generate some realistic-looking numbers
-        const baseVisitors = 1250;
-        const baseViews = 4500;
-        const basePlays = 890;
-
-        // Add some randomness
-        const visitors = baseVisitors + Math.floor(Math.random() * 100);
-        const views = baseViews + Math.floor(Math.random() * 200);
-        const plays = basePlays + Math.floor(Math.random() * 50);
-
-        // Calculate days online (since January 1, 2026)
-        const startDate = new Date('2026-01-01');
-        const today = new Date();
-        const daysOnline = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-
-        return { visitors, views, plays, daysOnline };
+    // Wait for analytics system to be ready
+    function updateStatsWhenReady() {
+        if (window.Analytics) {
+            window.Analytics.getTotalStats();
+        } else {
+            setTimeout(updateStatsWhenReady, 100);
+        }
     }
 
-    function formatNumber(num) {
-        if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-        return num.toString();
-    }
+    // Start updating stats
+    updateStatsWhenReady();
 
-    function updateStats() {
-        const stats = generateStats();
-
-        // Update all stat elements
-        const visitorsEl = document.querySelector('[data-total-visitors]');
-        const viewsEl = document.querySelector('[data-total-views]');
-        const playsEl = document.querySelector('[data-total-plays]');
-        const daysEl = document.querySelector('[data-active-days]');
-
-        if (visitorsEl) visitorsEl.textContent = formatNumber(stats.visitors);
-        if (viewsEl) viewsEl.textContent = formatNumber(stats.views);
-        if (playsEl) playsEl.textContent = formatNumber(stats.plays);
-        if (daysEl) daysEl.textContent = stats.daysOnline;
-    }
-
-    // Update stats immediately and then every 30 seconds
-    updateStats();
-    setInterval(updateStats, 30000);
-
-    // Store page view for session tracking
-    const sessionKey = 'visitor_session';
-    if (!sessionStorage.getItem(sessionKey)) {
-        sessionStorage.setItem(sessionKey, 'true');
-
-        // Increment total visitors (local storage for demo)
-        const totalVisitors = parseInt(localStorage.getItem('total_visitors') || '0');
-        localStorage.setItem('total_visitors', (totalVisitors + 1).toString());
-    }
+    // Update stats every 30 seconds for live feel
+    setInterval(() => {
+        if (window.Analytics) {
+            window.Analytics.getTotalStats();
+        }
+    }, 30000);
 })();
 </script>

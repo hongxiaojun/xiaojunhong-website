@@ -32,3 +32,19 @@
     text-transform: lowercase;
 }
 </style>
+
+<script>
+(function() {
+    // Ensure page view count is updated when analytics is ready
+    function updatePageCountWhenReady() {
+        if (window.Analytics) {
+            window.Analytics.getPageStats();
+        } else {
+            setTimeout(updatePageCountWhenReady, 100);
+        }
+    }
+
+    // Start updating page count
+    updatePageCountWhenReady();
+})();
+</script>
