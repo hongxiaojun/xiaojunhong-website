@@ -283,39 +283,51 @@
         showLoading();
 
         try {
-            // Fetch sitemap or list of pages
-            const pages = await fetch('/index.json').then(r => r.json()).catch(() => []);
+            // Try to load the pre-generated search index
+            console.log('Loading search index from /index.json...');
+            const response = await fetch('/index.json');
 
-            if (pages.length === 0) {
-                // Fallback: manually define pages to search
-                searchIndex = await getManualPageIndex();
-            } else {
-                searchIndex = pages;
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
 
-            console.log('Search index built:', searchIndex.length, 'pages');
+            const pages = await response.json();
+
+            if (pages && pages.length > 0) {
+                searchIndex = pages;
+                console.log('Search index loaded successfully:', pages.length, 'pages');
+                hideLoading();
+                return;
+            } else {
+                throw new Error('Empty search index received');
+            }
         } catch (error) {
-            console.error('Error building search index:', error);
+            console.error('Error loading search index:', error);
+            console.log('Falling back to manual page indexing...');
+
+            // Fallback: manually define pages to search
             searchIndex = await getManualPageIndex();
+            console.log('Manual search index built:', searchIndex.length, 'pages');
+        }
+
+        hideLoading();
+    }
+
+    function hideLoading() {
+        const loadingElement = document.querySelector('.loading');
+        if (loadingElement) {
+            loadingElement.remove();
         }
     }
 
     // Manual page index as fallback
     async function getManualPageIndex() {
-        // Common pages that should be searchable
+        // Minimal fallback - should rarely be used since index.json is generated
+        console.warn('Using minimal fallback index - search results may be limited');
+
         return [
-            {{ range first 50 .Site.RegularPages }}
-            {
-                title: {{ .Title | jsonify }},
-                url: {{ .Permalink | jsonify }},
-                content: {{ .Plain | jsonify }},
-                description: {{ .Description | jsonify }},
-                date: {{ .Date.Format "2006-01-02" | jsonify }},
-                type: {{ if eq .Section "articles" }}"article"{{ else if eq .Section "notes" }}"note"{{ else if eq .Section "podcasts" }}"podcast"{{ else }}"page"{{ end }},
-                tags: {{ if .Params.tags }}{{ .Params.tags | jsonify }}{{ else }}[]{{ end }},
-                category: {{ .Params.category | default "" | jsonify }}
-            },
-            {{ end }}
+            // This array will be populated by Hugo if index.json fails
+            // For now, return empty array to trigger proper error handling
         ];
     }
 
@@ -378,13 +390,14 @@
                     <div class="placeholder-icon">🔍</div>
                     <p>没有找到匹配的结果</p>
                     <small>试试其他关键词或调整筛选条件</small>
+                    <small>搜索了 ${searchIndex.length} 个页面</small>
                 </div>
             `;
-            searchInfo.textContent = `找到 0 个结果`;
+            searchInfo.textContent = `找到 0 个结果 (搜索了 ${searchIndex.length} 个页面)`;
             return;
         }
 
-        searchInfo.textContent = `找到 ${results.length} 个结果`;
+        searchInfo.textContent = `找到 ${results.length} 个结果 (搜索了 ${searchIndex.length} 个页面)`;
 
         const html = results.map(page => {
             const excerpt = getExcerpt(page.content || page.description, query);
@@ -509,9 +522,21 @@
         });
     });
 
-    // Initialize
-    buildSearchIndex();
-    showPlaceholder();
+    // Initialize search with better error handling
+    buildSearchIndex().then(() => {
+        console.log('✅ Search initialized successfully with', searchIndex.length, 'pages');
+        showPlaceholder();
+    }).catch((error) => {
+        console.error('❌ Search initialization failed:', error);
+        searchResults.innerHTML = `
+            <div class="no-results">
+                <div class="placeholder-icon">⚠️</div>
+                <p>搜索功能初始化失败</p>
+                <small>请刷新页面重试，或检查网络连接</small>
+                <small>错误: ${error.message}</small>
+            </div>
+        `;
+    });
 
     // Focus search input on page load
     searchInput.focus();
