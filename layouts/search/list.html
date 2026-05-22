@@ -1,0 +1,521 @@
+{{ define "main" }}
+<section class="search-section">
+    <div class="search-container">
+        <header class="search-header">
+            <h1>🔍 搜索内容</h1>
+            <p class="search-subtitle">查找文章、笔记和播客</p>
+        </header>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="search-input"
+                class="search-input"
+                placeholder="输入关键词搜索..."
+                autocomplete="off"
+                aria-label="搜索内容"
+            >
+            <div class="search-icon">🔍</div>
+        </div>
+
+        <div class="search-filters">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="articles">文章</button>
+            <button class="filter-btn" data-filter="notes">笔记</button>
+            <button class="filter-btn" data-filter="podcasts">播客</button>
+        </div>
+
+        <div class="search-results-info" id="search-info"></div>
+
+        <div class="search-results" id="search-results">
+            <div class="search-placeholder">
+                <div class="placeholder-icon">📝</div>
+                <p>输入关键词开始搜索</p>
+                <small>支持搜索标题、内容和标签</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.search-section {
+    min-height: 80vh;
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.search-container {
+    background: var(--color-bg);
+}
+
+.search-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.search-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--color-text);
+}
+
+.search-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    font-size: 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    opacity: 0.5;
+}
+
+.search-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: var(--border);
+}
+
+.filter-btn.active {
+    background: var(--brand);
+    color: white;
+    border-color: var(--brand);
+}
+
+.search-results-info {
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--color-text-light);
+    min-height: 20px;
+}
+
+.search-placeholder {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--color-text-light);
+}
+
+.placeholder-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.search-result-item {
+    padding: 24px;
+    margin-bottom: 16px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    border-color: var(--brand);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-type {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.result-type.article {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.result-type.note {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.result-type.podcast {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.result-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--brand);
+}
+
+.result-excerpt {
+    font-size: 14px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.result-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--color-text-lighter);
+}
+
+.result-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.result-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.result-tag {
+    padding: 4px 8px;
+    background: var(--color-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--color-text-light);
+}
+
+.highlight {
+    background: #fff59d;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-text-light);
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+    .search-section {
+        padding: 40px 16px;
+    }
+
+    .search-header h1 {
+        font-size: 2rem;
+    }
+
+    .search-input {
+        font-size: 14px;
+        padding: 12px 45px 12px 16px;
+    }
+
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+</style>
+
+<script>
+(function() {
+    'use strict';
+
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const searchInfo = document.getElementById('search-info');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    let currentFilter = 'all';
+    let searchIndex = [];
+    let searchTimeout;
+
+    // Build search index from all pages
+    async function buildSearchIndex() {
+        showLoading();
+
+        try {
+            // Fetch sitemap or list of pages
+            const pages = await fetch('/index.json').then(r => r.json()).catch(() => []);
+
+            if (pages.length === 0) {
+                // Fallback: manually define pages to search
+                searchIndex = await getManualPageIndex();
+            } else {
+                searchIndex = pages;
+            }
+
+            console.log('Search index built:', searchIndex.length, 'pages');
+        } catch (error) {
+            console.error('Error building search index:', error);
+            searchIndex = await getManualPageIndex();
+        }
+    }
+
+    // Manual page index as fallback
+    async function getManualPageIndex() {
+        // Common pages that should be searchable
+        return [
+            {{ range first 50 .Site.RegularPages }}
+            {
+                title: {{ .Title | jsonify }},
+                url: {{ .Permalink | jsonify }},
+                content: {{ .Plain | jsonify }},
+                description: {{ .Description | jsonify }},
+                date: {{ .Date.Format "2006-01-02" | jsonify }},
+                type: {{ if eq .Section "articles" }}"article"{{ else if eq .Section "notes" }}"note"{{ else if eq .Section "podcasts" }}"podcast"{{ else }}"page"{{ end }},
+                tags: {{ if .Params.tags }}{{ .Params.tags | jsonify }}{{ else }}[]{{ end }},
+                category: {{ .Params.category | default "" | jsonify }}
+            },
+            {{ end }}
+        ];
+    }
+
+    // Search function
+    function search(query) {
+        if (!query.trim()) {
+            showPlaceholder();
+            return;
+        }
+
+        const results = performSearch(query, currentFilter);
+        displayResults(results, query);
+    }
+
+    // Perform the actual search
+    function performSearch(query, filter) {
+        const terms = query.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+
+        return searchIndex.filter(page => {
+            // Filter by content type
+            if (filter !== 'all' && page.type !== filter) {
+                return false;
+            }
+
+            const searchText = `${page.title} ${page.description} ${page.content} ${page.tags.join(' ')}`.toLowerCase();
+
+            // All terms must match
+            return terms.every(term => searchText.includes(term));
+        }).sort((a, b) => {
+            // Sort by relevance
+            const aScore = calculateRelevance(a, terms);
+            const bScore = calculateRelevance(b, terms);
+            return bScore - aScore;
+        });
+    }
+
+    // Calculate relevance score
+    function calculateRelevance(page, terms) {
+        let score = 0;
+        const title = page.title.toLowerCase();
+        const description = (page.description || '').toLowerCase();
+        const content = page.content.toLowerCase();
+        const tags = page.tags.join(' ').toLowerCase();
+
+        terms.forEach(term => {
+            if (title.includes(term)) score += 10;
+            if (description.includes(term)) score += 5;
+            if (tags.includes(term)) score += 3;
+            if (content.includes(term)) score += 1;
+        });
+
+        return score;
+    }
+
+    // Display search results
+    function displayResults(results, query) {
+        if (results.length === 0) {
+            searchResults.innerHTML = `
+                <div class="no-results">
+                    <div class="placeholder-icon">🔍</div>
+                    <p>没有找到匹配的结果</p>
+                    <small>试试其他关键词或调整筛选条件</small>
+                </div>
+            `;
+            searchInfo.textContent = `找到 0 个结果`;
+            return;
+        }
+
+        searchInfo.textContent = `找到 ${results.length} 个结果`;
+
+        const html = results.map(page => {
+            const excerpt = getExcerpt(page.content || page.description, query);
+            const typeLabel = getTypeLabel(page.type);
+
+            return `
+                <div class="search-result-item" onclick="window.location.href='${page.url}'">
+                    <span class="result-type ${page.type}">${typeLabel}</span>
+                    <h3 class="result-title">${highlightText(page.title, query)}</h3>
+                    <p class="result-excerpt">${excerpt}</p>
+                    <div class="result-meta">
+                        <span>📅 ${page.date}</span>
+                        ${page.category ? `<span>📁 ${page.category}</span>` : ''}
+                    </div>
+                    ${page.tags && page.tags.length > 0 ? `
+                        <div class="result-tags">
+                            ${page.tags.map(tag => `<span class="result-tag">#${tag}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+
+        searchResults.innerHTML = html;
+    }
+
+    // Get excerpt with highlighted search terms
+    function getExcerpt(content, query) {
+        const maxLength = 150;
+        const plainText = content.replace(/<[^>]*>/g, '').trim();
+
+        if (plainText.length <= maxLength) {
+            return highlightText(plainText, query);
+        }
+
+        const terms = query.toLowerCase().split(/\s+/);
+        let bestStart = 0;
+        let bestScore = 0;
+
+        // Find best starting position based on query terms
+        for (let i = 0; i < plainText.length - maxLength; i++) {
+            const window = plainText.substr(i, maxLength).toLowerCase();
+            const score = terms.reduce((acc, term) => acc + (window.includes(term) ? 1 : 0), 0);
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestStart = i;
+            }
+        }
+
+        let excerpt = plainText.substr(bestStart, maxLength);
+        if (bestStart > 0) {
+            excerpt = '...' + excerpt;
+        }
+        if (bestStart + maxLength < plainText.length) {
+            excerpt = excerpt + '...';
+        }
+
+        return highlightText(excerpt, query);
+    }
+
+    // Highlight search terms in text
+    function highlightText(text, query) {
+        const terms = query.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+        let highlighted = text;
+
+        terms.forEach(term => {
+            const regex = new RegExp(`(${term})`, 'gi');
+            highlighted = highlighted.replace(regex, '<span class="highlight">$1</span>');
+        });
+
+        return highlighted;
+    }
+
+    // Get type label in Chinese
+    function getTypeLabel(type) {
+        const labels = {
+            'article': '文章',
+            'note': '笔记',
+            'podcast': '播客',
+            'page': '页面'
+        };
+        return labels[type] || '页面';
+    }
+
+    // Show loading state
+    function showLoading() {
+        searchResults.innerHTML = '<div class="loading">正在加载搜索索引...</div>';
+    }
+
+    // Show placeholder
+    function showPlaceholder() {
+        searchResults.innerHTML = `
+            <div class="search-placeholder">
+                <div class="placeholder-icon">📝</div>
+                <p>输入关键词开始搜索</p>
+                <small>支持搜索标题、内容和标签</small>
+            </div>
+        `;
+        searchInfo.textContent = '';
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const query = e.target.value;
+
+        searchTimeout = setTimeout(() => {
+            search(query);
+        }, 300);
+    });
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+
+            if (searchInput.value.trim()) {
+                search(searchInput.value);
+            }
+        });
+    });
+
+    // Initialize
+    buildSearchIndex();
+    showPlaceholder();
+
+    // Focus search input on page load
+    searchInput.focus();
+
+})();
+</script>
+{{ end }}

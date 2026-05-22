@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Title }} - Personal website for articles and notes{{ end }}">
+
+    <!-- RSS Feeds -->
+    {{ partial "rss-meta.html" . }}
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ .Site.BaseURL }}favicon.ico">
     <link rel="shortcut icon" href="{{ .Site.BaseURL }}favicon.ico">
     <link rel="icon" type="image/png" sizes="96x96" href="{{ .Site.BaseURL }}favicon-96x96.png">
@@ -2469,7 +2474,8 @@
     </style>
 </head>
 <body>
-    <div class="reading-progress" id="reading-progress"></div>
+    <!-- Reading Progress Bar -->
+    {{ partial "reading-progress.html" . }}
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>

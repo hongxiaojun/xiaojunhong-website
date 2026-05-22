@@ -1,0 +1,16 @@
+{{- $pages := where .Site.RegularPages "Type" "in" (slice "articles" "notes" "podcasts") -}}
+[
+  {{- range $index, $page := $pages -}}
+    {{- if gt $index 0 }},{{ end }}
+    {
+      "title": {{ $page.Title | jsonify }},
+      "url": {{ $page.Permalink | jsonify }},
+      "content": {{ $page.Plain | jsonify }},
+      "description": {{ $page.Description | jsonify }},
+      "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
+      "type": {{ if eq $page.Section "articles" }}"article"{{ else if eq $page.Section "notes" }}"note"{{ else if eq $page.Section "podcasts" }}"podcast"{{ else }}"page"{{ end }},
+      "tags": {{ $page.Params.tags | jsonify }},
+      "category": {{ $page.Params.category | jsonify }}
+    }
+  {{- end -}}
+]

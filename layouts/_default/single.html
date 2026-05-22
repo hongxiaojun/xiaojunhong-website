@@ -42,6 +42,9 @@
             {{ .Content }}
         </div>
 
+        <!-- Share Buttons -->
+        {{ partial "share-buttons.html" . }}
+
         {{ if .Params.tags }}
         <section class="related-articles">
             <h3 class="related-title">Related Articles</h3>

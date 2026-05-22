@@ -25,25 +25,29 @@ defaultContentLanguage = "zh"
 # Menu configuration
 [menu]
   [[menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 1
+  [[menu.main]]
     name = "Articles"
     url = "/articles/"
-    weight = 1
+    weight = 2
   [[menu.main]]
     name = "Notes"
     url = "/notes/"
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = "Podcasts"
     url = "/podcasts/"
-    weight = 3
+    weight = 4
   [[menu.main]]
     name = "GitHub"
     url = "/github/"
-    weight = 4
+    weight = 5
   [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 5
+    weight = 6
 
 # Markup settings
 [markup]
@@ -55,11 +59,19 @@ defaultContentLanguage = "zh"
     lineNos = false
     tabWidth = 2
 
-# Output formats
+# Output formats and RSS configuration
 [outputs]
-  home = ["HTML"]
-  section = ["HTML"]
+  home = ["HTML", "JSON", "RSS"]
+  section = ["HTML", "RSS"]
   page = ["HTML"]
+
+[mediaTypes]
+[mediaTypes."application/rss"]
+  suffixes = ["xml"]
+
+[outputFormats.RSS]
+  mediatype = "application/rss"
+  baseName = "feed"
 
 # Privacy settings (for GDPR compliance)
 [privacy]
