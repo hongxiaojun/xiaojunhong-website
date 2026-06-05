@@ -55,8 +55,10 @@
     {{ if gt (len $articles) 0 }}
     <section class="articles-section">
         <div class="section-header">
-            <h2 class="section-title">Articles</h2>
-            <p class="section-subtitle">From Vibe Coding to Vibe Thinking</p>
+            <div class="section-header-left">
+                <h2 class="section-title">Articles</h2>
+                <p class="section-subtitle">From Vibe Coding to Vibe Thinking</p>
+            </div>
             <a href="/articles/" class="section-link">View all →</a>
         </div>
 
@@ -77,6 +79,11 @@
                 <a href="{{ .RelPermalink }}" class="article-card-link">
                     {{ if .Params.featured }}
                     <div class="featured-badge">⭐ Featured</div>
+                    {{ end }}
+                    {{ if .Params.coverImage }}
+                    <div class="article-card-cover">
+                        <img src="{{ .Params.coverImage }}" alt="{{ .Title }}" loading="lazy">
+                    </div>
                     {{ end }}
                     <div class="article-card-content">
                         <div class="article-date">
@@ -108,52 +115,59 @@
     </section>
     {{ end }}
 
-    <!-- Quick Links Section -->
-    <section class="quicklinks-section">
-        <div class="quicklinks-grid">
-            <div class="quicklink-card">
-                <div class="quicklink-number">01</div>
-                <h3 class="quicklink-title">Articles</h3>
-                <p class="quicklink-description">Thoughts and tutorials on software development, cloud technologies, and continuous learning.</p>
-                <a href="/articles/" class="quicklink-link">Explore →</a>
+    <!-- Podcasts Section -->
+    {{ if gt (len $podcasts) 0 }}
+    <section class="podcasts-section">
+        <div class="section-header">
+            <div class="section-header-left">
+                <h2 class="section-title">Podcasts</h2>
+                <p class="section-subtitle">Economy · Investment · Personal Growth</p>
             </div>
+            <a href="/podcasts/" class="section-link">View all →</a>
+        </div>
 
-            <div class="quicklink-card">
-                <div class="quicklink-number">02</div>
-                <h3 class="quicklink-title">Notes</h3>
-                <p class="quicklink-description">Quick notes, bookmarks, and fragments of ideas from daily learning and exploration.</p>
-                <a href="/notes/" class="quicklink-link">Browse →</a>
-            </div>
-
-            <div class="quicklink-card">
-                <div class="quicklink-number">03</div>
-                <h3 class="quicklink-title">Podcasts</h3>
-                <p class="quicklink-description">Audio content about economy, investment, biography, learning methods, and personal growth.</p>
-                <a href="/podcasts/" class="quicklink-link">Listen →</a>
-            </div>
-
-            <div class="quicklink-card">
-                <div class="quicklink-number">04</div>
-                <h3 class="quicklink-title">GitHub</h3>
-                <p class="quicklink-description">Open source projects, code experiments, and development work shared with the community.</p>
-                <a href="/github/" class="quicklink-link">View Projects →</a>
-            </div>
+        <div class="podcasts-grid">
+            {{ range (first 6 $podcasts) }}
+            <article class="podcast-card">
+                <a href="{{ .RelPermalink }}" class="podcast-card-link">
+                    {{ if .Params.audio_file }}
+                    <div class="podcast-cover">
+                        <div class="podcast-play-icon">▶</div>
+                        <div class="podcast-number">{{ .Params.episode }}</div>
+                    </div>
+                    {{ end }}
+                    <div class="podcast-content">
+                        <div class="podcast-date">
+                            <time datetime="{{ .Date.Format "2006-01-02" }}">
+                                {{ .Date.Format "January 2, 2006" }}
+                            </time>
+                        </div>
+                        <h3 class="podcast-title">{{ .Title }}</h3>
+                        {{ if .Params.description }}
+                        <p class="podcast-description">{{ .Params.description }}</p>
+                        {{ end }}
+                        {{ if .Params.duration }}
+                        <div class="podcast-meta">
+                            <span class="podcast-duration">⏱ {{ .Params.duration }}</span>
+                            {{ if .Params.audio_size }}
+                            <span class="podcast-size">{{ .Params.audio_size }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        {{ if .Params.tags }}
+                        <div class="podcast-tags">
+                            {{ range first 2 .Params.tags }}
+                            <span class="tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                </a>
+            </article>
+            {{ end }}
         </div>
     </section>
-
-    <!-- Content Ticker Section -->
-    <section class="ticker-section">
-        <div class="ticker-header">
-            <h2 class="ticker-title">随便听听看看吧</h2>
-            <p class="ticker-subtitle">文章 · 笔记 · 播客</p>
-        </div>
-
-        <div class="ticker-container">
-            <div class="ticker-track" id="ticker-track">
-                <!-- Content will be shuffled by JavaScript -->
-            </div>
-        </div>
-    </section>
+    {{ end }}
 
     <!-- Website Statistics -->
     {{ partial "visitor-stats.html" . }}
@@ -255,87 +269,6 @@
 
     // Start typing animation
     setTimeout(typeChar, 500);
-})();
-</script>
-
-<script>
-(function() {
-    // Shuffle ticker content for random display
-    const tickerTrack = document.getElementById('ticker-track');
-    if (!tickerTrack) return;
-
-    // Content data
-    const articles = [
-        {{ range $index, $item := (first 10 $articles) }}
-        {
-            type: 'article',
-            title: '{{ .Title }}',
-            url: '{{ .RelPermalink }}',
-            badge: '文章',
-            emoji: {{ $index }}
-        },
-        {{ end }}
-    ];
-
-    const notes = [
-        {{ range $index, $item := (first 10 $notes) }}
-        {
-            type: 'note',
-            title: '{{ .Title }}',
-            url: '{{ .RelPermalink }}',
-            badge: '笔记',
-            emoji: {{ $index }}
-        },
-        {{ end }}
-    ];
-
-    const podcasts = [
-        {{ range $index, $item := (first 10 $podcasts) }}
-        {
-            type: 'podcast',
-            title: '{{ .Title }}',
-            url: '{{ .RelPermalink }}',
-            badge: '播客',
-            emoji: {{ $index }}
-        },
-        {{ end }}
-    ];
-
-    const articleEmojis = ['📚', '💡', '🚀', '✨'];
-    const noteEmojis = ['📌', '🖊️', '💡', '✨'];
-    const podcastEmojis = ['🎙️', '🎧', '🎵', '🎶'];
-
-    // Combine all content
-    const allContent = [
-        ...articles.map(item => ({ ...item, emoji: articleEmojis[item.emoji % articleEmojis.length] })),
-        ...notes.map(item => ({ ...item, emoji: noteEmojis[item.emoji % noteEmojis.length] })),
-        ...podcasts.map(item => ({ ...item, emoji: podcastEmojis[item.emoji % podcastEmojis.length] }))
-    ];
-
-    // Shuffle function
-    function shuffleArray(array) {
-        const shuffled = [...array];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
-    }
-
-    // Create shuffled content twice for seamless loop
-    const shuffledContent = shuffleArray(allContent);
-    const tickerContent = [...shuffledContent, ...shuffledContent];
-
-    // Generate HTML
-    tickerTrack.innerHTML = tickerContent.map(item => `
-        <div class="ticker-item" data-type="${item.type}">
-            <a href="${item.url}" class="ticker-link">
-                <span class="ticker-badge">${item.badge}</span>
-                <span class="ticker-text">${item.title}</span>
-                <span class="ticker-emoji">${item.emoji}</span>
-            </a>
-        </div>
-    `).join('');
 })();
 </script>
 {{ end }}

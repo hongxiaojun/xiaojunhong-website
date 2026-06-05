@@ -610,7 +610,15 @@
 
         /* Section Headers */
         .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 40px;
+        }
+
+        .section-header-left {
+            display: flex;
+            flex-direction: column;
         }
 
         .section-title {
@@ -631,6 +639,7 @@
             font-weight: 500;
             color: var(--color-accent);
             margin-top: 8px;
+            white-space: nowrap;
         }
 
         .section-link:hover {
@@ -664,15 +673,35 @@
         }
 
         .article-card-link {
-            display: block;
-            padding: 24px;
+            display: flex;
+            flex-direction: column;
             height: 100%;
+        }
+
+        .article-card-cover {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background-color: var(--warm-sand);
+        }
+
+        .article-card-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-card-cover img {
+            transform: scale(1.05);
         }
 
         .article-card-content {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            padding: 24px;
+            flex: 1;
         }
 
         .article-date {
@@ -1203,7 +1232,16 @@
                 font-size: 24px;
             }
 
+            .section-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+
             .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .podcasts-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1372,13 +1410,97 @@
         /* Podcasts Section */
         .podcasts-section {
             padding: 64px 0;
+            border-bottom: 1px solid var(--color-border-light);
         }
 
         .podcasts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 24px;
-            margin-top: 40px;
+        }
+
+        .podcast-card {
+            background-color: var(--ivory);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.15s ease;
+        }
+
+        .podcast-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+            border-color: var(--brand);
+        }
+
+        .podcast-card-link {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .podcast-cover {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+
+        [data-theme="dark"] .podcast-cover {
+            background: linear-gradient(135deg, #4da6ff 0%, #6bb3ff 100%);
+        }
+
+        .podcast-play-icon {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 1;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .podcast-card:hover .podcast-play-icon {
+            transform: scale(1.1);
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .podcast-number {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--brand);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 16px;
+            z-index: 2;
+        }
+
+        [data-theme="dark"] .podcast-number {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--brand);
+        }
+
+        .podcast-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .podcast-card {
