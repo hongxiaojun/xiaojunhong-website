@@ -6,6 +6,7 @@ description: "个人博客收集的精华内容"
 episode: "EP.001"
 duration: "20:00"
 audio_file: "/podcasts/001-___________.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "9.2 MB"
 audio_format: "mp3"
 tags: [博客,思考]

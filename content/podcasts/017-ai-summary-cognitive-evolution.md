@@ -6,6 +6,7 @@ description: "AI的陷阱：过度依赖总结功能如何影响我们的深度�
 episode: "EP.017"
 duration: "19:39"
 audio_file: "/podcasts/AI总结正剥夺你的认知进化.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "9.0 MB"
 audio_format: "mp3"
 tags: [AI, 认知, 思考]

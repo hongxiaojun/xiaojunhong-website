@@ -6,6 +6,7 @@ description: "保护独立思考：在AI时代保持心智的免疫系统"
 episode: "EP.014"
 duration: "22:58"
 audio_file: "/podcasts/别拿走心智疫苗.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "11 MB"
 audio_format: "mp3"
 tags: [AI, 思考, 心智]

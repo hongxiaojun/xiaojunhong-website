@@ -6,6 +6,7 @@ description: "超越信念：贝叶斯法则如何预测我们的现实"
 episode: "EP.005"
 duration: "33:17"
 audio_file: "/podcasts/005-Beyond_Belief__How_Bayes_Rules_Predict_Our_Reality.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "15 MB"
 audio_format: "mp3"
 tags: [数学,思维]

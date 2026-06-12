@@ -6,6 +6,7 @@ description: "AI辅助的自我重构：如何用系统化思维重塑习惯"
 episode: "EP.018"
 duration: "20:35"
 audio_file: "/podcasts/AI工厂重构39年戒烟大脑.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "9.4 MB"
 audio_format: "mp3"
 tags: [AI, 习惯, 自我重构]

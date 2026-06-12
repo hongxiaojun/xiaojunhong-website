@@ -11,6 +11,11 @@
         {{ range .Pages }}
         <article class="podcast-card">
             <a href="{{ .RelPermalink }}" class="podcast-card-link">
+                {{ if .Params.cover }}
+                <div class="podcard-cover-image">
+                    <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
+                </div>
+                {{ end }}
                 <div class="podcast-card-content">
                     <div class="podcast-number">
                         <span class="episode-number">{{ .Params.episode | default "EP" }}</span>

@@ -6,6 +6,7 @@ description: "超线性回报：如何获得指数级成长"
 episode: "EP.011"
 duration: "18:45"
 audio_file: "/podcasts/011-Superlinear_Returns.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "4.4 MB"
 audio_format: "mp3"
 tags: [成长,思维]

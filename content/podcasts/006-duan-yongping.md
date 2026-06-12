@@ -6,6 +6,7 @@ description: "段永平：从企业家到投资家的转变"
 episode: "EP.006"
 duration: "30:34"
 audio_file: "/podcasts/006-Duan_Yongping__Entrepreneur_to_Investor.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "14 MB"
 audio_format: "mp3"
 tags: [投资,创业]

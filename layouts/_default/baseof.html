@@ -24,26 +24,26 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Deep Mint Green Paper Design System */
-            --parchment: #D7E8D9;
-            --ivory: #E2F0E3;
-            --warm-sand: #C8DBC9;
-            --dark-surface: #1B2E23;
-            --deep-dark: #0D1F12;
+            /* Premium Paper Design System */
+            --parchment: #faf9f6;
+            --ivory: #f4f1ea;
+            --warm-sand: #ebe7dd;
+            --dark-surface: #2c2c2c;
+            --deep-dark: #1a1a1a;
 
-            /* Deep mint green brand colors */
-            --brand: #2E7D32;
-            --brand-light: #43A047;
+            /* Neutral brand colors */
+            --brand: #0066cc;
+            --brand-light: #e6f0ff;
 
-            /* Deep mint neutrals */
-            --near-black: #1B2E23;
-            --dark-warm: #2E4C31;
-            --olive: #388E3C;
-            --stone: #4CAF50;
+            /* Paper neutrals */
+            --near-black: #1a1a1a;
+            --dark-warm: #333333;
+            --olive: #666666;
+            --stone: #999999;
 
-            /* Deep mint borders */
-            --border: #A5D6A7;
-            --border-soft: #81C784;
+            /* Paper borders */
+            --border: #e5e5e5;
+            --border-soft: #ebe7dd;
 
             /* Legacy compatibility */
             --color-bg: var(--parchment);
@@ -69,34 +69,34 @@
         }
 
         [data-theme="dark"] {
-            /* Deep mint green colors for dark mode */
-            --parchment: #0A1F0E;
-            --ivory: #132B17;
-            --warm-sand: #1A361F;
-            --dark-surface: #0A1F0E;
-            --deep-dark: #051007;
+            /* Neutral dark mode colors */
+            --parchment: #1a1a1a;
+            --ivory: #2c2c2c;
+            --warm-sand: #333333;
+            --dark-surface: #1a1a1a;
+            --deep-dark: #0d0d0d;
 
-            /* Deep mint green brand colors for dark mode */
-            --brand: #66BB6A;
-            --brand-light: #81C784;
+            /* Neutral brand colors for dark mode */
+            --brand: #4d9bf5;
+            --brand-light: #1e3a5f;
 
-            /* Deep mint neutrals for dark mode */
-            --near-black: #C8E6C9;
-            --dark-warm: #A5D6A7;
-            --olive: #81C784;
-            --stone: #66BB6A;
+            /* Neutral dark mode neutrals */
+            --near-black: #e0e0e0;
+            --dark-warm: #b0b0b0;
+            --olive: #808080;
+            --stone: #606060;
 
-            /* Deep mint borders for dark mode */
-            --border: #2E4C31;
-            --border-soft: #1F3322;
+            /* Neutral dark mode borders */
+            --border: #404040;
+            --border-soft: #2a2a2a;
 
             /* Legacy compatibility */
-            --color-bg: #0A1F0E;
-            --color-bg-alt: #132B17;
-            --color-text: #C8E6C9;
-            --color-text-light: #81C784;
-            --color-text-lighter: #66BB6A;
-            --color-border: #2E4C31;
+            --color-bg: #1a1a1a;
+            --color-bg-alt: #2c2c2c;
+            --color-text: #e0e0e0;
+            --color-text-light: #808080;
+            --color-text-lighter: #606060;
+            --color-border: #404040;
             --color-border-light: #1F3322;
             --color-accent: #66BB6A;
             --color-accent-light: #81C784;
@@ -225,8 +225,8 @@
             line-height: 1.55;
             color: var(--color-text);
             background-color: var(--parchment);
-            background-image: radial-gradient(circle, #C8DBC9 1px, transparent 1px);
-            background-size: 4px 4px;
+            background-image: radial-gradient(circle, #ecebe7 0.6px, transparent 0.6px);
+            background-size: 2.1px 2.1px;
             background-position: 0 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -236,8 +236,8 @@
 
         /* Keep dot pattern for all pages */
         body.homepage {
-            background-image: radial-gradient(circle, #C8DBC9 1px, transparent 1px);
-            background-size: 4px 4px;
+            background-image: radial-gradient(circle, #ecebe7 0.6px, transparent 0.6px);
+            background-size: 2.1px 2.1px;
             background-position: 0 0;
         }
 
@@ -947,8 +947,8 @@
         .ticker-section {
             padding: 32px 0;
             background: var(--color-bg);
-            background-image: radial-gradient(circle, #C8DBC9 1px, transparent 1px);
-            background-size: 4px 4px;
+            background-image: radial-gradient(circle, #ecebe7 0.6px, transparent 0.6px);
+            background-size: 2.1px 2.1px;
             background-position: 0 0;
             border-radius: 8px;
             margin: 32px 0;
@@ -1450,6 +1450,45 @@
             overflow: hidden;
         }
 
+        .podcast-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .podcard-cover-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .podcard-cover-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .podcast-card:hover .podcard-cover-image img {
+            transform: scale(1.05);
+        }
+
+        .podcast-single-cover {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 32px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .podcast-single-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .podcast-cover::before {
             content: '';
             position: absolute;
@@ -1458,7 +1497,7 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 8px 8px;
+            background-size: 2.1px 2.1px;
         }
 
         [data-theme="dark"] .podcast-cover {

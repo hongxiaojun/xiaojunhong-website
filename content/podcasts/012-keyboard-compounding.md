@@ -6,6 +6,7 @@ description: "深度创作的复利效应：为什么键盘输入优于鼠标点
 episode: "EP.012"
 duration: "18:39"
 audio_file: "/podcasts/键盘有复利点鼠标不行.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "8.5 MB"
 audio_format: "mp3"
 tags: [创作, 复利, 思考]

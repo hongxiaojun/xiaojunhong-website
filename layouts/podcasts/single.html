@@ -8,6 +8,12 @@
             返回播客列表
         </a>
 
+        {{ if .Params.cover }}
+        <div class="podcast-single-cover">
+            <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
+        </div>
+        {{ end }}
+
         <div class="podcast-episode-info">
             {{ with .Params.episode }}
             <span class="episode-badge">{{ . }}</span>

@@ -6,6 +6,7 @@ description: "掌握费曼学习法：高效学习指南"
 episode: "EP.010"
 duration: "12:30"
 audio_file: "/podcasts/010-Mastering_the_Feynman_Learning_Method.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "3.5 MB"
 audio_format: "mp3"
 tags: [学习,方法]

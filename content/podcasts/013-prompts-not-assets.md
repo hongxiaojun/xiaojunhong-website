@@ -6,6 +6,7 @@ description: "重新思考提示词的价值：它们是工具还是资产？"
 episode: "EP.013"
 duration: "20:48"
 audio_file: "/podcasts/提示词不是资产.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "9.5 MB"
 audio_format: "mp3"
 tags: [AI, 提示词, 思考]

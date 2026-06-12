@@ -6,6 +6,7 @@ description: "金融狂热简史：从郁金香泡沫到现代危机"
 episode: "EP.003"
 duration: "27:22"
 audio_file: "/podcasts/003-A_Short_History_of_Financial_Euphoria.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "13 MB"
 audio_format: "mp3"
 tags: [金融,历史]

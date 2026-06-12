@@ -6,6 +6,7 @@ description: "经济政策：对当今与未来的思考"
 episode: "EP.007"
 duration: "33:53"
 audio_file: "/podcasts/007-Economic_Policy__Thoughts_for_Today_and_Tomorrow.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "16 MB"
 audio_format: "mp3"
 tags: [经济,政策]

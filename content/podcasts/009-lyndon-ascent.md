@@ -6,6 +6,7 @@ description: "林登·约翰逊：权力之路"
 episode: "EP.009"
 duration: "16:12"
 audio_file: "/podcasts/009-Lyndon_Johnson__Ascent_to_Power.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "8.1 MB"
 audio_format: "mp3"
 tags: [传记,历史]

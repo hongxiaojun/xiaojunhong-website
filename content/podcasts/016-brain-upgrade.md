@@ -6,6 +6,7 @@ description: "提升感知能力：如何升级我们的大脑分辨率"
 episode: "EP.016"
 duration: "25:14"
 audio_file: "/podcasts/升级大脑感知分辨率.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "12 MB"
 audio_format: "mp3"
 tags: [大脑, 感知, 成长]

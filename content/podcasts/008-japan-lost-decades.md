@@ -6,6 +6,7 @@ description: "日本失去的十年：经济停滞的启示"
 episode: "EP.008"
 duration: "7:45"
 audio_file: "/podcasts/008-Japan_s_Lost_Decades.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "3.9 MB"
 audio_format: "mp3"
 tags: [经济,日本]

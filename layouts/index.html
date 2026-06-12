@@ -130,29 +130,15 @@
             {{ range (first 6 $podcasts) }}
             <article class="podcast-card">
                 <a href="{{ .RelPermalink }}" class="podcast-card-link">
-                    {{ if .Params.audio_file }}
+                    {{ if .Params.cover }}
                     <div class="podcast-cover">
-                        <div class="podcast-play-icon">▶</div>
-                        <div class="podcast-number">{{ .Params.episode }}</div>
+                        <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
                     </div>
                     {{ end }}
                     <div class="podcast-content">
-                        <div class="podcast-date">
-                            <time datetime="{{ .Date.Format "2006-01-02" }}">
-                                {{ .Date.Format "January 2, 2006" }}
-                            </time>
-                        </div>
                         <h3 class="podcast-title">{{ .Title }}</h3>
                         {{ if .Params.description }}
                         <p class="podcast-description">{{ .Params.description }}</p>
-                        {{ end }}
-                        {{ if .Params.duration }}
-                        <div class="podcast-meta">
-                            <span class="podcast-duration">⏱ {{ .Params.duration }}</span>
-                            {{ if .Params.audio_size }}
-                            <span class="podcast-size">{{ .Params.audio_size }}</span>
-                            {{ end }}
-                        </div>
                         {{ end }}
                         {{ if .Params.tags }}
                         <div class="podcast-tags">

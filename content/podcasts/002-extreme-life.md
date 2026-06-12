@@ -6,6 +6,7 @@ description: "关于人生终极意义的深度思考"
 episode: "EP.002"
 duration: "6:45"
 audio_file: "/podcasts/002-_________.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "3.1 MB"
 audio_format: "mp3"
 tags: [人生,哲学]

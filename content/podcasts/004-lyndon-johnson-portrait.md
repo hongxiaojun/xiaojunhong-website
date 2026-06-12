@@ -6,6 +6,7 @@ description: "林登·约翰逊的亲密肖像"
 episode: "EP.004"
 duration: "17:53"
 audio_file: "/podcasts/004-An_Intimate_Portrait_of_Lyndon_Johnson.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "8.2 MB"
 audio_format: "mp3"
 tags: [传记,历史]

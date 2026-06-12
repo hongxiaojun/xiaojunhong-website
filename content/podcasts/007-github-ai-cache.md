@@ -6,6 +6,7 @@ description: "GitHub从代码仓库到AI思维缓存平台的演变"
 episode: "EP.007"
 duration: "12:13"
 audio_file: "/podcasts/GitHub成了AI思维缓存.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "11 MB"
 audio_format: "mp3"
 tags: [AI, GitHub, 技术思考]

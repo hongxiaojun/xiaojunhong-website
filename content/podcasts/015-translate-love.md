@@ -6,6 +6,7 @@ description: "沟通的艺术：如何将冲突转化为理解"
 episode: "EP.015"
 duration: "17:24"
 audio_file: "/podcasts/把后果翻译成爱.mp3"
+cover: "/images/podcast-cover.webp"
 audio_size: "8.0 MB"
 audio_format: "mp3"
 tags: [沟通, 情感, 关系]
