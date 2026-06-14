@@ -646,6 +646,47 @@
             text-decoration: underline;
         }
 
+        /* Section Header with Divider */
+        .section-header-with-divider {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .section-header-with-divider .section-link {
+            margin-top: 0;
+            align-self: center;
+        }
+
+        /* View More Container */
+        .view-more-container {
+            margin-top: 32px;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .view-more-link {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-accent);
+            padding: 12px 24px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .view-more-link:hover {
+            background-color: var(--color-accent-light);
+            border-color: var(--color-accent);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
         /* Articles Section */
         .articles-section {
             padding: 64px 0;
