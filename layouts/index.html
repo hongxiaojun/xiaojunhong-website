@@ -68,7 +68,7 @@
             {{ $maxArticles := .Site.Params.maxHomepageArticles | default 6 }}
 
             {{ $nonFeatured := where $articles "Params.featured" "!=" true }}
-            {{ $latestArticles := $nonFeatured.ByDate.Reverse | first 10 }}
+            {{ $latestArticles := $nonFeatured.ByDate.Reverse | first 15 }}
 
             {{ range $latestArticles }}
             <article class="article-list-item">
