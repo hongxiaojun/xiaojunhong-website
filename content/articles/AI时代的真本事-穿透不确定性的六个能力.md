@@ -1,12 +1,12 @@
 ---
 title: "AI时代的真本事：穿透不确定性的六个能力"
-date: 2026-06-17
+date: 2026-06-17T10:30:00+08:00
 draft: false
 description: "AI在已知知识密集区域的输出标准且廉价，人类技能溢价消失。真正的护城河在于定义问题、整合资源以及在黑盒状态下通过快速决策与高频纠偏拿到结果。"
 coverImage: "/images/article-covers/AI时代的真本事-穿透不确定性的六个能力.webp"
 readingTime: 26
 tags: ["AI", "不确定性", "决策", "能力", "范式转移"]
-featured: true
+featured: false
 ---
 
 # AI时代的真本事：穿透不确定性的六个能力

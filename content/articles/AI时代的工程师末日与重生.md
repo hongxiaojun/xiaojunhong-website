@@ -1,12 +1,12 @@
 ---
 title: "AI时代的工程师末日与重生：一位谷歌/麦当劳/IHG三栖技术领袖的底层观察"
-date: 2026-06-17
+date: 2026-06-17T12:00:00+08:00
 draft: false
 description: "软件工程底层限制已由'代码编写昂贵'转向'不确定性系统的确定性治理'。AI承担超80%编码后，传统敏捷团队压缩为'Senior+Junior+Agent群落'的极简Squad。"
 coverImage: "/images/article-covers/AI时代的工程师末日与重生.webp"
 readingTime: 30
 tags: ["AI", "工程师", "组织转型", "Digital Twin", "Agentic"]
-featured: true
+featured: false
 ---
 
 # AI 时代的工程师末日与重生：一位谷歌/麦当劳/IHG 三栖技术领袖的底层观察
