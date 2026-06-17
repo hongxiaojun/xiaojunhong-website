@@ -104,7 +104,6 @@ Kaku的Fork策略：**激进剪枝，专注单一平台**
 
 ```toml
 [dependencies]
-# 移除 vulkan, dx12, gl
 # 仅保留 metal
 copa = "0.1"
 parley = "0.1"

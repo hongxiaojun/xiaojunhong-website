@@ -90,7 +90,6 @@ tags: ["教程", "Hugo", "Cloudflare Pages", "Web开发", "新手指南", "Kami�
 #### 环境准备（5分钟）
 
 ```bash
-# macOS安装Hugo
 brew install hugo
 
 # 验证安装
@@ -132,7 +131,6 @@ Markdown文章 + HTML模板 = 完整的网站
 #### 实际操作（10分钟）
 
 ```bash
-# 1. 创建新网站
 hugo new site my-website
 
 # 2. 进入网站目录
@@ -187,7 +185,6 @@ baseURL = "https://yourname.github.io/"
 languageCode = "zh-cn"
 title = "你的网站名称"
 
-# 菜单配置
 [[menu.main]]
     name = "首页"
     url = "/"
@@ -331,7 +328,6 @@ content/
 
 **原始笔记**：
 ```
-# 学习笔记
 今天学习了Python...
 ```
 

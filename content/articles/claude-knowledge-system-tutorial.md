@@ -116,7 +116,6 @@ description: Bump version across 5 files
 globs: "{Cargo.toml,package.json,...}"
 ---
 
-# Bump version
 
 ## 为什么要有这个命令
 
@@ -317,7 +316,6 @@ grep -h "version" Cargo.toml package.json src-tauri/tauri.conf.json
 
 **要分点写**：
 ```
-# Path handling — Windows-aware
 
 ## 永远不要
 - ❌ 硬编码 `/` 做分隔符
@@ -532,7 +530,6 @@ rules/
 
 ```
 ❌ 不好：
-# 代码质量
 保持代码简洁和可读。
 
 问题：
@@ -560,7 +557,6 @@ rules/
 
 ```
 ❌ 不好：
-# 函数规则
 永远不要写超过 20 行的函数。
 
 问题：
@@ -636,7 +632,6 @@ description: Null safety rules for Rust code
 globs: "**/*.rs"
 ---
 
-# Null Safety
 
 ## 永远不要
 

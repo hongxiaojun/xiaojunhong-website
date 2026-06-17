@@ -9,7 +9,6 @@ tags: ["AI", "工程师", "组织转型", "Digital Twin", "Agentic"]
 featured: false
 ---
 
-# AI 时代的工程师末日与重生：一位谷歌/麦当劳/IHG 三栖技术领袖的底层观察
 
 ## 省时摘要
 
