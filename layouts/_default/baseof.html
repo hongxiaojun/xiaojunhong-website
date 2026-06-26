@@ -18,7 +18,7 @@
     <link rel="manifest" href="{{ .Site.BaseURL }}site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=LXGW+WenKai&family=Noto+Serif+SC:wght@300;400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -62,10 +62,12 @@
             --content-max-width: 720px;
             --toc-width: 240px;
 
-            /* Kami Typography */
-            --serif: Charter, Georgia, "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", "PMingLiU", Palatino, serif;
-            --sans: var(--serif);
-            --mono: "JetBrains Mono", "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, "Courier New", monospace;
+            /* Typography - Modern & Human */
+            --heading: "Playfair Display", "Noto Serif SC", Georgia, ui-serif, serif;
+            --body: "Lora", "LXGW WenKai", ui-serif, Georgia, serif;
+            --serif: var(--body);
+            --sans: var(--body);
+            --mono: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, "Courier New", monospace;
         }
 
         [data-theme="dark"] {
@@ -327,7 +329,7 @@
         .nav-brand a {
             font-size: 20px;
             font-weight: 500;
-            font-family: var(--serif);
+            font-family: var(--heading);
             color: var(--color-text);
             display: flex;
             align-items: center;
@@ -351,7 +353,7 @@
         .site-title {
             font-size: 20px;
             font-weight: 500;
-            font-family: var(--serif);
+            font-family: var(--heading);
         }
 
         .nav-links {
@@ -731,7 +733,7 @@
         }
 
         .article-list-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 16px;
             font-weight: 500;
             line-height: 1.4;
@@ -796,7 +798,7 @@
         }
 
         .article-card-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 15px;
             font-weight: 500;
             line-height: 1.3;
@@ -810,9 +812,9 @@
             overflow: hidden;
         }
 
-        /* Typography hierarchy - Kami-inspired */
+        /* Typography hierarchy - Modern & Human */
         h1, .hero-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 42px;
             font-weight: 500;
             line-height: 1.2;
@@ -824,7 +826,7 @@
         }
 
         h2, .section-title, .quicklink-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 32px;
             font-weight: 500;
             line-height: 1.2;
@@ -833,7 +835,7 @@
         }
 
         h3, .article-card-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 20px;
             font-weight: 500;
             line-height: 1.4;
@@ -841,7 +843,7 @@
         }
 
         h4 {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 18px;
             font-weight: 500;
             line-height: 1.4;
@@ -849,7 +851,7 @@
         }
 
         h5 {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 16px;
             font-weight: 500;
             line-height: 1.5;
@@ -857,7 +859,7 @@
         }
 
         h6 {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 14px;
             font-weight: 500;
             line-height: 1.5;
@@ -865,7 +867,7 @@
         }
 
         p {
-            font-family: var(--serif);
+            font-family: var(--body);
             font-weight: 400;
         }
 
@@ -1076,7 +1078,7 @@
         }
 
         .ticker-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 22px;
             font-weight: 600;
             margin-bottom: 4px;
@@ -1670,7 +1672,7 @@
         }
 
         .podcast-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 18px;
             font-weight: 500;
             line-height: 1.4;
@@ -1799,7 +1801,7 @@
         }
 
         .podcast-single-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 36px;
             font-weight: 600;
             line-height: 1.3;
@@ -2266,7 +2268,7 @@
         }
 
         .podcast-content h2 {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 24px;
             font-weight: 600;
             margin-top: 32px;
@@ -2275,7 +2277,7 @@
         }
 
         .podcast-content h3 {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 20px;
             font-weight: 600;
             margin-top: 24px;
@@ -2315,7 +2317,7 @@
         }
 
         .podcast-tags-section h3 {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 12px;
@@ -2380,7 +2382,7 @@
         }
 
         .nav-title {
-            font-family: var(--serif);
+            font-family: var(--heading);
             font-size: 14px;
             font-weight: 500;
             color: var(--color-text);
