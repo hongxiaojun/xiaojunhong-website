@@ -5,7 +5,7 @@ draft: false
 description: "基于《too-late》项目18次提交分析提炼的小说审稿评价标准——从'去AI味'到细节连续性管理，从人物签名到时间锚定，完整覆盖虚构类小说质量评估的九大维度、31条评价细则及改进意见示例。"
 coverImage: "/images/article-covers/novel-review-standards.webp"
 readingTime: 35
-tags: ["笑来", "AI辅助创作", "小说审稿", "写作标准", "去AI味", "too-late", "小说评价"]
+tags: ["笑来", "AI辅助创作", "写作标准", "去AI味", "too-late", "小说评价"]
 featured: true
 ---
 
