@@ -3,7 +3,7 @@ title: "全局工作空间：大语言模型的隐性特征方向"
 date: 2026-07-10
 draft: false
 description: "基于 Anthropic 机械可解释性研究的深度解构：现代 LLM 在预训练过程中自发涌现出可被观测的隐性特征方向（J-space）。通过 Jacobian 矩阵分析与激活修补干预，证实该表征向量直接决定最终 Logits 分布。"
-coverImage: "/images/article-covers/global-workspace-llm-latent-features.png"
+coverImage: "/images/article-covers/global-workspace-llm-latent-features.webp"
 readingTime: 35
 tags: ["Anthropic", "Mechanistic Interpretability", "Jacobian", "Transformer", "AI Safety", "可解释性", "残差流", "J-lens"]
 featured: true

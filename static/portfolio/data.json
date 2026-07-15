@@ -1,0 +1,136 @@
+{
+  "updatedAt": "2026-07-11T22:00:00Z",
+  "holdings": [
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "type": "crypto",
+      "quantity": 4.86,
+      "currency": "USD",
+      "category": "加密货币"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "type": "stock",
+      "quantity": 300,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "电动汽车"
+    },
+    {
+      "symbol": "XIACY",
+      "name": "Xiaomi",
+      "type": "stock",
+      "quantity": 1600,
+      "currency": "USD",
+      "exchange": "OTC",
+      "category": "消费电子"
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "type": "stock",
+      "quantity": 70,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "半导体"
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon",
+      "type": "stock",
+      "quantity": 40,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "电商"
+    },
+    {
+      "symbol": "NFLX",
+      "name": "Netflix",
+      "type": "stock",
+      "quantity": 30,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "流媒体"
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "type": "stock",
+      "quantity": 45,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "消费电子"
+    },
+    {
+      "symbol": "COIN",
+      "name": "Coinbase",
+      "type": "stock",
+      "quantity": 30,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "加密货币"
+    },
+    {
+      "symbol": "CIRC",
+      "name": "Circle",
+      "type": "stock",
+      "quantity": 25,
+      "currency": "USD",
+      "exchange": "NYSE",
+      "category": "金融科技"
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "type": "stock",
+      "quantity": 11,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "科技"
+    },
+    {
+      "symbol": "CLSK",
+      "name": "CleanSpark",
+      "type": "stock",
+      "quantity": 135,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "比特币挖矿"
+    },
+    {
+      "symbol": "3690",
+      "name": "Meituan",
+      "type": "stock",
+      "quantity": 200,
+      "currency": "HKD",
+      "exchange": "HKEX",
+      "category": "本地生活"
+    },
+    {
+      "symbol": "HZNI",
+      "name": "Horizon",
+      "type": "stock",
+      "quantity": 3000,
+      "currency": "USD",
+      "exchange": "NASDAQ",
+      "category": "AI科技"
+    },
+    {
+      "symbol": "3056",
+      "name": "PanFund HK3056",
+      "type": "fund",
+      "quantity": 200,
+      "currency": "HKD",
+      "exchange": "HKEX",
+      "category": "基金"
+    }
+  ],
+  "settings": {
+    "baseCurrency": "USD",
+    "theme": "dark",
+    "chartType": "pie",
+    "password": ""
+  }
+}

@@ -3,7 +3,7 @@ title: "《too-late》项目完整版本对比分析"
 date: 2026-07-14
 draft: false
 description: "深度分析笑来中篇小说《迟到》从V1到V2的完整演进过程：18次提交背后的修改动机、AI辅助创作方法论、以及'去AI味'的系统性修改原则。解析Git作为思维工具、社区作为质量保障的创作工作流。"
-coverImage: "/images/article-covers/too-late-version-analysis.png"
+coverImage: "/images/article-covers/too-late-version-analysis.webp"
 readingTime: 45
 tags: ["笑来", "AI辅助创作", "Git工作流", "版本分析", "写作方法论", "去AI味", "too-late"]
 featured: true
