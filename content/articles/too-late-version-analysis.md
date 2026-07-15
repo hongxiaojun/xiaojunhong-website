@@ -13,8 +13,6 @@ featured: true
 > 分析日期：2026年7月13日
 > 项目地址：https://github.com/xiaolai/too-late
 
-# 《too-late》项目完整版本对比分析
-
 ---
 
 ## 目录
