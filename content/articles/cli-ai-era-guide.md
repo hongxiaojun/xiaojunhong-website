@@ -3,7 +3,7 @@ title: "告别图形界面囚牢：AI 时代 CLI 极客与架构师终极指南"
 date: 2026-07-20
 draft: false
 description: "从 GUI 到 CLI：这不是学习新工具，而是从'搬运工'到'指挥官'的身份升级。AI 时代，命令行的门槛消失了——你只需要会说话。"
-coverImage: "/images/article-covers/cli-ai-era-guide.png"
+coverImage: "/images/article-covers/cli-ai-era-guide.webp"
 readingTime: 18
 tags: ["CLI", "AI", "效率", "命令行", "工作流"]
 featured: true
