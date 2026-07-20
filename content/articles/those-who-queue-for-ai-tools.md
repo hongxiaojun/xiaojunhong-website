@@ -1,11 +1,12 @@
 ---
 title: "那些在腾讯楼下排队装AI工具的人错过了什么"
-date: 2026-05-02
+date: 2026-07-20
 draft: false
 description: "真正拥有一个生产力工具，不是别人帮你配置好，而是你自己从零搭建、反复折腾的过程。AI时代技术门槛降低了，但正因为如此，选择让别人代劳恰恰是在放弃成长的机会。"
 coverImage: "/images/article-covers/those-who-queue-for-ai-tools.png"
-readingTime: 4
-tags: ["AI", "技术思维", "成长", "动手能力"]
+readingTime: 8
+tags: ["AI", "技术思维", "成长", "动手能力", "学习"]
+featured: true
 ---
 
 上周末腾讯总部楼下排起了长队。不是买奶茶,不是等明星,是等人帮忙装"小龙虾"——一个AI智能体工具。
