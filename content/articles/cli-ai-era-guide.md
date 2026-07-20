@@ -68,7 +68,7 @@ featured: true
 
 **你几乎从来没有真正进入过深度工作状态。**
 
-![Gemini_Generated_Image_wk7x4twk7x4twk7x](/Users/add/Downloads/Gemini_Generated_Image_wk7x4twk7x4twk7x.png)
+![注意力分散的影响](/images/cli-attention-span.webp)
 
 ---
 
@@ -119,7 +119,7 @@ GUI 把你的电脑变成了一个"点击触发器"——你点一下，它动�
 
 这就是区别。
 
-![Gemini_Generated_Image_k5sx8fk5sx8fk5sx](/Users/add/Downloads/Gemini_Generated_Image_k5sx8fk5sx8fk5sx.png)
+![效率对比：GUI vs CLI](/images/cli-efficiency-comparison.webp)
 
 ---
 
