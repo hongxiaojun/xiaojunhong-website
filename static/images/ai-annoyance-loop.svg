@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa"/>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#343a40">
+    被 AI 烦到的循环
+  </text>
+
+  <!-- Central character - tired developer -->
+  <g transform="translate(400, 280)">
+    <!-- Body -->
+    <ellipse rx="50" ry="60" fill="#6c757d"/>
+    <!-- Head -->
+    <circle r="35" fill="#495057"/>
+    <!-- Tired eyes -->
+    <ellipse cx="-12" cy="-5" rx="8" ry="4" fill="#f8f9fa"/>
+    <ellipse cx="12" cy="-5" rx="8" ry="4" fill="#f8f9fa"/>
+    <!-- Sweat drop -->
+    <path d="M40,-30 Q45,-20 40,-10 Q35,-20 40,-30" fill="#74c0fc"/>
+    <!-- Speech bubble -->
+    <ellipse cx="80" cy="-60" rx="45" ry="25" fill="#e9ecef" stroke="#dee2e6" stroke-width="2"/>
+    <text x="80" y="-55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#495057">我只想</text>
+    <text x="80" y="-42" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#495057">写代码...</text>
+  </g>
+
+  <!-- Question 1 - Top Left -->
+  <g transform="translate(150, 120)">
+    <rect x="-80" y="-30" width="160" height="60" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#856404">React 还是 Vue？</text>
+    <text x="0" y="12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#856404">⏱️ 已用 20 分钟</text>
+  </g>
+
+  <!-- Question 2 - Top Right -->
+  <g transform="translate(650, 120)">
+    <rect x="-80" y="-30" width="160" height="60" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#856404">TypeScript 用吗？</text>
+    <text x="0" y="12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#856404">⏱️ 已用 15 分钟</text>
+  </g>
+
+  <!-- Question 3 - Bottom Left -->
+  <g transform="translate(150, 380)">
+    <rect x="-85" y="-30" width="170" height="60" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#856404">PostgreSQL 还是 MySQL？</text>
+    <text x="0" y="12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#856404">⏱️ 已用 25 分钟</text>
+  </g>
+
+  <!-- Question 4 - Bottom Right -->
+  <g transform="translate(650, 380)">
+    <rect x="-80" y="-30" width="160" height="60" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#856404">ORM 选哪个？</text>
+    <text x="0" y="12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#856404">⏱️ 已用 18 分钟</text>
+  </g>
+
+  <!-- Circular arrows showing the loop -->
+  <g fill="none" stroke="#dc3545" stroke-width="3" stroke-dasharray="8,4">
+    <!-- Top-left to top-right -->
+    <path d="M240,110 Q400,60 560,110"/>
+    <!-- Top-right to bottom-right -->
+    <path d="M670,160 Q700,280 670,340"/>
+    <!-- Bottom-right to bottom-left -->
+    <path d="M560,390 Q400,440 240,390"/>
+    <!-- Bottom-left to top-left -->
+    <path d="M130,340 Q100,280 130,160"/>
+  </g>
+
+  <!-- Arrow heads -->
+  <g fill="#dc3545">
+    <polygon points="560,105 550,95 570,95"/>
+    <polygon points="665,340 675,350 680,330"/>
+    <polygon points="240,395 250,405 230,405"/>
+    <polygon points="135,160 125,150 120,170"/>
+  </g>
+
+  <!-- Bottom stats -->
+  <rect x="250" y="450" width="300" height="40" rx="8" fill="#343a40"/>
+  <text x="400" y="475" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#fff" font-weight="bold">
+    2小时后：一行代码没写 🫠
+  </text>
+</svg>

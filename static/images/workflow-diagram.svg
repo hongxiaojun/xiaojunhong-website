@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650">
+  <!-- Background -->
+  <rect width="1200" height="650" fill="#f8f9fa"/>
+
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#343a40">
+    11 阶段完整工作流
+  </text>
+  <text x="600" y="58" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#6c757d">
+    从概念到验收，每个阶段都有标准化输出
+  </text>
+
+  <!-- Phase 1: 概念论证与跨模型对抗 -->
+  <g transform="translate(50, 100)">
+    <!-- Phase box -->
+    <rect width="270" height="200" rx="10" fill="#e7f5ff" stroke="#007bff" stroke-width="2"/>
+    <!-- Phase header -->
+    <rect x="0" y="0" width="270" height="35" rx="10" fill="#007bff"/>
+    <rect x="0" y="20" width="270" height="15" fill="#007bff"/>
+    <text x="135" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#fff">
+      Phase 1: 概念论证与跨模型对抗
+    </text>
+    <!-- Stages -->
+    <g transform="translate(15, 50)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#007bff" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 1:</tspan> Brainstorm &amp; Fact-check
+      </text>
+    </g>
+    <g transform="translate(15, 85)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#007bff" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 2:</tspan> Grill - 一审（破坏者视角）
+      </text>
+    </g>
+    <g transform="translate(15, 120)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#007bff" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 3:</tspan> Refine - 二审（防御性修复）
+      </text>
+    </g>
+    <g transform="translate(15, 155)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#007bff" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 4:</tspan> CMC Prep（跨模型验证）
+      </text>
+    </g>
+    <!-- Wait indicator -->
+    <g transform="translate(135, 220)">
+      <circle r="15" fill="#ffc107" stroke="#343a40" stroke-width="2"/>
+      <text x="0" y="5" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#343a40">⏸</text>
+      <text x="0" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6c757d">等待 CMC 反馈</text>
+    </g>
+  </g>
+
+  <!-- Phase 2: 策略蓝图与反脆弱排雷 -->
+  <g transform="translate(350, 100)">
+    <rect width="270" height="200" rx="10" fill="#d4edda" stroke="#28a745" stroke-width="2"/>
+    <rect x="0" y="0" width="270" height="35" rx="10" fill="#28a745"/>
+    <rect x="0" y="20" width="270" height="15" fill="#28a745"/>
+    <text x="135" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#fff">
+      Phase 2: 策略蓝图与反脆弱排雷
+    </text>
+    <g transform="translate(15, 50)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#28a745" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 5:</tspan> Failure Mode Analysis
+      </text>
+    </g>
+    <g transform="translate(15, 85)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#28a745" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 6:</tspan> Framework &amp; Strategy
+      </text>
+    </g>
+    <g transform="translate(15, 120)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#28a745" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 7:</tspan> Best Practices
+      </text>
+    </g>
+    <!-- Output -->
+    <g transform="translate(135, 175)">
+      <text x="0" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6c757d">输出：架构策略文档</text>
+    </g>
+  </g>
+
+  <!-- Phase 3: 工具链适配与深化施工 -->
+  <g transform="translate(650, 100)">
+    <rect width="270" height="200" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <rect x="0" y="0" width="270" height="35" rx="10" fill="#ffc107"/>
+    <rect x="0" y="20" width="270" height="15" fill="#ffc107"/>
+    <text x="135" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#343a40">
+      Phase 3: 工具链适配与深化施工
+    </text>
+    <g transform="translate(15, 50)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#ffc107" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 8:</tspan> Optimal Tool-kits
+      </text>
+    </g>
+    <g transform="translate(15, 85)">
+      <rect width="240" height="30" rx="5" fill="#fff" stroke="#ffc107" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 9:</tspan> Execution（深化施工）
+      </text>
+    </g>
+    <!-- Recursive indicator -->
+    <g transform="translate(135, 140)">
+      <rect x="-60" y="0" width="120" height="30" rx="5" fill="#e9ecef" stroke="#6c757d" stroke-dasharray="4,2"/>
+      <text x="0" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6c757d">🔄 递归触发</text>
+      <text x="0" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#6c757d">技术选型/架构变更</text>
+    </g>
+    <g transform="translate(135, 175)">
+      <text x="0" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6c757d">输出：工具栈 + 里程碑</text>
+    </g>
+  </g>
+
+  <!-- Phase 4: 项目落地与最终验收 -->
+  <g transform="translate(950, 100)">
+    <rect width="200" height="200" rx="10" fill="#e2d5f0" stroke="#6f42c1" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="10" fill="#6f42c1"/>
+    <rect x="0" y="20" width="200" height="15" fill="#6f42c1"/>
+    <text x="100" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#fff">
+      Phase 4: 验收
+    </text>
+    <g transform="translate(10, 50)">
+      <rect width="180" height="30" rx="5" fill="#fff" stroke="#6f42c1" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 10:</tspan> Quality Assurance
+      </text>
+    </g>
+    <g transform="translate(10, 85)">
+      <rect width="180" height="30" rx="5" fill="#fff" stroke="#6f42c1" stroke-width="1"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="12" fill="#343a40">
+        <tspan font-weight="bold">Stage 11:</tspan> Acceptance Criteria
+      </text>
+    </g>
+    <!-- NEW badge -->
+    <g transform="translate(100, 140)">
+      <rect x="-30" y="-10" width="60" height="20" rx="10" fill="#28a745"/>
+      <text x="0" y="4" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#fff">NEW v2.0</text>
+    </g>
+    <g transform="translate(100, 175)">
+      <text x="0" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6c757d">输出：验收清单</text>
+    </g>
+  </g>
+
+  <!-- Connecting arrows between phases -->
+  <g fill="none" stroke="#343a40" stroke-width="2">
+    <!-- Phase 1 to 2 -->
+    <path d="M320,200 L350,200"/>
+    <polygon points="350,200 342,196 342,204" fill="#343a40"/>
+    <!-- Phase 2 to 3 -->
+    <path d="M620,200 L650,200"/>
+    <polygon points="650,200 642,196 642,204" fill="#343a40"/>
+    <!-- Phase 3 to 4 -->
+    <path d="M920,200 L950,200"/>
+    <polygon points="950,200 942,196 942,204" fill="#343a40"/>
+  </g>
+
+  <!-- Outputs section at bottom -->
+  <g transform="translate(50, 380)">
+    <rect width="1100" height="240" rx="10" fill="#e9ecef" stroke="#dee2e6" stroke-width="2"/>
+    <text x="550" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#343a40">
+      📁 标准化输出文档
+    </text>
+
+    <!-- Output grid -->
+    <g transform="translate(30, 45)">
+      <!-- Phase 1 outputs -->
+      <g>
+        <rect width="160" height="70" rx="5" fill="#fff" stroke="#007bff" stroke-width="1"/>
+        <text x="80" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#007bff">Phase 1 输出</text>
+        <text x="10" y="32" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Idea_Exploration.md</text>
+        <text x="10" y="46" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Grill_Stage1.md</text>
+        <text x="10" y="60" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Project_Context_For_CMC.md</text>
+      </g>
+
+      <!-- Phase 2 outputs -->
+      <g transform="translate(200, 0)">
+        <rect width="160" height="70" rx="5" fill="#fff" stroke="#28a745" stroke-width="1"/>
+        <text x="80" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#28a745">Phase 2 输出</text>
+        <text x="10" y="32" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Failure_Mode_Analysis.md</text>
+        <text x="10" y="46" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Architecture_Strategy.md</text>
+        <text x="10" y="60" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Best_Practices.md</text>
+      </g>
+
+      <!-- Phase 3 outputs -->
+      <g transform="translate(400, 0)">
+        <rect width="160" height="70" rx="5" fill="#fff" stroke="#ffc107" stroke-width="1"/>
+        <text x="80" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#e6a700">Phase 3 输出</text>
+        <text x="10" y="32" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Toolchain_Stack.md</text>
+        <text x="10" y="46" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• AI_Decision_Matrix_*.md</text>
+        <text x="10" y="60" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Milestone_*/**.md</text>
+      </g>
+
+      <!-- Phase 4 outputs -->
+      <g transform="translate(600, 0)">
+        <rect width="160" height="70" rx="5" fill="#fff" stroke="#6f42c1" stroke-width="1"/>
+        <text x="80" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#6f42c1">Phase 4 输出</text>
+        <text x="10" y="32" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• QA_Report.md</text>
+        <text x="10" y="46" font-family="system-ui, sans-serif" font-size="10" fill="#495057">• Acceptance_Criteria.md</text>
+      </g>
+
+      <!-- CLAUDE.md -->
+      <g transform="translate(800, 0)">
+        <rect width="160" height="70" rx="5" fill="#343a40" stroke="#343a40" stroke-width="1"/>
+        <text x="80" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#fff">持久化</text>
+        <text x="10" y="35" font-family="system-ui, sans-serif" font-size="10" fill="#fff">⭐ CLAUDE.md</text>
+        <text x="10" y="52" font-family="system-ui, sans-serif" font-size="10" fill="#adb5bd">项目根目录</text>
+        <text x="10" y="65" font-family="system-ui, sans-serif" font-size="9" fill="#adb5bd">上下文永不丢失</text>
+      </g>
+    </g>
+
+    <!-- Bottom insight -->
+    <g transform="translate(550, 160)">
+      <rect x="-350" y="-30" width="700" height="50" rx="8" fill="#343a40"/>
+      <text x="0" y="-5" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#fff" font-weight="bold">
+        每个阶段都有明确的输入输出，不会做到一半不知道下一步
+      </text>
+      <text x="0" y="15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#adb5bd">
+        标准化文档格式 + 持久化上下文 + 跨模型验证 = 稳健的项目设计
+      </text>
+    </g>
+  </g>
+</svg>
