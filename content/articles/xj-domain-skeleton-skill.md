@@ -4,7 +4,7 @@ date: 2026-07-26
 draft: false
 description: "从一段领域认知骨架的提示词，到一个经两领域实测迭代的 Claude Code Skill——它最反直觉的地方是：这个 Skill 教的方法，正是它自己被构建出来的方式。"
 tags: ["Claude Code", "AI", "方法论", "Skill"]
-featured: false
+featured: true
 coverImage: "/images/article-covers/xj-domain-skeleton-skill.webp"
 ---
 
